@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <TextView android:gravity="center_vertical" android:id="@id/titleTextView" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="TextView" />
+                <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="3.0dip">
+                    <ImageView android:id="@id/helpIcon" android:layout_width="15.0dip" android:layout_height="15.0dip" android:src="@drawable/ic_help" android:tint="@color/white" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <Space android:layout_width="0.0dip" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView android:gravity="center_vertical" android:id="@id/subtitleTextView" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="TextView" android:layout_weight="1.0" />
+        </LinearLayout>
+        <Space android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView android:gravity="center_vertical" android:id="@id/rightTextView" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="TextView" android:layout_weight="0.0" />
+</LinearLayout>

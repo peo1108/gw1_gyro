@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" package="com.zx.yxt" platformBuildVersionCode="33" platformBuildVersionName="13">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:dataExtractionRules="@xml/data_extraction_rules" android:extractNativeLibs="true" android:fullBackupContent="@xml/backup_rules" android:icon="@drawable/app_logo_1024" android:label="@string/app_name" android:largeHeap="true" android:name="com.zjx.jyandroid.App" android:requestLegacyExternalStorage="true" android:roundIcon="@drawable/app_logo_1024" android:supportsRtl="true" android:theme="@style/Theme.Jyandroid" android:usesCleartextTraffic="true">
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.MainApp.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.MainApp.LoginActivity"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.MainApp.AddGameActivity"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.MainApp.ManagePermissionActivity"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.MainApp.TestConnectionActivity"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.ADB.ManageAdbActivityWired"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.ADB.ManageAdbActivityWireless"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.ADB.ManageAdbActivityRoot"/>
+        <activity android:theme="@style/Theme.MDM" android:exported="true" android:name="com.zjx.jyandroid.MainApp.OTAActivity"/>
+        <service android:name="com.zjx.jyandroid.ForegroundService.MainService"/>
+        <service android:foregroundServiceType="mediaProjection" android:name="com.zjx.jyandroid.ForegroundService.ScreenCaptureService"/>
+        <provider android:authorities="com.zx.yxt.ShellProcessContentProvider" android:enabled="true" android:exported="true" android:multiprocess="false" android:name="com.zjx.jyandroid.ContentProviders.ShellProcessContentProvider"/>
+        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SharedMainProcessService"/>
+        <service android:name="com.liulishuo.filedownloader.services.FileDownloadService$SeparateProcessService" android:process=":filedownloader"/>
+        <provider android:authorities="com.zx.yxt.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+        </provider>
+    </application>
+</manifest>

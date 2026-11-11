@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.Extensions.gnyx.RCDataManageView android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <com.evrencoskun.tableview.TableView android:id="@id/tableView" android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" app:allow_click_inside_cell="true" app:column_header_height="0.0dip" app:row_header_width="0.0dip" app:separator_color="@color/table_view_separator_color_on_blue" app:show_horizontal_separator="false" app:show_vertical_separator="true" app:unselected_color="@color/transparent" />
+        <View android:background="#1fffffff" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_weight="0.0" />
+        <LinearLayout android:orientation="horizontal" android:id="@id/optionsMenu" android:layout_width="fill_parent" android:layout_height="30.0dip" android:layout_weight="0.0" app:layout_constraintTop_toBottomOf="@id/tableView">
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <Button android:textColor="@color/jy_blue_1" android:id="@id/fixConfigButton" android:background="@drawable/mdm_btn_ghost_sm" android:layout_width="100.0dip" android:layout_height="fill_parent" android:text="@string/manage_pubg_rc_data_view_text4" />
+            <Space android:layout_width="10.0dip" android:layout_height="wrap_content" android:layout_weight="0.0" />
+            <Button android:textColor="@color/jy_blue_1" android:id="@id/createConfigButton" android:background="@drawable/mdm_btn_ghost_sm" android:layout_width="100.0dip" android:layout_height="fill_parent" android:text="@string/manage_pubg_rc_data_view_text1" android:layout_weight="0.0" />
+            <Space android:layout_width="10.0dip" android:layout_height="wrap_content" android:layout_weight="0.0" />
+            <Button android:textColor="@color/jy_blue_1" android:id="@id/importConfigButton" android:visibility="gone" android:background="@drawable/mdm_btn_ghost_sm" android:layout_width="100.0dip" android:layout_height="fill_parent" android:text="@string/manage_pubg_rc_data_view_text2" android:layout_weight="0.0" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView android:textColor="@color/white" android:id="@id/loadingIndicator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/manage_pubg_rc_data_view_text3" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+</com.zjx.jyandroid.Extensions.gnyx.RCDataManageView>

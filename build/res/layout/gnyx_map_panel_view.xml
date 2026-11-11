@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.Extensions.gnyx.GnyxMapPanelView android:background="@drawable/pubg_map_panel_background" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="300.0dip" android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="30.0dip" android:weightSum="13.0">
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/cancelButton" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" android:layout_weight="3.0" />
+            <View android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/resetButton" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/reset" android:layout_weight="3.0" />
+            <View android:id="@id/view53" android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/saveButton" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/save" android:layout_weight="3.0" />
+            <View android:id="@id/view55" android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/shareButton" android:visibility="gone" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="分享" android:layout_weight="3.0" />
+            <View android:id="@id/view54" android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/presetMapsButton" android:visibility="gone" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="官方映射" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pubg_map_panel_view_text1" android:layout_weight="1.0" />
+                <Switch android:id="@id/enableRecoilControlSwitch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:thumbTint="@drawable/settings_switch_thumb" android:trackTint="@drawable/settings_switch_track_jy_blue" />
+            </LinearLayout>
+            <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center|right" android:id="@id/switchFoldButton" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginRight="15.0dip" android:text="折叠" android:layout_weight="1.0" />
+        </LinearLayout>
+        <Space android:layout_width="fill_parent" android:layout_height="0.0dip" />
+        <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pubg_map_panel_view_text2" android:layout_weight="1.0" />
+                <Switch android:id="@id/enableAccessoryRecognitionSwitch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:thumbTint="@drawable/settings_switch_thumb" android:trackTint="@drawable/settings_switch_track_jy_blue" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pubg_map_panel_view_text5" />
+                <Switch android:id="@id/customizeAssetSizeSwitch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:thumbTint="@drawable/settings_switch_thumb" android:trackTint="@drawable/settings_switch_track_jy_blue" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:id="@id/textView13" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pubg_map_panel_view_text3" android:layout_weight="1.0" />
+                <Switch android:id="@id/scopeRecognitionSwitch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" android:thumbTint="@drawable/settings_switch_thumb" android:trackTint="@drawable/settings_switch_track_jy_blue" />
+            </LinearLayout>
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/canFoldView" android:layout_width="fill_parent" android:layout_height="50.0dip">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/weaponSizeSliderContainer" android:layout_width="fill_parent" android:layout_height="25.0dip" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center" android:id="@id/textView9" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/pubg_map_panel_view_text6" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.0" />
+                    <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/weaponSizeSlider" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginStart="5.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/textView9" app:layout_constraintTop_toTopOf="parent" app:sliderMax="150" app:sliderMin="10" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/accessoryRectSizeConstraintLayout" android:layout_width="fill_parent" android:layout_height="25.0dip" android:layout_marginLeft="5.0dip" android:layout_marginRight="5.0dip">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center" android:id="@id/tttt" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="@string/pubg_map_panel_view_text4" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                    <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/accessoryRectSizeSlider" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginStart="5.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@id/tttt" app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="3.0">
+                <Button android:textColor="@color/white" android:id="@id/upButton" android:background="@drawable/up" android:layout_width="30.0dip" android:layout_height="20.0dip" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                <Button android:textColor="@color/white" android:id="@id/rightButton" android:background="@drawable/right" android:layout_width="20.0dip" android:layout_height="30.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                <Button android:textColor="@color/white" android:id="@id/downButton" android:background="@drawable/down" android:layout_width="30.0dip" android:layout_height="20.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" />
+                <Button android:textColor="@color/white" android:id="@id/leftButton" android:background="@drawable/left" android:layout_width="20.0dip" android:layout_height="30.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.zjx.jyandroid.Extensions.gnyx.GnyxMapPanelView>

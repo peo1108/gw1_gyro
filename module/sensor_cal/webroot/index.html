@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0b">
+<title>Sensor Calibration Service</title>
+<link rel="icon" href="lotus.png">
+<!-- Optional web fonts; the page falls back to system serif/sans when offline. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#0a0a0b; --panel:#121214; --panel2:#17171a;
+    --hair:rgba(255,255,255,.07); --hair2:rgba(255,255,255,.12);
+    --gold:#cdb07a; --gold-hi:#f1e3c2; --gold-lo:#8c7246; --gold-line:rgba(205,176,122,.45);
+    --text:#ece8e1; --muted:#8a857d; --ok:#b9d8b0; --bad:#e8a598;
+    --metal:linear-gradient(180deg,#f3e6c6 0%,#d9bf86 38%,#b8955a 70%,#d6bb83 100%);
+    --serif:"Cormorant Garamond","Didot","Bodoni 72","Noto Serif",Georgia,serif;
+    --sans:"Montserrat",-apple-system,Roboto,"Segoe UI",sans-serif;
+    --ease:cubic-bezier(.22,.8,.2,1);
+  }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body {
+    margin:0; min-height:100vh; color:var(--text); font-family:var(--sans); overflow-x:hidden;
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgba(255,255,255,.07), transparent 60%),
+      radial-gradient(80% 50% at 50% 110%, rgba(205,176,122,.06), transparent 70%),
+      var(--ink);
+    padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+    -webkit-font-smoothing:antialiased;
+  }
+  /* fine film grain */
+  body::before { content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  #fx { position:fixed; inset:0; z-index:5; pointer-events:none; }
+  .wrap { position:relative; z-index:1; max-width:480px; margin:0 auto; padding:14px 0 24px;
+          display:flex; flex-direction:column;
+          min-height:calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+          min-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); }
+
+  .reveal { opacity:0; transform:translateY(14px); animation:reveal 1s var(--ease) forwards; }
+  @keyframes reveal { to { opacity:1; transform:none; } }
+
+  /* ── Top bar ────────────────────────────────────────────────────────────── */
+  .top { display:flex; align-items:center; justify-content:space-between; padding:6px 2px 22px; }
+  .brand { display:flex; align-items:center; gap:10px; }
+  .brand img { width:30px; height:auto; }
+  .brand b { font-family:var(--serif); font-weight:500; font-size:20px; letter-spacing:.32em; color:var(--gold-hi); }
+  .live { display:inline-flex; align-items:center; gap:8px; font-size:10px; letter-spacing:.2em;
+          text-transform:uppercase; color:var(--muted); }
+  .live i { width:6px; height:6px; border-radius:50%; background:var(--muted); }
+  .live.on { color:var(--ok); }
+  .live.on i { background:var(--ok); box-shadow:0 0 0 3px rgba(185,216,176,.12); }
+
+  /* ── Title ──────────────────────────────────────────────────────────────── */
+  .eyebrow { font-size:10px; letter-spacing:.38em; text-transform:uppercase; color:var(--gold); margin:0 0 10px; }
+  h1 { margin:0; font-family:var(--serif); font-weight:400; font-size:40px; line-height:1.02; letter-spacing:.01em; }
+  h1 em { font-style:italic; color:var(--gold-hi); }
+  .sub { margin:12px 0 26px; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
+
+  /* ── Logo ───────────────────────────────────────────────────────────────── */
+  .hero { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:32px; }
+  .hero .sub { margin-bottom:0; }
+  .logo { flex:0 0 auto; width:38%; max-width:170px; }
+  .logo img { display:block; width:100%; height:auto; }
+
+  /* ── Section + options ──────────────────────────────────────────────────── */
+  .sec { display:flex; align-items:center; gap:14px; margin:0 0 14px; }
+  .sec span { font-size:10px; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); white-space:nowrap; }
+  .sec::after { content:""; flex:1; height:1px; background:linear-gradient(90deg, var(--gold-line), transparent); }
+  .hint { font-size:12px; color:var(--muted); margin:-4px 0 16px; letter-spacing:.02em; }
+
+  .opt { position:relative; display:flex; align-items:center; gap:18px; padding:18px 18px 18px 16px;
+         margin-bottom:10px; border-radius:14px; cursor:pointer; overflow:hidden;
+         background:var(--panel); border:1px solid var(--hair);
+         transition:border-color .35s, background .35s, transform .2s var(--ease); }
+  .opt:active { transform:scale(.985); }
+  .opt::before { content:""; position:absolute; left:16px; right:16px; top:0; height:1px;
+                 background:linear-gradient(90deg, transparent, var(--gold-hi), transparent);
+                 opacity:0; transition:opacity .35s; }
+  .opt.sel { border-color:var(--gold-line); background:linear-gradient(180deg, rgba(205,176,122,.07), rgba(205,176,122,.015)); }
+  .opt.sel::before { opacity:.9; }
+  .num { width:44px; flex:0 0 auto; text-align:center; font-family:var(--serif); font-size:34px; line-height:1;
+         color:#4a4740; transition:color .35s; }
+  .opt.sel .num { background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .opt .body { flex:1; min-width:0; border-left:1px solid var(--hair); padding-left:18px; }
+  .opt .t { font-size:13px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+            display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .tag { font-size:8.5px; font-weight:500; letter-spacing:.24em; padding:3px 7px 3px 8px; border-radius:3px;
+         color:var(--gold); border:1px solid var(--gold-line); }
+  .opt .d { color:var(--muted); font-size:12px; margin-top:6px; line-height:1.55; }
+  .radio { width:18px; height:18px; flex:0 0 auto; border-radius:50%; border:1px solid #3a3833; position:relative;
+           transition:border-color .35s; }
+  .radio::after { content:""; position:absolute; inset:4px; border-radius:50%; background:var(--metal);
+                  transform:scale(0); transition:transform .35s var(--ease); }
+  .opt.sel .radio { border-color:var(--gold); }
+  .opt.sel .radio::after { transform:scale(1); }
+
+  .note { text-align:center; font-size:11px; letter-spacing:.12em; color:var(--muted); margin:20px 0 0; min-height:16px;
+          transition:color .3s; }
+  .opt.saving .radio { border-color:var(--gold); border-top-color:transparent; animation:spin .7s linear infinite; }
+  .opt.saving .radio::after { transform:scale(0); }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .note.ok { color:var(--ok); }
+  .err { display:none; margin-bottom:22px; padding:12px 14px; border-radius:12px; font-size:12px; line-height:1.55;
+         color:#f1d3cc; background:rgba(232,165,152,.06); border:1px solid rgba(232,165,152,.3); }
+
+  /* footer sits at the bottom of the window (or below content when it's taller) */
+  .foot { margin-top:auto; padding-top:40px; display:flex; align-items:center; justify-content:center; gap:16px; opacity:.6; }
+  /* double rules: two 1px lines, 3px apart, fading outward */
+  .foot::before, .foot::after { content:""; flex:0 1 90px; height:5px; background-repeat:no-repeat;
+                                background-size:100% 1px; background-position:0 0, 0 100%; }
+  .foot::before { background-image:linear-gradient(90deg, transparent, var(--gold)), linear-gradient(90deg, transparent, var(--gold)); }
+  .foot::after  { background-image:linear-gradient(270deg, transparent, var(--gold)), linear-gradient(270deg, transparent, var(--gold)); }
+  .foot img { width:28px; height:auto; transform:translateY(-9px); }  /* lotus rides above the rules */
+
+  @media (max-width:360px) { h1 { font-size:34px; } .opt { gap:12px; } .opt .body { padding-left:12px; } }
+  @media (prefers-reduced-motion:reduce) {
+    .reveal { animation:none; opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <div class="top reveal">
+    <div class="brand"><img src="lotus.png" alt=""><b>MDM</b></div>
+    <span class="live" id="live"><i></i><span id="liveTxt">Connecting</span></span>
+  </div>
+
+  <div class="hero">
+    <div class="reveal" style="animation-delay:.08s">
+      <p class="eyebrow">Private Module</p>
+      <h1>Sensor<br><em>Calibration</em></h1>
+      <p class="sub">v1.5 &middot; by Cam</p>
+    </div>
+    <div class="logo reveal" style="animation-delay:.18s"><img src="logo.png" alt="MDM"></div>
+  </div>
+
+  <div id="err" class="err"></div>
+
+  <div class="reveal" style="animation-delay:.28s">
+    <div class="sec"><span>Hook method</span></div>
+    <p class="hint">Takes effect after a reboot.</p>
+
+    <div class="opt" data-mode="1" id="opt1">
+      <div class="num">I</div>
+      <div class="body">
+        <div class="t">Mode 1 <span class="tag">Default</span></div>
+        <div class="d">Recommended. Best compatibility on most devices.</div>
+      </div>
+      <div class="radio"></div>
+    </div>
+
+    <div class="opt" data-mode="2" id="opt2">
+      <div class="num">II</div>
+      <div class="body">
+        <div class="t">Mode 2</div>
+        <div class="d">Alternative method. Try this if Mode 1 doesn't work on your device.</div>
+      </div>
+      <div class="radio"></div>
+    </div>
+  </div>
+
+  <p id="note" class="note reveal" style="animation-delay:.38s">Loading current setting&hellip;</p>
+
+  <div class="foot reveal" style="animation-delay:.5s"><img src="lotus.png" alt=""></div>
+
+</div>
+
+<script>
+"use strict";
+// Module directory is fixed by module.prop id=sensor_cal.
+var MODE_FILE = "/data/adb/modules/sensor_cal/hook_mode";
+
+var selected = 1;     // UI selection
+var savedMode = 1;    // last persisted value
+var ready = false;
+
+// The build stamps the module version into the 1.5 token in the subtitle
+// (ReplaceTokens). If the page is opened un-built (raw source), strip the token
+// so it doesn't show literally. Token built from parts so ReplaceTokens won't
+// rewrite this guard.
+(function () {
+  var tok = "@" + "VERSION" + "@";
+  var s = document.querySelector(".sub");
+  if (s && s.textContent.indexOf(tok) >= 0) s.textContent = "by Terius";
+})();
+
+var opt1 = document.getElementById("opt1");
+var opt2 = document.getElementById("opt2");
+var note = document.getElementById("note");
+var errBox = document.getElementById("err");
+var live = document.getElementById("live");
+var liveTxt = document.getElementById("liveTxt");
+
+// ── KernelSU WebUI bridge ────────────────────────────────────────────────────
+// The manager injects a global `ksu` object whose exec() is callback-based:
+//   ksu.exec(cmd, optionsJson, callbackName) -> window[callbackName](errno, stdout, stderr)
+// Wrap it in a Promise. Resolve with errno=-1 if the bridge is missing (e.g.
+// page opened in a plain browser) so the UI degrades gracefully.
+function exec(cmd) {
+  return new Promise(function (resolve) {
+    if (typeof ksu === "undefined" || !ksu.exec) {
+      resolve({ errno: -1, stdout: "", stderr: "no ksu bridge" });
+      return;
+    }
+    var cb = "__cb_" + Math.random().toString(36).slice(2);
+    window[cb] = function (errno, stdout, stderr) {
+      try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+      resolve({ errno: errno, stdout: stdout || "", stderr: stderr || "" });
+    };
+    try {
+      // Classic KernelSU WebUI: callback-based via window[cb]. Newer
+      // (WebUI X / MMRL) managers ignore the callback and return a Promise —
+      // handle that too so the page works across managers.
+      var ret = ksu.exec(cmd, "{}", cb);
+      if (ret && typeof ret.then === "function") {
+        ret.then(function (o) {
+          if (typeof o === "string") resolve({ errno: 0, stdout: o, stderr: "" });
+          else resolve({ errno: o.errno || 0, stdout: o.stdout || "", stderr: o.stderr || "" });
+        }).catch(function (e) { resolve({ errno: -1, stdout: "", stderr: String(e) }); });
+      }
+    } catch (e) {
+      resolve({ errno: -1, stdout: "", stderr: String(e) });
+    }
+  });
+}
+
+function toast(msg) {
+  if (typeof ksu !== "undefined" && ksu.toast) { try { ksu.toast(msg); } catch (e) {} }
+}
+function buzz(ms) { try { if (navigator.vibrate) navigator.vibrate(ms); } catch (e) {} }
+
+function showError(msg) { errBox.textContent = msg; errBox.style.display = "block"; }
+
+function render() {
+  opt1.classList.toggle("sel", selected === 1);
+  opt2.classList.toggle("sel", selected === 2);
+}
+
+// Auto-save: tapping a mode writes it straight away. Writes are serialized so
+// quick taps can't race; the last tap always wins on disk.
+var saving = false;
+function persist() {
+  if (saving || selected === savedMode) return;
+  saving = true;
+  var mode = selected;
+  var el = mode === 1 ? opt1 : opt2;
+  el.classList.add("saving");
+  note.className = "note";
+  note.textContent = "Saving Mode " + mode + "…";
+  // -n: no trailing newline; post-fs-data.sh tolerates whitespace anyway.
+  exec("printf '%s' '" + mode + "' > " + MODE_FILE).then(function (r) {
+    saving = false;
+    el.classList.remove("saving");
+    if (r.errno !== 0) {
+      showError("Could not save (errno " + r.errno + "). " + (r.stderr || ""));
+      buzz([30, 60, 30]);
+      selected = savedMode;        // revert UI to what's actually on disk
+      note.className = "note";
+      note.textContent = "Current: Mode " + savedMode;
+      render();
+      return;
+    }
+    savedMode = mode;
+    if (selected !== savedMode) { persist(); return; }   // user tapped again meanwhile
+    note.className = "note ok";
+    note.textContent = "Saved ✓  Reboot to apply Mode " + mode;
+    toast("Saved — reboot to apply");
+    buzz([12, 40, 20]);
+    sparkle(el);
+  });
+}
+
+function pick(mode) {
+  if (!ready || selected === mode) return;
+  buzz(8);
+  selected = mode;
+  render();
+  persist();
+}
+
+opt1.addEventListener("click", function () { pick(1); });
+opt2.addEventListener("click", function () { pick(2); });
+
+// ── Load current setting ─────────────────────────────────────────────────────
+exec("cat " + MODE_FILE + " 2>/dev/null").then(function (r) {
+  ready = true;
+  if (r.errno === -1) {
+    showError("KernelSU WebUI bridge not found. Open this page from the "
+      + "KernelSU manager (Modules → Sensor Calibration Service → Open).");
+    live.className = "live"; liveTxt.textContent = "Offline";
+  } else {
+    live.className = "live on"; liveTxt.textContent = "Connected";
+  }
+  var v = (r.stdout || "").replace(/[^12]/g, "").charAt(0);
+  savedMode = v === "2" ? 2 : 1;   // default Mode 1 when unset
+  selected = savedMode;
+  note.className = "note";
+  note.textContent = "Current: Mode " + savedMode;
+  render();
+});
+render();
+
+// ── Effects (purely visual) ──────────────────────────────────────────────────
+var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Fine champagne sparkles on a successful save.
+var cv = document.getElementById("fx"), cx = cv.getContext("2d"), parts = [], running = false;
+function fit() {
+  var d = Math.min(devicePixelRatio || 1, 2);
+  cv.width = innerWidth * d; cv.height = innerHeight * d;
+  cv.style.width = innerWidth + "px"; cv.style.height = innerHeight + "px";
+  cx.setTransform(d, 0, 0, d, 0, 0);
+}
+fit(); addEventListener("resize", fit);
+function sparkle(el) {
+  if (reduce) return;
+  var r = el.getBoundingClientRect();
+  for (var i = 0; i < 70; i++) {
+    var a = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.3, s = 2 + Math.random() * 6;
+    parts.push({ x: r.left + Math.random() * r.width, y: r.top + r.height / 2,
+                 vx: Math.cos(a) * s, vy: Math.sin(a) * s, l: 1, d: .012 + Math.random() * .018,
+                 w: .6 + Math.random() * 1.6, c: Math.random() < .5 ? "241,227,194" : "205,176,122" });
+  }
+  if (!running) { running = true; requestAnimationFrame(tick); }
+}
+function tick() {
+  cx.clearRect(0, 0, innerWidth, innerHeight);
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var p = parts[i];
+    p.vy += .1; p.vx *= .98; p.x += p.vx; p.y += p.vy; p.l -= p.d;
+    if (p.l <= 0) { parts.splice(i, 1); continue; }
+    cx.strokeStyle = "rgba(" + p.c + "," + p.l + ")"; cx.lineWidth = p.w;
+    cx.beginPath(); cx.moveTo(p.x, p.y); cx.lineTo(p.x - p.vx * 2.2, p.y - p.vy * 2.2); cx.stroke();
+  }
+  if (parts.length) requestAnimationFrame(tick); else { running = false; cx.clearRect(0, 0, innerWidth, innerHeight); }
+}
+</script>
+</body>
+</html>

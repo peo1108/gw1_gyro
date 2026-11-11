@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tablets and wide screens keep the original two-column canvas. -->
+    <dimen name="mdm_page_pad_h">32.0dip</dimen>
+    <dimen name="mdm_page_pad_top">22.0dip</dimen>
+    <dimen name="mdm_page_pad_bottom">92.0dip</dimen>
+    <dimen name="mdm_col_gap">24.0dip</dimen>
+    <dimen name="mdm_card_pad">22.0dip</dimen>
+    <dimen name="mdm_card_radius">24dp</dimen>
+    <dimen name="mdm_title_size">28.0sp</dimen>
+    <dimen name="mdm_eyebrow_size">12.0sp</dimen>
+    <dimen name="mdm_hero_logo">132.0dip</dimen>
+    <dimen name="mdm_hero_pad">28.0dip</dimen>
+    <dimen name="mdm_row_h">64.0dip</dimen>
+    <dimen name="mdm_nav_height">64.0dip</dimen>
+    <dimen name="mdm_nav_margin">20.0dip</dimen>
+    <dimen name="mdm_nav_tab_min">104.0dip</dimen>
+    <dimen name="mdm_activity_pad_h">28.0dip</dimen>
+    <dimen name="mdm_activity_header">76.0dip</dimen>
+    <dimen name="mdm_activity_head_size">26.0sp</dimen>
+</resources>

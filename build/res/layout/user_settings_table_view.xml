@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.evrencoskun.tableview.TableView android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="fill_parent" app:allow_click_inside_cell="true" app:column_header_height="0.0dip" app:row_header_width="0.0dip" app:separator_color="@color/table_view_separator_color_on_blue" app:show_horizontal_separator="false" app:show_vertical_separator="true" app:unselected_color="@color/transparent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" />

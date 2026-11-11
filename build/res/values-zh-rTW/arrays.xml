@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="activation_mode">
+        <item>有線激活</item>
+        <item>無線激活</item>
+        <item>ROOT一鍵激活</item>
+        <item>電腦插線激活</item>
+    </string-array>
+    <string-array name="language_list">
+        <item>English</item>
+        <item>簡體中文</item>
+        <item>正體中文</item>
+        <item>Português</item>
+        <item>Tiếng Việt</item>
+    </string-array>
+</resources>

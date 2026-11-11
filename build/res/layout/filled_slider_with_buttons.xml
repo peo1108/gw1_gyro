@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="0.0">
+        <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <Button android:textColor="@color/white" android:id="@id/minusButton" android:background="@drawable/filled_slider_button_bg" android:layout_width="25.0dip" android:layout_height="25.0dip" android:text="-" android:layout_weight="0.0" />
+        <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+    </LinearLayout>
+    <Space android:layout_width="10.0dip" android:layout_height="wrap_content" android:layout_weight="0.0" />
+    <LinearLayout android:orientation="vertical" android:clipChildren="false" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <TextView android:textSize="10.0sp" android:textColor="@color/white" android:id="@id/valueTextView" android:layout_width="fill_parent" android:layout_height="25.0dip" android:layout_marginTop="0.0dip" android:text="-1" android:includeFontPadding="false" android:layout_weight="1.0" />
+        <SeekBar android:id="@id/seekBar" android:layout_width="fill_parent" android:layout_height="25.0dip" android:layout_marginBottom="5.0dip" android:progressDrawable="@drawable/thick_seek_bar_phone" android:thumb="@drawable/thick_seek_bar_thumb_phone" android:thumbOffset="10.0dip" android:layout_weight="1.0" android:paddingStart="0.0dip" android:paddingEnd="0.0dip" android:elevation="4.0dip" android:splitTrack="false" />
+        <Space android:layout_width="fill_parent" android:layout_height="10.0dip" android:layout_weight="1.0" />
+    </LinearLayout>
+    <Space android:layout_width="10.0dip" android:layout_height="wrap_content" android:layout_weight="0.0" />
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="0.0">
+        <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+        <Button android:textColor="@color/white" android:id="@id/addButton" android:background="@drawable/filled_slider_button_bg" android:layout_width="25.0dip" android:layout_height="25.0dip" android:text="+" android:layout_weight="0.0" />
+        <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

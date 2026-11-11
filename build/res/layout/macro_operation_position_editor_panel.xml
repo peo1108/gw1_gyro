@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.ForegroundService.UI.UploadKeymapModule.ComponentSettingsViews.Macro.MacroOperationPositionEditorPanel android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="100.0" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <androidx.cardview.widget.CardView android:background="#e6141210" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="72.0" app:cardBackgroundColor="#e6141210" app:cardCornerRadius="10.0dip" app:cardElevation="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="4.0">
+                <LinearLayout android:orientation="vertical" android:id="@id/exitButton" android:layout_width="0.0dip" android:layout_height="fill_parent" android:weightSum="100.0" android:layout_weight="1.0">
+                    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="80.0">
+                        <ImageView android:id="@id/selectKeymapImageView" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/uploadkeymappanel_exit_icon" android:scaleType="centerInside" android:adjustViewBounds="true" android:contentDescription="exit_icon" app:layout_constraintDimensionRatio="1:1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView android:textColor="#ffffffff" android:id="@id/selectKeymapTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/exit" android:layout_weight="1.0" android:textAlignment="center" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/unlockButton" android:layout_width="0.0dip" android:layout_height="fill_parent" android:weightSum="100.0" android:layout_weight="1.0">
+                    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="80.0">
+                        <ImageView android:id="@id/unlockIcon" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/uploadkeymappanel_unlock_icon" android:scaleType="centerInside" android:adjustViewBounds="true" android:contentDescription="unlock_icon" app:layout_constraintDimensionRatio="1:1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView android:textColor="#ffffffff" android:id="@id/unlockButtonTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/keymap_upload_floating_panel_unlock_background" android:layout_weight="1.0" android:textAlignment="center" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/resetButton" android:layout_width="0.0dip" android:layout_height="fill_parent" android:weightSum="100.0" android:layout_weight="1.0">
+                    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="80.0">
+                        <ImageView android:id="@id/settingsImageView" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/uploadkeymappanel_reset_icon" android:scaleType="centerInside" android:adjustViewBounds="true" android:contentDescription="reset_icon" app:layout_constraintDimensionRatio="1:1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView android:textColor="#ffffffff" android:id="@id/settingsTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/reset" android:layout_weight="1.0" android:textAlignment="center" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/saveButton" android:layout_width="0.0dip" android:layout_height="fill_parent" android:weightSum="100.0" android:layout_weight="1.0">
+                    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="80.0">
+                        <ImageView android:id="@id/returnImageView" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@drawable/uploadkeymappanel_save_icon" android:scaleType="centerInside" android:adjustViewBounds="true" android:contentDescription="save_icon" app:layout_constraintDimensionRatio="1:1" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView android:textColor="#ffffffff" android:id="@id/returnTextView" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/save" android:layout_weight="1.0" android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="0.0dip" android:weightSum="100.0" android:layout_weight="28.0">
+            <Space android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="80.0" />
+            <ImageView android:id="@id/hidePanelImageView" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="fill_parent" android:src="@drawable/rootfloatingpanel_hide_icon" android:layout_weight="20.0" />
+        </LinearLayout>
+    </LinearLayout>
+</com.zjx.jyandroid.ForegroundService.UI.UploadKeymapModule.ComponentSettingsViews.Macro.MacroOperationPositionEditorPanel>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- MDM screens. Phone values here; values-sw600dp-v13 restores the tablet canvas. -->
+    <dimen name="mdm_page_pad_h">20.0dip</dimen>
+    <dimen name="mdm_page_pad_top">16.0dip</dimen>
+    <dimen name="mdm_page_pad_bottom">100.0dip</dimen>
+    <dimen name="mdm_col_gap">16.0dip</dimen>
+    <dimen name="mdm_card_pad">16.0dip</dimen>
+    <dimen name="mdm_card_radius">20dp</dimen>
+    <dimen name="mdm_title_size">22.0sp</dimen>
+    <dimen name="mdm_eyebrow_size">11.0sp</dimen>
+    <dimen name="mdm_hero_logo">92.0dip</dimen>
+    <dimen name="mdm_hero_pad">20.0dip</dimen>
+    <dimen name="mdm_row_h">56.0dip</dimen>
+    <dimen name="mdm_nav_height">58.0dip</dimen>
+    <dimen name="mdm_nav_margin">10.0dip</dimen>
+    <dimen name="mdm_nav_tab_min">88.0dip</dimen>
+    <dimen name="mdm_activity_pad_h">20.0dip</dimen>
+    <dimen name="mdm_activity_header">64.0dip</dimen>
+    <dimen name="mdm_activity_head_size">22.0sp</dimen>
+</resources>

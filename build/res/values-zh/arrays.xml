@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="activation_mode">
+        <item>有线激活</item>
+        <item>无线激活</item>
+        <item>ROOT一键激活</item>
+        <item>电脑插线激活</item>
+    </string-array>
+</resources>

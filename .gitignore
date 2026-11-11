@@ -1,0 +1,25 @@
+# signing keys / passwords - never commit
+keys/*.jks
+keys/*.keystore
+keys/*.properties
+*.jks
+*.keystore
+
+# build outputs and large binaries
+out/
+release/
+decompiled/
+_device_backup/
+source/*.apk
+tools/*.jar
+java/smali_out/
+java/classes/
+*.dex
+build/build/
+build/dist/
+
+# misc
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.Extensions.pubg.EditCrazyTapWeaponsView android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="40.0dip">
+            <TextView android:textColor="@color/white" android:id="@id/textView21" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/edit_crazy_tap_weapons_view_text1" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="0.5" />
+            <Button android:textColor="@color/white" android:id="@id/cancelButton" android:background="@android:color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/finishButton" app:layout_constraintTop_toTopOf="parent" />
+            <Button android:textColor="@color/white" android:id="@id/finishButton" android:background="@android:color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/finish" android:layout_marginEnd="25.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="15.0dip" android:layout_marginEnd="15.0dip">
+            <LinearLayout android:orientation="vertical" android:id="@id/container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </ScrollView>
+    </LinearLayout>
+</com.zjx.jyandroid.Extensions.pubg.EditCrazyTapWeaponsView>

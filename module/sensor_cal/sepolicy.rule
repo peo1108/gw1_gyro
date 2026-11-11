@@ -1,0 +1,15 @@
+# Allow system_server (where the Zygisk module runs) to connect to the
+# abstract Unix socket bound by the client app (any untrusted_app context).
+# Without this rule SELinux denies the connect() with avc:
+#   denied { connectto } scontext=u:r:system_server:s0
+#                        tcontext=u:r:untrusted_app_<N>:s0
+#                        tclass=unix_stream_socket
+#
+# Format: magiskpolicy uses space-separated tokens (NOT the standard `.te`
+# colon/semicolon syntax — `untrusted_app_all:unix_stream_socket` would be
+# parsed as one unrecognized token and the rule would silently drop).
+#
+# untrusted_app_all is a typeattribute covering all untrusted_app_<N> contexts
+# (split by targetSdkVersion: 25/27/29/30/32/34/...), so a single rule covers
+# every client API level without per-version maintenance.
+allow system_server untrusted_app_all unix_stream_socket connectto

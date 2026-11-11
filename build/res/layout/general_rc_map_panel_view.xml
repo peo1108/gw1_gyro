@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.Extensions.GeneralRC.GeneralRCMapPanelView android:background="@drawable/pubg_map_panel_background" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="300.0dip" android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="30.0dip" android:weightSum="13.0">
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/cancelButton" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" android:layout_weight="3.0" />
+            <View android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/resetButton" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/reset" android:layout_weight="3.0" />
+            <View android:id="@id/view53" android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+            <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/mdm_on_gold" android:id="@id/saveButton" android:background="@color/jy_blue_3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/save" android:layout_weight="3.0" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center" android:id="@id/addFingerRegionButton" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="点我添加一个手指范围" android:layout_weight="1.0" />
+                <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center" android:id="@id/addFireRegionButton" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="点我添加一个开火范围" android:layout_weight="1.0" />
+            </LinearLayout>
+            <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center|right" android:id="@id/switchFoldButton" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginRight="15.0dip" android:layout_weight="1.0" />
+        </LinearLayout>
+        <Space android:layout_width="fill_parent" android:layout_height="0.0dip" />
+    </LinearLayout>
+</com.zjx.jyandroid.Extensions.GeneralRC.GeneralRCMapPanelView>

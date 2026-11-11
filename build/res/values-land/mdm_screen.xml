@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- A landscape phone is still one column, only shorter: tighten the bottom gap. -->
+    <dimen name="mdm_page_pad_bottom">84.0dip</dimen>
+    <dimen name="mdm_nav_margin">8.0dip</dimen>
+</resources>

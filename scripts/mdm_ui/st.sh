@@ -1,0 +1,1 @@
+for id in zygisksu sensor_cal; do d=/data/adb/modules/$id; u=/data/adb/modules_update/$id; v=$(grep '^version=' $d/module.prop 2>/dev/null | head -1 | cut -d= -f2-); uv=$(grep '^version=' $u/module.prop 2>/dev/null | head -1 | cut -d= -f2-); f=; [ -f $d/disable ] && f=disable; [ -f $d/remove ] && f=remove; [ -f $d/update ] && f=update; echo "MDM|$id|$v|$uv|$f"; done

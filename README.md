@@ -1,0 +1,135 @@
+# MDM (gg1 + gyro)
+
+Bản mod của gg1 (`com.zx.yxt` v1.8.41) cho khách: thêm gyro ghìm tâm qua module Zygisk `sensor_cal`,
+giao diện MDM (đen + vàng champagne), nhận diện súng/phụ kiện cập nhật từ gg2.
+Bản mới nhất: **m31**, file `release/MDM_release_m31.apk`.
+
+## Cấu trúc
+
+| Thư mục | Nội dung |
+|---|---|
+| `build/` | **Mã nguồn chính**: cây apktool (smali + res + assets) của bản m27. Sửa ở đây rồi build lại |
+| `source/` | APK gốc: `gg1.apk` (bản nền), `gg2.apk` (bản tham khảo, nguồn gốc gyro và nhận diện) |
+| `java/` | Mã Java của các lớp tự viết (`src/mdm/*`, `src/k/{h,i,l}`), stub để biên dịch, test |
+| `scripts/` | `build.sh`, `sign_debug.sh`, và script vá theo từng đợt (`port_gyro/`, `mdm_ui/`, `recog/`) |
+| `tools/` | `apktool.jar` 2.10.0 |
+| `keys/` | Khoá ký **release** (`mdm-release.jks` + mật khẩu) và khoá debug để test |
+| `module/` | Module `sensor_cal` v1.5 (mã nguồn + `sensor_cal_v1.5.zip` để flash) |
+| `release/` | APK đã ký release để gửi khách |
+| `brand/` | Logo gốc (`IMG_8567.PNG`) và bản thiết kế giao diện |
+
+> **Giữ kỹ `keys/`.** Mất `mdm-release.jks` thì khách không cập nhật đè được nữa (phải gỡ app, mất dữ liệu).
+> Không gửi thư mục này cho ai.
+
+## Build
+
+Cần: Java (JDK 17+), Android SDK build-tools 36.0.0 và platform android-36, chạy trong Git Bash.
+
+```bash
+scripts/build.sh MDM_m26          # -> out/MDM_m26-release.apk (đã ký release)
+```
+
+Build thử cho máy test đang cài bản ký debug: `scripts/sign_debug.sh out/MDM_m26.apk`.
+
+## Sửa code
+
+- **Smali**: sửa thẳng trong `build/smali*/`. Tên lớp gg1 hầu như không bị làm rối
+  (`MainService`, `App.getContext()`…), phần PUBG nằm ở `com/zjx/jyandroid/Extensions/pubg/`.
+- **Lớp mới bằng Java**: viết trong `java/src/`, chạy `java/build.sh src/mdm/TenLop.java`, rồi chép
+  `java/smali_out/...smali` vào `build/smali_classes3/` (lớp `mdm.*`) hoặc đúng chỗ của lớp bị thay.
+  Lớp gọi vào code gg1 thì cần stub trong `java/stub/` (khai báo đúng tên thành viên trong smali).
+- **Chuỗi/ID mới**: thêm vào `res/values*/strings.xml` và `res/values/public.xml` với id cố định
+  (string tiếp theo sau `0x7f1103ad`, id view tiếp theo sau `0x7f090429`); trong smali dùng số id trực tiếp.
+
+## Code tự thêm (tóm tắt)
+
+| Ở đâu | Làm gì |
+|---|---|
+| `K6/*`, `F6/*`, `D6/*`, `com/zjx/gw2lic/*`, … | Gyro chép từ gg2 (372 lớp). Chỉ dùng chế độ Module |
+| `pubg/i$d` → `K6/m.rcOut` | Ghìm tâm dọc qua gyro, luôn bật |
+| `K6/GyroUI`, `K6/GyroInvL`, `K6/GyroSensL` | Ô Đảo chiều + Độ nhạy gyro trong cài đặt PUBG (lưu ở prefs `gw2_gyro`) |
+| `mdm/*` (smali_classes3) | Giao diện MDM: thanh điều hướng, trạng thái gyro, thẻ cài module, ủng hộ… |
+| `k/h`, `k/i`, `k/l` | Nhận diện tay cầm / nòng / báng theo gg2 (Ergonomic, Hãm, Kéo dài, Duckbill, Báng nặng) |
+| `mdm/ForceRedDot`, `RecogCompat`, `PostureColor` | Ép Red Dot, nhận súng không giữ súng cũ, nhận ngồi bản quốc tế |
+| `mdm/RcPad` | Sửa lỗi cấu hình thiếu súng dùng chung một bản ghi ghìm tâm |
+| `mdm/RcParams`, `mdm/RcParamsView` | Bảng thông số ghìm tâm: mỗi súng mở ra các tầm ngắm x1…x8, sửa bằng kéo / ± / gõ tay. Thay cho nút Chia sẻ ở cả 3 màn (PUBG, GeneralRC, gnyx) |
+| `y/d.a()` | Chỉ kích hoạt bằng Root: luôn trả `ADBConnectionMode.ROOT` (ô chọn chế độ đã ẩn; trước m26 máy cài mới mặc định USB) |
+| `mdm/RootGate` ← `MainActivity.onResume` | Không có root thì không vào được app: phủ màn hình tới khi `su` trả uid 0, lỗi thì hiện "Cần quyền Root" (Thử lại / Thoát), quay lại app thì tự kiểm tra lại |
+| enum `pubg/c$l,d,c,h` | Thêm ABAKAN, M338, MP7, AS50, MG97 và phụ kiện mới |
+
+## Bảng thông số ghìm tâm (m28)
+
+Nút **Chia sẻ** trên mỗi dòng cấu hình đã thay bằng **Thông số**: mở bảng sửa trực tiếp thay vì
+đẩy cấu hình lên server. Dữ liệu đọc/ghi đúng chỗ bộ nhận diện dùng:
+
+```
+content["recoil_data"][súng]["v"][i] = {
+    gesture, grip, muzzle, scope, stock,        # chỉ số enum, dùng để dò đúng bản ghi
+    recoilValue: [ [0, <giá trị>], ... ]        # chỉ sửa phần tử [1]; [0] là mốc trục, luôn 0
+}
+```
+
+- Dò bản ghi **theo 5 trường enum**, không theo vị trí, vì `pubg.g` cũng dò như vậy và cấu hình
+  cũ có thể đã bị đệm (xem `RcPad`).
+- Lưu đi qua `KeymapManager.L` → `mdm/LocalKeymapStore.updateKeymap`: ghi file local **và**
+  mirror ra `pubg_extension/RCConfig/<id>` cho nhận diện đọc.
+- Thanh chọn trong mỗi súng chỉ còn thế **đứng / ngồi / nằm**. Phụ kiện (nòng, báng) đã bỏ khỏi
+  giao diện: mỗi dòng x1…x8 ghi cùng một giá trị cho **mọi biến thể grip/muzzle** của đúng
+  súng + tầm + thế đó (`RcParams.setValueFor`), nên không phải chọn phụ kiện nữa.
+- Màn Cài đặt chạy trong **cửa sổ overlay của service**, không phải Activity → không có window token,
+  nên bảng được gắn thẳng vào `getRootView()` của dòng vừa bấm (`RcParamsView` gắn/gỡ `shell`),
+  không dùng `Dialog`. Dùng `Dialog` ở đây sẽ `BadTokenException` hoặc im lặng không hiện.
+
+## Script build phụ (chạy được cả trong WSL)
+
+`scripts/build.sh` và `keys/sign_release.sh` giả định chạy trong Git Bash (`$HOME` là `/c/Users/...`).
+Trong WSL dùng:
+
+```bash
+scripts/jbuild.sh src/mdm/RcParams.java src/mdm/RcParamsView.java   # java -> smali_out/
+scripts/abuild.sh MDM_m28                                           # build/ -> out/MDM_m28.apk
+scripts/asign.sh out/MDM_m28.apk                                    # -> out/MDM_m28-release.apk
+```
+
+Vá lại nút Chia sẻ (chạy lại sau khi reset `build/`): `python scripts/recog/patch_rcparams.py build`.
+
+## Giao diện điện thoại (m32)
+
+Trang chính và trang "Thêm" trước đây dựng cho khung 1280x800: hai cột cố định, lề 32dip, cột phụ
+400dip. Trên điện thoại cột danh sách còn ~100dip và thanh điều hướng nổi đè lên nội dung.
+
+`scripts/mdm_ui/mdm_phone.py <build>` chuyển hai trang thành **một cột cuộn dọc** (giữ nguyên mọi
+id/tag mà `MainPageView` / `SettingsPageView` tìm lúc chạy): thông tin máy + nút hành động lên trước,
+danh sách game nằm dưới. Mọi kích thước đi qua `res/values*/mdm_screen.xml`:
+
+| Qualifier | Dùng cho | Khác biệt chính |
+|---|---|---|
+| `values/` | điện thoại dọc | lề 20dip, cột phụ `fill_parent`, logo 92dip, tiêu đề 22sp |
+| `values-sw600dp-v13/` | máy tính bảng | giữ nguyên bản 1280x800 (lề 32dip, logo 132dip, tiêu đề 28sp) |
+| `values-land/` | xoay ngang | chỉ siết khoảng đáy cho thanh điều hướng |
+
+Thanh điều hướng (`mdm.CamNavBar`) lấy cao/đáy từ `@dimen/mdm_nav_height` / `mdm_nav_margin`, tab
+rộng tối thiểu 88dip (trước 104dip) nên vừa màn 360dip.
+
+Script cũng sửa luôn text từng bị double-encode (`Trang chá»§` → `Trang chủ`) bằng cách đảo đúng
+một vòng UTF-8 → cp1252 → UTF-8; text đã đúng không bị đụng tới.
+
+> **Đừng sửa `res/values*/strings.xml` bằng `Set-Content -Encoding UTF8` của PowerShell 5.1.**
+> Nó đọc file bằng cp1252 rồi ghi lại UTF-8, làm toàn bộ tiếng Việt thành "Chá»‰ Ä‘Æ°á»ng".
+> Dùng `Edit`/Python. Nếu đã lỡ: `python scripts/recog/fix_mojibake_strings.py build`.
+
+## Máy khách cần
+
+Root (KernelSU / Magisk / Cam), **Zygisk Next** + **sensor_cal** (app có nút cài cả hai trong Cài đặt,
+file nằm sẵn ở `build/assets/mdm_modules/`), khởi động lại sau khi cài, bật gyroscope trong cài đặt PUBG.
+
+## Phân tích lại gg1 / gg2
+
+Thư mục decompile đã xoá cho gọn, cần thì tạo lại:
+
+```bash
+java -jar tools/apktool.jar d source/gg2.apk -o decompiled/gg2/apktool
+jadx -d decompiled/gg2/jadx source/gg2.apk        # jadx tải tại github.com/skylot/jadx
+```
+
+Chuỗi trong gg2 bị mã hoá XOR, giải bằng `scripts/recog/decenum.py` (key `(i*109+90) & 255`).

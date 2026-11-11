@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.Extensions.GeneralRC.ComponentSettingsView.GeneralRCSwitchConfigComponentSettingsViewSC android:background="@color/component_settings_view_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="15.0sp" android:textColor="@color/white" android:id="@id/textView3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/keymap_component_settings_intro_title" />
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+            <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:id="@id/textView4" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="可设置到切换至某个通用压枪配置" />
+        </LinearLayout>
+        <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+        <ImageView android:id="@id/imageView9" android:layout_width="fill_parent" android:layout_height="5.0dip" android:src="@drawable/white_dotted_line" />
+        <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+        <LinearLayout android:orientation="horizontal" android:id="@id/blockTouchLinearLayout" android:layout_width="fill_parent" android:layout_height="25.0dip">
+            <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="65.0dip" android:layout_height="fill_parent" android:text="@string/block_touch" />
+            <Switch android:id="@id/blockTouchSwitch" android:layout_width="48.0dip" android:layout_height="wrap_content" android:thumbTint="@drawable/settings_switch_thumb" android:trackTint="@drawable/settings_switch_track" />
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="25.0dip">
+            <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="配置切换" />
+            <Space android:layout_width="30.0dip" android:layout_height="wrap_content" />
+            <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/switchIndexSliderView" android:layout_width="250.0dip" android:layout_height="fill_parent" app:sliderMax="10" app:sliderMin="1" />
+            <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <ImageView android:id="@id/helpIcon" android:layout_width="15.0dip" android:layout_height="15.0dip" android:src="@drawable/ic_help" android:tint="@color/white" android:layout_weight="0.0" />
+        </LinearLayout>
+    </LinearLayout>
+</com.zjx.jyandroid.Extensions.GeneralRC.ComponentSettingsView.GeneralRCSwitchConfigComponentSettingsViewSC>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.ForegroundService.UI.UploadKeymapModule.ComponentSettingsViews.MultifunctionalSettingsViewSC android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <View android:id="@id/view34" android:background="#1fffffff" android:layout_width="1.0px" android:layout_height="fill_parent" />
+        <ScrollView android:background="@color/mdm_panel" android:layout_width="140.0dip" android:layout_height="fill_parent" android:layout_weight="0.0">
+            <LinearLayout android:orientation="vertical" android:id="@id/sidePanelLayout" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:id="@id/horizontalRecoilControlButtonSC" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/multifunctional_component_settings_view_sc_text1" android:fontFamily="sans-serif" android:stateListAnimator="@null" />
+                <Button android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:id="@id/generalRCSwitchConfigButtonSC" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="切换压枪配置" android:fontFamily="sans-serif" android:stateListAnimator="@null" />
+            </LinearLayout>
+        </ScrollView>
+        <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/componentSettingsView" android:background="@color/component_settings_view_background" android:paddingTop="8.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="0.0" android:paddingStart="8.0dip" />
+    </LinearLayout>
+</com.zjx.jyandroid.ForegroundService.UI.UploadKeymapModule.ComponentSettingsViews.MultifunctionalSettingsViewSC>

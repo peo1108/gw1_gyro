@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.Extensions.gnyx.AdjustCoefficientView android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="5.0dip" android:layout_marginEnd="5.0dip">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="60.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/adjust_coefficient_view_text1" />
+                    <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/crouchSlider" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                        <Space android:layout_width="10.0dip" android:layout_height="wrap_content" />
+                    </com.zjx.jyandroid.base.Components.FilledSliderWithButtons>
+                </LinearLayout>
+                <Space android:layout_width="10.0dip" android:layout_height="wrap_content" android:layout_weight="0.0" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="60.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="一级枪口" />
+                    <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/muzzleLevel1Slider" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                        <Space android:layout_width="10.0dip" android:layout_height="wrap_content" />
+                    </com.zjx.jyandroid.base.Components.FilledSliderWithButtons>
+                </LinearLayout>
+                <Space android:layout_width="10.0dip" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="60.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="四级枪口" />
+                    <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/muzzleLevel4Slider" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="60.0dip">
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="一级枪托" />
+                    <com.zjx.jyandroid.base.Components.FilledSliderWithButtons android:id="@id/stockLevel1Slider" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+                </LinearLayout>
+                <Space android:layout_width="10.0dip" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</com.zjx.jyandroid.Extensions.gnyx.AdjustCoefficientView>

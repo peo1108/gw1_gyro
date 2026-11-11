@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zjx.jyandroid.ForegroundService.UI.UploadKeymapModule.ComponentSettingsViews.MacroComponentSettingsView android:background="@color/mdm_panel" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="30.0dip" android:layout_marginEnd="30.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <TextView android:textSize="15.0sp" android:textColor="@color/white" android:id="@id/textView3" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/keymap_component_settings_intro_title" />
+                <Space android:layout_width="fill_parent" android:layout_height="5.0dip" />
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:id="@id/textView4" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/macro_settings_prompt" />
+            </LinearLayout>
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+            <ImageView android:layout_width="fill_parent" android:layout_height="5.0dip" android:src="@drawable/white_dotted_line" />
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="0.0">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="85.0dip" android:layout_height="fill_parent" android:text="@string/macro_settings_text1" />
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/nameTextView" android:layout_width="65.0dip" android:layout_height="fill_parent" android:text="@string/empty" />
+                <Space android:layout_width="0.0dip" android:layout_height="wrap_content" />
+                <Button android:textSize="@dimen/font_size_text_phone" android:textStyle="bold" android:textColor="@color/mdm_gold_hi" android:id="@id/changeNameButton" android:background="@drawable/button_rounded_white" android:layout_width="@dimen/button_width_phone" android:layout_height="@dimen/button_height_phone" android:text="@string/modify" />
+                <Space android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="0.0">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="85.0dip" android:layout_height="fill_parent" android:text="@string/macro_settings_text2" />
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/triggerKeyTextView" android:layout_width="65.0dip" android:layout_height="fill_parent" android:text="@string/empty" />
+                <Space android:layout_width="0.0dip" android:layout_height="wrap_content" />
+                <Button android:textSize="@dimen/font_size_text_phone" android:textStyle="bold" android:textColor="@color/mdm_gold_hi" android:id="@id/changeTriggerKeyButton" android:background="@drawable/button_rounded_white" android:layout_width="@dimen/button_width_phone" android:layout_height="@dimen/button_height_phone" android:text="@string/modify" />
+                <Space android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="0.0">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="85.0dip" android:layout_height="fill_parent" android:text="@string/macro_settings_text3" />
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:id="@id/terminateKeyTextView" android:layout_width="65.0dip" android:layout_height="fill_parent" android:text="@string/empty" />
+                <Space android:layout_width="0.0dip" android:layout_height="wrap_content" />
+                <Button android:textSize="@dimen/font_size_text_phone" android:textStyle="bold" android:textColor="@color/mdm_gold_hi" android:id="@id/changeTerminateKeyButton" android:background="@drawable/button_rounded_white" android:layout_width="@dimen/button_width_phone" android:layout_height="@dimen/button_height_phone" android:text="@string/modify" />
+                <Space android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </LinearLayout>
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="100.0dip" android:layout_height="fill_parent" android:text="@string/macro_settings_text4" />
+                <Space android:layout_width="50.0dip" android:layout_height="wrap_content" />
+                <com.addisonelliott.segmentedbutton.SegmentedButtonGroup android:layout_gravity="center_horizontal" android:id="@id/triggerModeSegmentedControl" android:background="@color/settings_segmented_control_background" android:layout_width="260.0dip" android:layout_height="@dimen/button_height_phone" android:elevation="0.0dip" app:borderColor="@color/settings_segmented_control_background" app:borderWidth="0.0dip" app:divider="@color/settings_segmented_control_divider" app:dividerPadding="5.0dip" app:dividerWidth="1.0dip" app:draggable="true" app:position="0" app:radius="5.0dip" app:ripple="true" app:rippleColor="@color/white" app:selectedBackground="@color/white" app:selectionAnimationDuration="200">
+                    <com.addisonelliott.segmentedbutton.SegmentedButton android:padding="7.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" app:drawableGravity="top" app:selectedTextColor="@color/mdm_on_gold" app:selectedTextStyle="bold" app:text="@string/macro_settings_text5" app:textColor="@color/mdm_text_dim" app:textSize="@dimen/font_size_subtext_phone" />
+                    <com.addisonelliott.segmentedbutton.SegmentedButton android:padding="7.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" app:drawableGravity="top" app:selectedTextColor="@color/mdm_on_gold" app:selectedTextStyle="bold" app:text="@string/macro_settings_text6" app:textColor="@color/mdm_text_dim" app:textSize="@dimen/font_size_subtext_phone" />
+                    <com.addisonelliott.segmentedbutton.SegmentedButton android:id="@id/segmentedButton" android:padding="7.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" app:drawableGravity="top" app:selectedTextColor="@color/mdm_on_gold" app:selectedTextStyle="bold" app:text="@string/macro_settings_text7" app:textColor="@color/mdm_text_dim" app:textSize="@dimen/font_size_subtext_phone" />
+                    <com.addisonelliott.segmentedbutton.SegmentedButton android:id="@id/segmentedButton4" android:padding="7.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" app:drawableGravity="top" app:selectedTextColor="@color/mdm_on_gold" app:selectedTextStyle="bold" app:text="@string/macro_settings_text12" app:textColor="@color/mdm_text_dim" app:textSize="@dimen/font_size_subtext_phone" />
+                </com.addisonelliott.segmentedbutton.SegmentedButtonGroup>
+                <Space android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            </LinearLayout>
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" android:layout_weight="1.0" />
+            <ImageView android:layout_width="fill_parent" android:layout_height="5.0dip" android:src="@drawable/white_dotted_line" />
+            <Space android:layout_width="fill_parent" android:layout_height="7.0dip" android:layout_weight="1.0" />
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_weight="0.0">
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="150.0dip" android:layout_height="fill_parent" android:text="@string/macro_settings_text8" />
+                    <TextView android:textSize="@dimen/font_size_text_phone" android:textColor="@color/white" android:gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" />
+                    <Space android:layout_width="0.0dip" android:layout_height="wrap_content" />
+                    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                        <Button android:textSize="@dimen/font_size_text_phone" android:textStyle="bold" android:textColor="@color/mdm_gold_hi" android:id="@id/editButton" android:background="@drawable/button_rounded_white" android:layout_width="@dimen/button_width_phone" android:layout_height="@dimen/button_height_phone" android:text="@string/macro_settings_text9" />
+                        <Space android:layout_width="10.0dip" android:layout_height="wrap_content" />
+                        <Button android:textSize="@dimen/font_size_text_phone" android:textStyle="bold" android:textColor="@color/mdm_gold_hi" android:id="@id/shareButton" android:visibility="gone" android:background="@drawable/button_rounded_white" android:layout_width="@dimen/button_width_phone" android:layout_height="@dimen/button_height_phone" android:text="@string/macro_settings_text10" android:layout_weight="1.0" />
+                        <Space android:layout_width="10.0dip" android:layout_height="wrap_content" />
+                        <Button android:textSize="@dimen/font_size_text_phone" android:textStyle="bold" android:textColor="@color/mdm_gold_hi" android:id="@id/applyButton" android:background="@drawable/button_rounded_white" android:layout_width="@dimen/button_width_phone" android:layout_height="@dimen/button_height_phone" android:text="@string/macro_settings_text11" android:layout_weight="1.0" />
+                    </LinearLayout>
+                    <Space android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                </LinearLayout>
+                <Space android:layout_width="fill_parent" android:layout_height="7.0dip" android:layout_weight="0.0" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</com.zjx.jyandroid.ForegroundService.UI.UploadKeymapModule.ComponentSettingsViews.MacroComponentSettingsView>

@@ -1,0 +1,54 @@
+version: 2.10.0
+apkFileName: gg1.apk
+isFrameworkApk: false
+usesFramework:
+  ids:
+  - 1
+  tag: null
+sdkInfo:
+  minSdkVersion: 28
+  targetSdkVersion: 33
+packageInfo:
+  forcedPackageId: 127
+  renameManifestPackage: null
+versionInfo:
+  versionCode: 219
+  versionName: 1.8.41
+resourcesAreCompressed: false
+sharedLibrary: false
+sparseResources: false
+unknownFiles:
+  DebugProbesKt.bin: 8
+  kotlin-tooling-metadata.json: 8
+  com/qq/jce/wup/wup.properties: 8
+doNotCompress:
+- resources.arsc
+- classes.dex
+- classes2.dex
+- png
+- jpg
+- webp
+- assets/appData/pubgExtension/accessory_assets/grip/empty.JPG
+- assets/appData/pubgExtension/accessory_assets/grip/grip-half.JPG
+- assets/appData/pubgExtension/accessory_assets/grip/grip-horizontal.JPG
+- assets/appData/pubgExtension/accessory_assets/grip/grip-laser.JPG
+- assets/appData/pubgExtension/accessory_assets/grip/grip-light.JPG
+- assets/appData/pubgExtension/accessory_assets/grip/grip-thumb.JPG
+- assets/appData/pubgExtension/accessory_assets/grip/grip-vertical.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/empty.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-compensator-bq.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-compensator-cfq.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-compensator-ju.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-flashhider-bq.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-flashhider-cfq.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-flashhider-ju.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-suppressor-bq.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-suppressor-cfq.JPG
+- assets/appData/pubgExtension/accessory_assets/muzzle/muzzle-suppressor-ju.JPG
+- assets/appData/pubgExtension/accessory_assets/stock/empty.JPG
+- assets/appData/pubgExtension/accessory_assets/stock/stock-bump-fire.JPG
+- assets/appData/pubgExtension/accessory_assets/stock/stock-justock-ju.JPG
+- assets/appData/pubgExtension/accessory_assets/stock/stock-m4stock-general.JPG
+- assets/appData/pubgExtension/accessory_assets/stock/stock-uzistock-cfq.JPG
+- assets/dexopt/baseline.prof
+- assets/dexopt/baseline.profm

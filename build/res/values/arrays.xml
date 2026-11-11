@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="activation_mode">
+        <item>Wired</item>
+        <item>Wireless</item>
+        <item>Root</item>
+        <item>By Computer</item>
+    </string-array>
+    <array name="initial_horizontal_dynamic_rc_value_slider_values">
+        <item>0.0</item>
+        <item>6.0</item>
+    </array>
+    <array name="initial_vertical_dynamic_rc_value_slider_values">
+        <item>0.0</item>
+        <item>100.0</item>
+    </array>
+    <string-array name="language_list">
+        <item>English</item>
+        <item>简体中文</item>
+        <item>繁体中文</item>
+        <item>Português</item>
+        <item>Tiếng Việt</item>
+    </string-array>
+</resources>

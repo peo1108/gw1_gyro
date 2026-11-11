@@ -55,7 +55,8 @@
 
     if-eqz v1, :cond_0
 
-    const v1, 0x3f19999a    # 0.6f
+    # mdm-tablet: settings window 0.6 -> 0.82 of screen width on tablets (content is scaled x1.3)
+    const v1, 0x3f51eb85    # 0.82f
 
     goto :goto_0
 

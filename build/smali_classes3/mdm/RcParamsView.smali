@@ -140,15 +140,10 @@
     .line 94
     iget-object p1, p0, Lmdm/RcParamsView;->ctx:Landroid/content/Context;
 
-    invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+    # mdm-tablet: density x1.3 on tablets (smallest width >= 600dp)
+    invoke-static {p1}, Lmdm/TabletScale;->density(Landroid/content/Context;)F
 
-    move-result-object p1
-
-    invoke-virtual {p1}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
-
-    move-result-object p1
-
-    iget p1, p1, Landroid/util/DisplayMetrics;->density:F
+    move-result p1
 
     iput p1, p0, Lmdm/RcParamsView;->dp:F
 
@@ -602,6 +597,11 @@
     const/4 p1, 0x2
 
     const/high16 v1, 0x41380000    # 11.5f
+
+    # mdm-tablet: text x1.3 on tablets
+    invoke-static {v1}, Lmdm/TabletScale;->sp(F)F
+
+    move-result v1
 
     invoke-virtual {v0, p1, v1}, Landroid/widget/TextView;->setTextSize(IF)V
 
@@ -1204,6 +1204,11 @@
     .line 780
     const/4 p1, 0x2
 
+    # mdm-tablet: text x1.3 on tablets
+    invoke-static {p2}, Lmdm/TabletScale;->sp(F)F
+
+    move-result p2
+
     invoke-virtual {v0, p1, p2}, Landroid/widget/TextView;->setTextSize(IF)V
 
     .line 781
@@ -1313,6 +1318,11 @@
     const/4 p1, 0x2
 
     const/high16 v1, 0x41580000    # 13.5f
+
+    # mdm-tablet: text x1.3 on tablets
+    invoke-static {v1}, Lmdm/TabletScale;->sp(F)F
+
+    move-result v1
 
     invoke-virtual {v0, p1, v1}, Landroid/widget/TextView;->setTextSize(IF)V
 
@@ -3016,6 +3026,11 @@
 
     const/high16 v6, 0x41580000    # 13.5f
 
+    # mdm-tablet: text x1.3 on tablets
+    invoke-static {v6}, Lmdm/TabletScale;->sp(F)F
+
+    move-result v6
+
     invoke-virtual {v4, v5, v6}, Landroid/widget/EditText;->setTextSize(IF)V
 
     .line 205
@@ -3354,6 +3369,11 @@
     const/4 p1, 0x2
 
     const/high16 v1, 0x41800000    # 16.0f
+
+    # mdm-tablet: text x1.3 on tablets
+    invoke-static {v1}, Lmdm/TabletScale;->sp(F)F
+
+    move-result v1
 
     invoke-virtual {v0, p1, v1}, Landroid/widget/TextView;->setTextSize(IF)V
 

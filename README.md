@@ -2,7 +2,7 @@
 
 Bản mod của gg1 (`com.zx.yxt` v1.8.41) cho khách: thêm gyro ghìm tâm qua module Zygisk `sensor_cal`,
 giao diện MDM (đen + vàng champagne), nhận diện súng/phụ kiện cập nhật từ gg2.
-Bản mới nhất: **m31**, file `release/MDM_release_m31.apk`.
+Bản mới nhất: **m36**, file `out/MDM_m36-release.apk` (menu nổi to hơn trên tablet).
 
 ## Cấu trúc
 
@@ -117,6 +117,28 @@ một vòng UTF-8 → cp1252 → UTF-8; text đã đúng không bị đụng t�
 > **Đừng sửa `res/values*/strings.xml` bằng `Set-Content -Encoding UTF8` của PowerShell 5.1.**
 > Nó đọc file bằng cp1252 rồi ghi lại UTF-8, làm toàn bộ tiếng Việt thành "Chá»‰ Ä‘Æ°á»ng".
 > Dùng `Edit`/Python. Nếu đã lỡ: `python scripts/recog/fix_mojibake_strings.py build`.
+
+## Menu nổi trên tablet (m36)
+
+Menu nổi trong game (panel PUBG nhanh, chọn/sửa keymap, "Cài đặt AI" và các tab cùng cửa sổ) vẽ
+bằng dip cỡ điện thoại nên trên tablet trông bé. **Điện thoại không đổi gì**: `res/layout/` giữ nguyên,
+bản to nằm ở `res/layout-sw600dp-v13/` (Android chỉ dùng khi cạnh ngắn ≥ 600dp).
+
+```bash
+python scripts/mdm_ui/mdm_tablet.py build          # sinh lại 70 layout x1.3
+python scripts/mdm_ui/mdm_tablet.py build --list   # chỉ in danh sách
+```
+
+- Script nhân mọi `dip`/`sp` (cả `@dimen/` đã giải ra giá trị) với `SCALE = 1.3`, thêm `textSize`
+  cho chữ đang dùng mặc định 14sp. Id/tag/class giữ nguyên, script tự kiểm tra.
+- **Sửa layout overlay ở `res/layout/` thì chạy lại script**: file sinh ra có dòng đánh dấu, bị xoá và
+  tạo lại mỗi lần chạy. Đừng sửa tay trong `layout-sw600dp-v13/`.
+- Không phóng to: lớp phím keymap trên màn game (`components_holder_view`, phải khớp nút game),
+  bóng nổi, thanh icon gốc, tâm ngắm, và mọi màn Activity.
+- Cửa sổ cài đặt (`smali/t/a.smali`) trên tablet rộng 82% màn (trước 60%, điện thoại vẫn 70%).
+- Bảng ghìm tâm x1…x8 dựng bằng code: smali `RcParamsView` gọi `mdm.TabletScale.density()` / `sp()`
+  (cùng ngưỡng 600dp). **`java/src/mdm/RcParamsView.java` cũ hơn smali đang chạy** (thiếu 6 lớp
+  ẩn danh, APK m35 dùng bản smali) — đừng biên dịch lại từ file Java đó, vá smali.
 
 ## Máy khách cần
 

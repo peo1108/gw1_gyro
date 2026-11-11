@@ -2147,6 +2147,9 @@
 
     invoke-virtual {p1, v0, v6}, Lcom/zjx/jyandroid/ForegroundService/UI/RootFloatingPanelView;->a(Landroid/view/View;I)V
 
+    # mdm-rc: "Thông số" item next to "Cài đặt AI"
+    invoke-static {p1, p0}, Lmdm/ParamsMenu;->install(Ljava/lang/Object;Ljava/lang/Object;)V
+
     new-instance p1, Lcom/zjx/jyandroid/Extensions/pubg/d$k;
 
     invoke-direct {p1, p0}, Lcom/zjx/jyandroid/Extensions/pubg/d$k;-><init>(Lcom/zjx/jyandroid/Extensions/pubg/d;)V

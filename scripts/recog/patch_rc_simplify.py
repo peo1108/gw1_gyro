@@ -9,12 +9,13 @@ docs/superpowers/specs/2026-11-11-rc-params-simplify-design.md).
   AdjustRCValueFloatingPanelView$c.run()
                                  after it fetches the current lookup node, call mdm.RcPanel.bind
                                  (title "weapon · stance · scope", extra buttons hidden)
+  pubg/d.onFloatingPanelDisplay  (--menu) add the "Thông số" item via mdm.ParamsMenu.install
   pubg_extension_settings_view   hide the accessory recognition switch + its settings block
 
 apktool's smali is CRLF: files are edited as text with their own newline kept. Every patch is
 idempotent (marker "mdm-rc") and must match exactly once.
 
-usage: python scripts/recog/patch_rc_simplify.py <build_dir>
+usage: python scripts/recog/patch_rc_simplify.py <build_dir> [--panel] [--menu]
 """
 import os
 import re
@@ -37,10 +38,20 @@ def save(path, text, nl):
         f.write(text.replace("\n", nl).encode("utf-8"))
 
 
+# what each patch inserts: present already -> that patch is done (a file can carry several)
+DONE_IF = {
+    "accessory_getter": "mdm-rc: accessory recognition removed",
+    "sensitivity_no_rescale": "mdm-rc: sensitivity saved above",
+    "alias_sync": "Lmdm/RcStore;->syncAliases",
+    "panel_bind": "Lmdm/RcPanel;->bind",
+    "menu_install": "Lmdm/ParamsMenu;->install",
+}
+
+
 def patch(name, fn):
     path = os.path.join(PUBG, name)
     text, nl = load(path)
-    if MARK in text and fn.__name__ != "settings_layout":
+    if DONE_IF[fn.__name__] in text:
         print("skip (already patched): " + name)
         return
     new = fn(text)
@@ -97,6 +108,17 @@ def panel_bind(t):
     return once(pat, t, rep)
 
 
+def menu_install(t):
+    # p1 is still the RootFloatingPanelView right after the extension added "Cài đặt AI";
+    # the next lines reuse p1 for the click listener, so the call goes exactly here
+    call = ("    invoke-virtual {p1, v0, v6}, Lcom/zjx/jyandroid/ForegroundService/UI/RootFloatingPanelView;"
+            "->a(Landroid/view/View;I)V\n")
+    return once(re.escape(call), t,
+                call.replace("\\", "\\\\") +
+                "\n    # mdm-rc: \"Thông số\" item next to \"Cài đặt AI\"\n"
+                "    invoke-static {p1, p0}, Lmdm/ParamsMenu;->install(Ljava/lang/Object;Ljava/lang/Object;)V\n")
+
+
 def settings_layout(t):
     for vid in ("enableAccessoryRecognitionCell", "accessoryRecognitionSettingsLinearLayout"):
         tag = re.search(r'<[^<>]*android:id="@id/%s"[^<>]*>' % vid, t)
@@ -117,6 +139,8 @@ def main():
     patch("g$b.smali", alias_sync)
     if "--panel" in sys.argv:
         patch("AdjustRCValueFloatingPanelView$c.smali", panel_bind)
+    if "--menu" in sys.argv:
+        patch("d.smali", menu_install)
     lay = os.path.join(B, "res", "layout", "pubg_extension_settings_view.xml")
     text, nl = load(lay)
     save(lay, settings_layout(text), nl)

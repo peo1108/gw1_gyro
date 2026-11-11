@@ -293,6 +293,27 @@ public final class LocalKeymapStore {
         return content;
     }
 
+    /** Fresh mdm_v2 content of a PUBG RC config for the "Thông số" sheet (engine file first). */
+    static Map loadRcLive(KeymapManager km, String id) {
+        return ensureV2(km, PUBG_RC_BUNDLE, id, readContent(id));
+    }
+
+    /** Id of the PUBG RC config the game uses, or null when none is selected. */
+    static String selectedRcId() {
+        Map<String, Object> bm = bundle(loadIndex(), PUBG_RC_BUNDLE, false);
+        return bm == null ? null : str(bm.get("selected"));
+    }
+
+    /** Display name of a stored config, or null. */
+    @SuppressWarnings("unchecked")
+    static String nameOf(String id) {
+        Map<String, Object> root = loadIndex();
+        String bundleId = bundleOf(root, id);
+        Map<String, Object> bm = bundleId == null ? null : bundle(root, bundleId, false);
+        Object o = bm == null ? null : items(bm).get(id);
+        return o instanceof Map ? str(((Map<String, Object>) o).get("name")) : null;
+    }
+
     static boolean rcFileExists(String bundleId, String id) {
         String path = rcFilePath(bundleId, id);
         if (path == null) return false;

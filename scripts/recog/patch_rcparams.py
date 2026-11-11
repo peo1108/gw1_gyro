@@ -1,4 +1,4 @@
-﻿"""Point each RC-data row's share button at the per-weapon parameter editor.
+"""Point each RC-data row's share button at the per-weapon parameter editor.
 
 Each config row carries a share button whose listener showed an Alert and then pushed the
 config to the share service. This rewrites that listener's onClick so it opens
@@ -24,7 +24,7 @@ Field layout read from the smali, not guessed:
                val$this$1: ...$TableViewAdapter             (field a = the view; privateKeymapManager)
                bundleId:  static field RCDataManageView.BUNDLE_ID
 
-usage: python scripts/recog/patch_rcparams.py <build_dir>
+usage: python scripts/recog/patch_rcparams.py <build_dir> [--only pubg|GeneralRC|gnyx]
 """
 import os
 import sys
@@ -35,6 +35,8 @@ SM = os.path.join(B, "smali")
 TARGETS = [
     dict(
         name="pubg",
+        # m38 (mdm_v2): PUBG rows open the new 3-stance x 7-scope sheet
+        sheet="Lmdm/ParamsSheet;",
         listener="com/zjx/jyandroid/Extensions/pubg/RCDataManageView$k$b$c.smali",
         cls="Lcom/zjx/jyandroid/Extensions/pubg/RCDataManageView$k$b$c;",
         adapter_field="a:Lcom/zjx/jyandroid/Extensions/pubg/RCDataManageView$k;",
@@ -171,11 +173,11 @@ def body(t):
     A("")
 
     # instance -> v0 (the holder is no longer needed)
-    A("    new-instance v0, Lmdm/RcParamsView;")
+    A("    new-instance v0, " + t.get("sheet", "Lmdm/RcParamsView;") + "")
     A("")
-    A("    invoke-direct/range {v0 .. v5}, Lmdm/RcParamsView;-><init>(Landroid/view/View;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager;)V")
+    A("    invoke-direct/range {v0 .. v5}, " + t.get("sheet", "Lmdm/RcParamsView;") + "-><init>(Landroid/view/View;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager;)V")
     A("")
-    A("    invoke-virtual {v0}, Lmdm/RcParamsView;->open()V")
+    A("    invoke-virtual {v0}, " + t.get("sheet", "Lmdm/RcParamsView;") + "->open()V")
     A("")
     A("    return-void")
     A(".end method")
@@ -210,8 +212,12 @@ def patch(t):
     return True
 
 
+ONLY = sys.argv[sys.argv.index("--only") + 1] if "--only" in sys.argv else None
+
 n = 0
 for t in TARGETS:
+    if ONLY and t["name"] != ONLY:
+        continue
     if patch(t):
         n += 1
 print("patched:", n, "/", len(TARGETS))

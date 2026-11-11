@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 476
+    .line 485
     iput-object p1, p0, Lmdm/LocalKeymapStore$4;->val$h:Lcom/zjx/jyandroid/ForegroundService/KeymapManager$UpdateKeymapCompletionHandler;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,7 +43,7 @@
 .method public run()V
     .registers 3
 
-    .line 476
+    .line 485
     iget-object v0, p0, Lmdm/LocalKeymapStore$4;->val$h:Lcom/zjx/jyandroid/ForegroundService/KeymapManager$UpdateKeymapCompletionHandler;
 
     if-eqz v0, :cond_a

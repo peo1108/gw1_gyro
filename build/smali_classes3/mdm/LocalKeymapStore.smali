@@ -4,8 +4,6 @@
 
 
 # static fields
-.field static final DEFAULT_RECOIL:[D
-
 .field static final GSON:Lcom/google/gson/Gson;
 
 .field static final MAIN:Landroid/os/Handler;
@@ -35,28 +33,7 @@
 
     sput-object v0, Lmdm/LocalKeymapStore;->MAIN:Landroid/os/Handler;
 
-    .line 220
-    const/16 v0, 0x8
-
-    new-array v0, v0, [D
-
-    fill-array-data v0, :array_1c
-
-    sput-object v0, Lmdm/LocalKeymapStore;->DEFAULT_RECOIL:[D
-
     return-void
-
-    :array_1c
-    .array-data 8
-        0x4028000000000000L    # 12.0
-        0x4034000000000000L    # 20.0
-        0x4036000000000000L    # 22.0
-        0x4050800000000000L    # 66.0
-        0x4059000000000000L    # 100.0
-        0x4050800000000000L    # 66.0
-        0x4050800000000000L    # 66.0
-        0x4059000000000000L    # 100.0
-    .end array-data
 .end method
 
 .method private constructor <init>()V
@@ -65,229 +42,6 @@
     .line 37
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    return-void
-.end method
-
-.method static applyDefaultRecoil(Ljava/util/Map;)V
-    .registers 6
-
-    .line 229
-    if-nez p0, :cond_3
-
-    return-void
-
-    .line 230
-    :cond_3
-    const-string v0, "recoil_data"
-
-    invoke-interface {p0, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object p0
-
-    .line 231
-    instance-of v0, p0, Ljava/util/List;
-
-    if-nez v0, :cond_e
-
-    return-void
-
-    .line 232
-    :cond_e
-    check-cast p0, Ljava/util/List;
-
-    invoke-interface {p0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
-
-    move-result-object p0
-
-    :goto_14
-    invoke-interface {p0}, Ljava/util/Iterator;->hasNext()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_a0
-
-    invoke-interface {p0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
-
-    move-result-object v0
-
-    .line 233
-    instance-of v1, v0, Ljava/util/Map;
-
-    if-nez v1, :cond_23
-
-    goto :goto_14
-
-    .line 234
-    :cond_23
-    check-cast v0, Ljava/util/Map;
-
-    const-string v1, "v"
-
-    invoke-interface {v0, v1}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v0
-
-    .line 235
-    instance-of v1, v0, Ljava/util/List;
-
-    if-nez v1, :cond_30
-
-    goto :goto_14
-
-    .line 236
-    :cond_30
-    check-cast v0, Ljava/util/List;
-
-    invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
-
-    move-result-object v0
-
-    :cond_36
-    :goto_36
-    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
-
-    move-result v1
-
-    if-eqz v1, :cond_9e
-
-    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
-
-    move-result-object v1
-
-    .line 237
-    instance-of v2, v1, Ljava/util/Map;
-
-    if-nez v2, :cond_45
-
-    goto :goto_36
-
-    .line 238
-    :cond_45
-    check-cast v1, Ljava/util/Map;
-
-    .line 239
-    const-string v2, "scope"
-
-    invoke-interface {v1, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v2
-
-    .line 240
-    instance-of v3, v2, Ljava/lang/Number;
-
-    if-nez v3, :cond_52
-
-    goto :goto_36
-
-    .line 241
-    :cond_52
-    check-cast v2, Ljava/lang/Number;
-
-    invoke-virtual {v2}, Ljava/lang/Number;->intValue()I
-
-    move-result v2
-
-    .line 242
-    if-ltz v2, :cond_36
-
-    sget-object v3, Lmdm/LocalKeymapStore;->DEFAULT_RECOIL:[D
-
-    array-length v3, v3
-
-    if-lt v2, v3, :cond_60
-
-    goto :goto_36
-
-    .line 243
-    :cond_60
-    const-string v3, "recoilValue"
-
-    invoke-interface {v1, v3}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
-
-    move-result-object v1
-
-    .line 244
-    instance-of v3, v1, Ljava/util/List;
-
-    if-nez v3, :cond_6b
-
-    goto :goto_36
-
-    .line 245
-    :cond_6b
-    check-cast v1, Ljava/util/List;
-
-    .line 246
-    invoke-interface {v1}, Ljava/util/List;->isEmpty()Z
-
-    move-result v3
-
-    if-eqz v3, :cond_74
-
-    goto :goto_36
-
-    .line 247
-    :cond_74
-    const/4 v3, 0x0
-
-    invoke-interface {v1, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
-
-    move-result-object v1
-
-    .line 248
-    instance-of v3, v1, Ljava/util/List;
-
-    if-nez v3, :cond_7e
-
-    goto :goto_36
-
-    .line 249
-    :cond_7e
-    check-cast v1, Ljava/util/List;
-
-    .line 250
-    :goto_80
-    invoke-interface {v1}, Ljava/util/List;->size()I
-
-    move-result v3
-
-    const/4 v4, 0x2
-
-    if-ge v3, v4, :cond_91
-
-    const-wide/16 v3, 0x0
-
-    invoke-static {v3, v4}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
-
-    move-result-object v3
-
-    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    goto :goto_80
-
-    .line 251
-    :cond_91
-    sget-object v3, Lmdm/LocalKeymapStore;->DEFAULT_RECOIL:[D
-
-    aget-wide v2, v3, v2
-
-    invoke-static {v2, v3}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
-
-    move-result-object v2
-
-    const/4 v3, 0x1
-
-    invoke-interface {v1, v3, v2}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
-
-    .line 252
-    goto :goto_36
-
-    .line 253
-    :cond_9e
-    goto/16 :goto_14
-
-    .line 254
-    :cond_a0
     return-void
 .end method
 
@@ -712,15 +466,15 @@
 .method static createCommon(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$CreateKeymapCompletionHandler;)V
     .registers 11
 
-    .line 414
+    .line 422
     invoke-static {}, Lmdm/LocalKeymapStore;->newId()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 415
+    .line 423
     if-nez p2, :cond_1c
 
-    .line 416
+    .line 424
     const-string p2, "com.zjx.pubg.rcConfig"
 
     invoke-virtual {p2, p3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
@@ -738,7 +492,7 @@
     :cond_13
     const/4 p2, 0x0
 
-    .line 417
+    .line 425
     :goto_14
     if-eqz p2, :cond_17
 
@@ -749,15 +503,15 @@
 
     invoke-direct {p2}, Ljava/util/HashMap;-><init>()V
 
-    .line 420
+    .line 428
     :cond_1c
     :goto_1c
     nop
 
-    .line 421
+    .line 429
     nop
 
-    .line 423
+    .line 431
     const/4 v1, 0x0
 
     :try_start_1f
@@ -765,15 +519,15 @@
 
     move-result-object v2
 
-    .line 424
+    .line 432
     if-eqz v2, :cond_2d
 
-    .line 425
+    .line 433
     if-nez p1, :cond_29
 
     iget-object p1, v2, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapContentInfo;->name:Ljava/lang/String;
 
-    .line 426
+    .line 434
     :cond_29
     iget v1, v2, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapContentInfo;->componentCount:I
     :try_end_2b
@@ -781,7 +535,7 @@
 
     goto :goto_2d
 
-    .line 428
+    .line 436
     :catchall_2c
     move-exception v2
 
@@ -789,7 +543,7 @@
     :goto_2d
     nop
 
-    .line 430
+    .line 438
     invoke-static {v0}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object v2
@@ -802,41 +556,41 @@
 
     invoke-static {v2, v3}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 432
+    .line 440
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object v2
 
-    .line 433
+    .line 441
     const/4 v3, 0x1
 
     invoke-static {v2, p3, v3}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v3
 
-    .line 434
+    .line 442
     new-instance v4, Ljava/util/HashMap;
 
     invoke-direct {v4}, Ljava/util/HashMap;-><init>()V
 
-    .line 435
+    .line 443
     const-string v5, "name"
 
     invoke-interface {v4, v5, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 436
+    .line 444
     const-string p1, "bundleId"
 
     invoke-interface {v4, p1, p3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 437
+    .line 445
     const-string p1, "isOfficial"
 
     sget-object v5, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
 
     invoke-interface {v4, p1, v5}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 438
+    .line 446
     const-string p1, "componentCount"
 
     invoke-static {v1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
@@ -845,14 +599,14 @@
 
     invoke-interface {v4, p1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 439
+    .line 447
     const-string p1, "forPhone"
 
     sget-object v1, Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean;
 
     invoke-interface {v4, p1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 440
+    .line 448
     const-string p1, "updateTime"
 
     invoke-static {}, Lmdm/LocalKeymapStore;->now()Ljava/lang/String;
@@ -861,17 +615,17 @@
 
     invoke-interface {v4, p1, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 441
+    .line 449
     invoke-static {v3}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object p1
 
     invoke-interface {p1, v0, v4}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 442
+    .line 450
     invoke-static {v2}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
 
-    .line 444
+    .line 452
     invoke-static {v2, p3}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
     move-result-object p1
@@ -888,69 +642,69 @@
 
     invoke-static {p0, p3, p1, v1}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 445
+    .line 453
     invoke-static {p0, v0, p2}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 446
+    .line 454
     invoke-static {p3, v0, p2}, Lmdm/LocalKeymapStore;->mirrorRc(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 447
+    .line 455
     new-instance p0, Lmdm/LocalKeymapStore$3;
 
     invoke-direct {p0, p4, v0}, Lmdm/LocalKeymapStore$3;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$CreateKeymapCompletionHandler;Ljava/lang/String;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 448
+    .line 456
     return-void
 .end method
 
 .method public static createNamed(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$CreateKeymapCompletionHandler;)V
     .registers 5
 
-    .line 403
+    .line 411
     const/4 v0, 0x0
 
     invoke-static {p0, p1, v0, p2, p3}, Lmdm/LocalKeymapStore;->createCommon(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$CreateKeymapCompletionHandler;)V
 
-    .line 404
+    .line 412
     return-void
 .end method
 
 .method public static createWithContent(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/util/Map;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$CreateKeymapCompletionHandler;)V
     .registers 5
 
-    .line 408
+    .line 416
     const/4 v0, 0x0
 
     invoke-static {p0, v0, p1, p2, p3}, Lmdm/LocalKeymapStore;->createCommon(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$CreateKeymapCompletionHandler;)V
 
-    .line 409
+    .line 417
     return-void
 .end method
 
 .method static defaultRcContent()Ljava/util/Map;
     .registers 1
 
-    .line 258
+    .line 217
     :try_start_0
     invoke-static {}, Lcom/zjx/jyandroid/Extensions/pubg/g;->f()Ljava/util/Map;
 
     move-result-object v0
 
-    .line 259
-    invoke-static {v0}, Lmdm/LocalKeymapStore;->applyDefaultRecoil(Ljava/util/Map;)V
+    .line 218
+    invoke-static {v0}, Lmdm/RcStore;->makeDefault(Ljava/util/Map;)V
     :try_end_7
     .catchall {:try_start_0 .. :try_end_7} :catchall_8
 
-    .line 260
+    .line 219
     return-object v0
 
-    .line 261
+    .line 220
     :catchall_8
     move-exception v0
 
-    .line 262
+    .line 221
     const/4 v0, 0x0
 
     return-object v0
@@ -959,34 +713,34 @@
 .method public static deleteKeymap(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$DeleteKeymapCompletionHandler;)V
     .registers 8
 
-    .line 481
+    .line 490
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object v0
 
-    .line 482
+    .line 491
     invoke-static {v0, p1}, Lmdm/LocalKeymapStore;->bundleOf(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 483
+    .line 492
     if-eqz v1, :cond_3c
 
-    .line 484
+    .line 493
     const/4 v2, 0x1
 
     invoke-static {v0, v1, v2}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v2
 
-    .line 485
+    .line 494
     invoke-static {v2}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v3
 
     invoke-interface {v3, p1}, Ljava/util/Map;->remove(Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 486
+    .line 495
     const-string v3, "selected"
 
     invoke-interface {v2, v3}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
@@ -1007,11 +761,11 @@
 
     invoke-interface {v2, v3, v4}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 487
+    .line 496
     :cond_2a
     invoke-static {v0}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
 
-    .line 488
+    .line 497
     invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
     move-result-object v0
@@ -1026,7 +780,7 @@
 
     invoke-static {p0, v1, v0, v2}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 490
+    .line 499
     :cond_3c
     :try_start_3c
     invoke-static {p1}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
@@ -1042,21 +796,21 @@
     :catchall_44
     move-exception v0
 
-    .line 491
+    .line 500
     :goto_45
     invoke-static {v1, p1}, Lmdm/LocalKeymapStore;->removeRcFile(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 492
+    .line 501
     invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->dropContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;)V
 
-    .line 493
+    .line 502
     new-instance p0, Lmdm/LocalKeymapStore$5;
 
     invoke-direct {p0, p2}, Lmdm/LocalKeymapStore$5;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$DeleteKeymapCompletionHandler;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 494
+    .line 503
     return-void
 .end method
 
@@ -1083,10 +837,186 @@
     return-void
 .end method
 
+.method static ensureV2(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;
+    .registers 8
+
+    .line 270
+    const-string v0, "com.zjx.pubg.rcConfig"
+
+    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_88
+
+    if-nez p2, :cond_c
+
+    goto/16 :goto_88
+
+    .line 271
+    :cond_c
+    invoke-static {p1, p2}, Lmdm/LocalKeymapStore;->readRcFile(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
+
+    move-result-object v0
+
+    .line 272
+    invoke-static {v0}, Lmdm/LocalKeymapStore;->hasRecoilData(Ljava/util/Map;)Z
+
+    move-result v1
+
+    .line 273
+    if-eqz v1, :cond_17
+
+    move-object p3, v0
+
+    .line 274
+    :cond_17
+    invoke-static {p3}, Lmdm/LocalKeymapStore;->hasRecoilData(Ljava/util/Map;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_27
+
+    .line 275
+    invoke-static {}, Lmdm/LocalKeymapStore;->defaultRcContent()Ljava/util/Map;
+
+    move-result-object v0
+
+    .line 276
+    if-nez v0, :cond_24
+
+    return-object p3
+
+    .line 277
+    :cond_24
+    nop
+
+    .line 278
+    move-object p3, v0
+
+    goto :goto_60
+
+    :cond_27
+    invoke-static {p3}, Lmdm/RcStore;->isV2(Ljava/util/Map;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_74
+
+    .line 279
+    new-instance v0, Ljava/io/File;
+
+    invoke-static {p2}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/io/File;->getParentFile()Ljava/io/File;
+
+    move-result-object v1
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    const-string v3, ".v1.bak.json"
+
+    invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v2
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-direct {v0, v1, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    .line 280
+    invoke-virtual {v0}, Ljava/io/File;->exists()Z
+
+    move-result v1
+
+    if-nez v1, :cond_5c
+
+    sget-object v1, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
+
+    invoke-virtual {v1, p3}, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
+
+    .line 281
+    :cond_5c
+    invoke-static {p3}, Lmdm/RcStore;->makeDefault(Ljava/util/Map;)V
+
+    .line 282
+    nop
+
+    .line 289
+    :goto_60
+    sget-object v0, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
+
+    invoke-virtual {v0, p3}, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v0
+
+    .line 290
+    invoke-static {p2}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
+
+    move-result-object v1
+
+    invoke-static {v1, v0}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
+
+    .line 291
+    invoke-static {p1, p2, p3}, Lmdm/LocalKeymapStore;->writeRcFile(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+
+    .line 292
+    invoke-static {p0, p2, p3}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
+
+    .line 293
+    return-object p3
+
+    .line 282
+    :cond_74
+    if-eqz v1, :cond_87
+
+    .line 283
+    invoke-static {p2}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
+
+    move-result-object p1
+
+    sget-object v0, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
+
+    invoke-virtual {v0, p3}, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {p1, v0}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
+
+    .line 284
+    invoke-static {p0, p2, p3}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
+
+    .line 285
+    return-object p3
+
+    .line 287
+    :cond_87
+    return-object p3
+
+    .line 270
+    :cond_88
+    :goto_88
+    return-object p3
+.end method
+
 .method public static getConfigContentById(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetConfigContentByIdCompletionHandler;)V
     .registers 3
 
-    .line 537
+    .line 545
     invoke-static {p1}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object p0
@@ -1095,34 +1025,34 @@
 
     move-result-object p0
 
-    .line 538
+    .line 546
     new-instance p1, Lmdm/LocalKeymapStore$8;
 
     invoke-direct {p1, p2, p0}, Lmdm/LocalKeymapStore$8;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetConfigContentByIdCompletionHandler;Ljava/lang/String;)V
 
     invoke-static {p1}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 539
+    .line 547
     return-void
 .end method
 
 .method public static getKeymap(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetKeymapCompletionHandler;)V
     .registers 9
 
-    .line 375
+    .line 382
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object v0
 
-    .line 376
+    .line 383
     invoke-static {v0, p1}, Lmdm/LocalKeymapStore;->bundleOf(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 378
+    .line 385
     nop
 
-    .line 379
+    .line 386
     invoke-static {p1}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object v2
@@ -1131,12 +1061,12 @@
 
     move-result-object v2
 
-    .line 380
+    .line 387
     const/4 v3, 0x0
 
     if-eqz v2, :cond_20
 
-    .line 381
+    .line 388
     :try_start_14
     sget-object v4, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
 
@@ -1155,39 +1085,44 @@
     :catchall_1f
     move-exception v2
 
-    .line 383
+    .line 390
     :cond_20
     move-object v2, v3
 
     :goto_21
-    if-nez v2, :cond_28
+    invoke-static {p0, v1, p1, v2}, Lmdm/LocalKeymapStore;->ensureV2(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;
+
+    move-result-object v2
+
+    .line 391
+    if-nez v2, :cond_2c
 
     new-instance v2, Ljava/util/HashMap;
 
     invoke-direct {v2}, Ljava/util/HashMap;-><init>()V
 
-    .line 386
-    :cond_28
-    if-nez v1, :cond_2c
+    .line 394
+    :cond_2c
+    if-nez v1, :cond_30
 
     move-object v0, v3
 
-    goto :goto_31
+    goto :goto_35
 
-    :cond_2c
+    :cond_30
     const/4 v4, 0x0
 
     invoke-static {v0, v1, v4}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v0
 
-    .line 387
-    :goto_31
-    if-nez v0, :cond_34
+    .line 395
+    :goto_35
+    if-nez v0, :cond_38
 
-    goto :goto_3c
+    goto :goto_40
 
-    :cond_34
+    :cond_38
     invoke-static {v0}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v0
@@ -1196,74 +1131,74 @@
 
     move-result-object v3
 
-    .line 388
-    :goto_3c
+    .line 396
+    :goto_40
     instance-of v0, v3, Ljava/util/Map;
 
-    if-eqz v0, :cond_47
+    if-eqz v0, :cond_4b
 
-    .line 389
+    .line 397
     check-cast v3, Ljava/util/Map;
 
     invoke-static {p1, v1, v3}, Lmdm/LocalKeymapStore;->toInfo(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapInfo;
 
     move-result-object v0
 
-    goto :goto_50
+    goto :goto_54
 
-    .line 391
-    :cond_47
+    .line 399
+    :cond_4b
     new-instance v0, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapInfo;
 
     invoke-direct {v0}, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapInfo;-><init>()V
 
-    .line 392
+    .line 400
     iput-object p1, v0, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapInfo;->id:Ljava/lang/String;
 
-    .line 393
+    .line 401
     iput-object v1, v0, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapInfo;->bundleId:Ljava/lang/String;
 
-    .line 396
-    :goto_50
+    .line 404
+    :goto_54
     new-instance v1, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$Keymap;
 
     invoke-direct {v1, v0, v2}, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$Keymap;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapInfo;Ljava/util/Map;)V
 
-    .line 397
+    .line 405
     invoke-static {p0, p1, v2}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 398
+    .line 406
     new-instance p0, Lmdm/LocalKeymapStore$2;
 
     invoke-direct {p0, p2, v1}, Lmdm/LocalKeymapStore$2;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetKeymapCompletionHandler;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$Keymap;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 399
+    .line 407
     return-void
 .end method
 
 .method public static getKeymapList(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetKeymapListCompletionHandler;)V
     .registers 7
 
-    .line 363
+    .line 370
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object p2
 
-    .line 364
+    .line 371
     invoke-static {p2, p1}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
     move-result-object v0
 
-    .line 365
+    .line 372
     const/4 v1, 0x0
 
     invoke-static {p2, p1, v1}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v1
 
-    .line 366
+    .line 373
     if-nez v1, :cond_11
 
     const/4 v1, 0x0
@@ -1281,21 +1216,21 @@
 
     move-result-object v1
 
-    .line 367
+    .line 374
     :goto_1b
     invoke-static {p0, p2, p1, v1}, Lmdm/LocalKeymapStore;->healAndMirrorSelectedRc(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/util/Map;Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 368
+    .line 375
     invoke-static {p0, p1, v0, v1}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 369
+    .line 376
     new-instance p0, Lmdm/LocalKeymapStore$1;
 
     invoke-direct {p0, p3, v0, v1}, Lmdm/LocalKeymapStore$1;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetKeymapListCompletionHandler;Ljava/util/LinkedList;Ljava/lang/String;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 370
+    .line 377
     return-void
 .end method
 
@@ -1352,47 +1287,54 @@
         }
     .end annotation
 
-    .line 324
+    .line 329
     const-string v0, "com.zjx.pubg.rcConfig"
 
     invoke-virtual {v0, p2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
 
     move-result v0
 
-    if-eqz v0, :cond_91
+    if-eqz v0, :cond_a8
 
     if-nez p3, :cond_c
 
-    goto/16 :goto_91
+    goto/16 :goto_a8
 
-    .line 325
+    .line 330
     :cond_c
     invoke-static {p2, p3}, Lmdm/LocalKeymapStore;->rcFileExists(Ljava/lang/String;Ljava/lang/String;)Z
 
     move-result v0
 
-    if-eqz v0, :cond_33
+    if-eqz v0, :cond_3a
 
-    .line 326
+    .line 331
     invoke-static {p3}, Lmdm/LocalKeymapStore;->readContent(Ljava/lang/String;)Ljava/util/Map;
 
     move-result-object p1
 
-    if-nez p1, :cond_32
+    invoke-static {p0, p2, p3, p1}, Lmdm/LocalKeymapStore;->ensureV2(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;
 
-    .line 327
+    .line 332
+    invoke-static {p3}, Lmdm/LocalKeymapStore;->readContent(Ljava/lang/String;)Ljava/util/Map;
+
+    move-result-object p1
+
+    if-nez p1, :cond_39
+
+    .line 333
     invoke-static {p2, p3}, Lmdm/LocalKeymapStore;->readRcFile(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
 
     move-result-object p1
 
-    .line 328
+    .line 334
     invoke-static {p1}, Lmdm/LocalKeymapStore;->hasRecoilData(Ljava/util/Map;)Z
 
     move-result p2
 
-    if-eqz p2, :cond_32
+    if-eqz p2, :cond_39
 
-    .line 329
+    .line 335
     invoke-static {p3}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object p2
@@ -1405,38 +1347,56 @@
 
     invoke-static {p2, v0}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 330
+    .line 336
     invoke-static {p0, p3, p1}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 333
-    :cond_32
+    .line 339
+    :cond_39
     return-void
 
-    .line 335
-    :cond_33
+    .line 341
+    :cond_3a
     invoke-static {p3}, Lmdm/LocalKeymapStore;->readContent(Ljava/lang/String;)Ljava/util/Map;
 
     move-result-object v0
 
-    .line 336
+    .line 342
     invoke-static {v0}, Lmdm/LocalKeymapStore;->hasRecoilData(Ljava/util/Map;)Z
 
     move-result v1
 
-    if-nez v1, :cond_8d
+    if-eqz v1, :cond_4e
 
-    .line 337
+    invoke-static {v0}, Lmdm/RcStore;->isV2(Ljava/util/Map;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_4e
+
+    invoke-static {p0, p2, p3, v0}, Lmdm/LocalKeymapStore;->ensureV2(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;
+
+    move-result-object v0
+
+    .line 343
+    :cond_4e
+    invoke-static {v0}, Lmdm/LocalKeymapStore;->hasRecoilData(Ljava/util/Map;)Z
+
+    move-result v1
+
+    if-nez v1, :cond_a4
+
+    .line 344
     invoke-static {}, Lmdm/LocalKeymapStore;->defaultRcContent()Ljava/util/Map;
 
     move-result-object v1
 
-    .line 338
-    if-eqz v1, :cond_8d
+    .line 345
+    if-eqz v1, :cond_a4
 
-    .line 339
+    .line 346
     nop
 
-    .line 340
+    .line 347
     invoke-static {p3}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object v0
@@ -1449,15 +1409,15 @@
 
     invoke-static {v0, v2}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 342
+    .line 349
     const/4 v0, 0x1
 
-    :try_start_52
+    :try_start_69
     invoke-static {p1, p2, v0}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v0
 
-    .line 343
+    .line 350
     invoke-static {v0}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v0
@@ -1466,23 +1426,23 @@
 
     move-result-object v0
 
-    .line 344
+    .line 351
     instance-of v2, v0, Ljava/util/Map;
 
-    if-eqz v2, :cond_88
+    if-eqz v2, :cond_9f
 
-    .line 345
+    .line 352
     invoke-static {v1}, Lcom/zjx/jyandroid/ForegroundService/KeymapManager;->q(Ljava/util/Map;)Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapContentInfo;
 
     move-result-object v2
 
-    .line 346
-    if-eqz v2, :cond_83
+    .line 353
+    if-eqz v2, :cond_9a
 
-    .line 347
+    .line 354
     iget-object v3, v2, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapContentInfo;->name:Ljava/lang/String;
 
-    if-eqz v3, :cond_76
+    if-eqz v3, :cond_8d
 
     move-object v3, v0
 
@@ -1494,8 +1454,8 @@
 
     invoke-interface {v3, v4, v5}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 348
-    :cond_76
+    .line 355
+    :cond_8d
     check-cast v0, Ljava/util/Map;
 
     const-string v3, "componentCount"
@@ -1508,37 +1468,37 @@
 
     invoke-interface {v0, v3, v2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 350
-    :cond_83
+    .line 357
+    :cond_9a
     invoke-static {p1}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
-    :try_end_86
-    .catchall {:try_start_52 .. :try_end_86} :catchall_87
+    :try_end_9d
+    .catchall {:try_start_69 .. :try_end_9d} :catchall_9e
 
-    goto :goto_88
+    goto :goto_9f
 
-    .line 352
-    :catchall_87
+    .line 359
+    :catchall_9e
     move-exception p1
 
-    :cond_88
-    :goto_88
+    :cond_9f
+    :goto_9f
     nop
 
-    .line 353
+    .line 360
     invoke-static {p0, p3, v1}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
 
     move-object v0, v1
 
-    .line 356
-    :cond_8d
+    .line 363
+    :cond_a4
     invoke-static {p2, p3, v0}, Lmdm/LocalKeymapStore;->mirrorRc(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 357
+    .line 364
     return-void
 
-    .line 324
-    :cond_91
-    :goto_91
+    .line 329
+    :cond_a8
+    :goto_a8
     return-void
 .end method
 
@@ -1695,26 +1655,26 @@
 .method static mirrorRc(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
     .registers 7
 
-    .line 280
+    .line 239
     invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->rcFilePath(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 281
+    .line 240
     if-eqz p0, :cond_3b
 
     if-nez p2, :cond_9
 
     goto :goto_3b
 
-    .line 283
+    .line 242
     :cond_9
     :try_start_9
     new-instance p1, Ljava/io/File;
 
     invoke-direct {p1, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 284
+    .line 243
     invoke-virtual {p1}, Ljava/io/File;->exists()Z
 
     move-result p0
@@ -1733,13 +1693,13 @@
 
     return-void
 
-    .line 285
+    .line 244
     :cond_1f
     invoke-virtual {p1}, Ljava/io/File;->getParentFile()Ljava/io/File;
 
     move-result-object p0
 
-    .line 286
+    .line 245
     if-eqz p0, :cond_2e
 
     invoke-virtual {p0}, Ljava/io/File;->exists()Z
@@ -1750,7 +1710,7 @@
 
     invoke-virtual {p0}, Ljava/io/File;->mkdirs()Z
 
-    .line 287
+    .line 246
     :cond_2e
     sget-object p0, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
 
@@ -1764,17 +1724,17 @@
 
     goto :goto_39
 
-    .line 288
+    .line 247
     :catchall_38
     move-exception p0
 
     :goto_39
     nop
 
-    .line 289
+    .line 248
     return-void
 
-    .line 281
+    .line 240
     :cond_3b
     :goto_3b
     return-void
@@ -1891,26 +1851,26 @@
 .method static rcFileExists(Ljava/lang/String;Ljava/lang/String;)Z
     .registers 6
 
-    .line 292
+    .line 297
     invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->rcFilePath(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 293
+    .line 298
     const/4 p1, 0x0
 
     if-nez p0, :cond_8
 
     return p1
 
-    .line 295
+    .line 300
     :cond_8
     :try_start_8
     new-instance v0, Ljava/io/File;
 
     invoke-direct {v0, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 
-    .line 296
+    .line 301
     invoke-virtual {v0}, Ljava/io/File;->exists()Z
 
     move-result p0
@@ -1934,11 +1894,11 @@
     :cond_1e
     return p1
 
-    .line 297
+    .line 302
     :catchall_1f
     move-exception p0
 
-    .line 298
+    .line 303
     return p1
 .end method
 
@@ -1996,7 +1956,7 @@
 .method static readContent(Ljava/lang/String;)Ljava/util/Map;
     .registers 4
 
-    .line 268
+    .line 227
     invoke-static {p0}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object p0
@@ -2005,14 +1965,14 @@
 
     move-result-object p0
 
-    .line 269
+    .line 228
     const/4 v0, 0x0
 
     if-nez p0, :cond_c
 
     return-object v0
 
-    .line 270
+    .line 229
     :cond_c
     :try_start_c
     sget-object v1, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
@@ -2162,19 +2122,19 @@
 .method static readRcFile(Ljava/lang/String;Ljava/lang/String;)Ljava/util/Map;
     .registers 4
 
-    .line 305
+    .line 310
     invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->rcFilePath(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 306
+    .line 311
     const/4 p1, 0x0
 
     if-nez p0, :cond_8
 
     return-object p1
 
-    .line 307
+    .line 312
     :cond_8
     new-instance v0, Ljava/io/File;
 
@@ -2184,7 +2144,7 @@
 
     move-result-object p0
 
-    .line 308
+    .line 313
     if-eqz p0, :cond_27
 
     invoke-virtual {p0}, Ljava/lang/String;->length()I
@@ -2195,7 +2155,7 @@
 
     goto :goto_27
 
-    .line 309
+    .line 314
     :cond_1a
     :try_start_1a
     sget-object v0, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
@@ -2217,7 +2177,7 @@
 
     return-object p1
 
-    .line 308
+    .line 313
     :cond_27
     :goto_27
     return-object p1
@@ -2226,17 +2186,17 @@
 .method static removeRcFile(Ljava/lang/String;Ljava/lang/String;)V
     .registers 2
 
-    .line 313
+    .line 318
     invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->rcFilePath(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 314
+    .line 319
     if-nez p0, :cond_7
 
     return-void
 
-    .line 315
+    .line 320
     :cond_7
     :try_start_7
     new-instance p1, Ljava/io/File;
@@ -2252,7 +2212,7 @@
     :catchall_10
     move-exception p0
 
-    .line 316
+    .line 321
     :goto_11
     return-void
 .end method
@@ -2260,27 +2220,27 @@
 .method public static renameKeymap(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$RenameKeymapCompletionHandler;)V
     .registers 9
 
-    .line 499
+    .line 508
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object v0
 
-    .line 500
+    .line 509
     invoke-static {v0, p1}, Lmdm/LocalKeymapStore;->bundleOf(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 501
+    .line 510
     if-eqz v1, :cond_3f
 
-    .line 502
+    .line 511
     const/4 v2, 0x1
 
     invoke-static {v0, v1, v2}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v2
 
-    .line 503
+    .line 512
     invoke-static {v2}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v3
@@ -2289,19 +2249,19 @@
 
     move-result-object v3
 
-    .line 504
+    .line 513
     instance-of v4, v3, Ljava/util/Map;
 
     if-eqz v4, :cond_2b
 
-    .line 505
+    .line 514
     check-cast v3, Ljava/util/Map;
 
     const-string v4, "name"
 
     invoke-interface {v3, v4, p2}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 506
+    .line 515
     const-string p2, "updateTime"
 
     invoke-static {}, Lmdm/LocalKeymapStore;->now()Ljava/lang/String;
@@ -2310,11 +2270,11 @@
 
     invoke-interface {v3, p2, v4}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 508
+    .line 517
     :cond_2b
     invoke-static {v0}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
 
-    .line 509
+    .line 518
     invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
     move-result-object p2
@@ -2331,18 +2291,18 @@
 
     invoke-static {p0, v1, p2, v0}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 511
+    .line 520
     :cond_3f
     invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->dropContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;)V
 
-    .line 512
+    .line 521
     new-instance p0, Lmdm/LocalKeymapStore$6;
 
     invoke-direct {p0, p3}, Lmdm/LocalKeymapStore$6;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$RenameKeymapCompletionHandler;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 513
+    .line 522
     return-void
 .end method
 
@@ -2377,80 +2337,72 @@
 .method public static setSelected(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$SetSelectedKeymapCompletionHandler;)V
     .registers 7
 
-    .line 517
+    .line 526
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object v0
 
-    .line 518
+    .line 527
     invoke-static {v0, p1}, Lmdm/LocalKeymapStore;->bundleOf(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 519
-    if-eqz v1, :cond_37
+    .line 528
+    if-eqz v1, :cond_31
 
-    .line 520
+    .line 529
     const/4 v2, 0x1
 
     invoke-static {v0, v1, v2}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v2
 
-    .line 521
+    .line 530
     const-string v3, "selected"
 
     invoke-interface {v2, v3, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 522
+    .line 531
     invoke-static {v0}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
 
-    .line 525
+    .line 534
     invoke-static {v1, p1}, Lmdm/LocalKeymapStore;->rcFileExists(Ljava/lang/String;Ljava/lang/String;)Z
 
     move-result v2
 
-    if-nez v2, :cond_30
+    if-nez v2, :cond_2a
 
-    .line 526
+    .line 535
     invoke-static {p1}, Lmdm/LocalKeymapStore;->readContent(Ljava/lang/String;)Ljava/util/Map;
 
     move-result-object v2
 
-    .line 527
-    invoke-static {v2}, Lmdm/LocalKeymapStore;->hasRecoilData(Ljava/util/Map;)Z
-
-    move-result v3
-
-    if-nez v3, :cond_2b
-
-    invoke-static {}, Lmdm/LocalKeymapStore;->defaultRcContent()Ljava/util/Map;
+    invoke-static {p0, v1, p1, v2}, Lmdm/LocalKeymapStore;->ensureV2(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v2
 
-    .line 528
-    :cond_2b
-    if-eqz v2, :cond_30
+    .line 536
+    if-eqz v2, :cond_2a
 
     invoke-static {v1, p1, v2}, Lmdm/LocalKeymapStore;->mirrorRc(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 530
-    :cond_30
+    .line 538
+    :cond_2a
     invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
     move-result-object v0
 
     invoke-static {p0, v1, v0, p1}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 532
-    :cond_37
+    .line 540
+    :cond_31
     new-instance p0, Lmdm/LocalKeymapStore$7;
 
     invoke-direct {p0, p2}, Lmdm/LocalKeymapStore$7;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$SetSelectedKeymapCompletionHandler;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 533
+    .line 541
     return-void
 .end method
 
@@ -2608,7 +2560,7 @@
 .method public static updateKeymap(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/util/Map;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$UpdateKeymapCompletionHandler;)V
     .registers 11
 
-    .line 453
+    .line 461
     invoke-static {p2}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object v0
@@ -2621,27 +2573,27 @@
 
     invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 455
+    .line 463
     invoke-static {}, Lmdm/LocalKeymapStore;->loadIndex()Ljava/util/Map;
 
     move-result-object v0
 
-    .line 456
+    .line 464
     invoke-static {v0, p2}, Lmdm/LocalKeymapStore;->bundleOf(Ljava/util/Map;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 457
+    .line 465
     if-eqz v1, :cond_78
 
-    .line 458
+    .line 466
     const/4 v2, 0x1
 
     invoke-static {v0, v1, v2}, Lmdm/LocalKeymapStore;->bundle(Ljava/util/Map;Ljava/lang/String;Z)Ljava/util/Map;
 
     move-result-object v2
 
-    .line 459
+    .line 467
     invoke-static {v2}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v3
@@ -2650,7 +2602,7 @@
 
     move-result-object v3
 
-    .line 460
+    .line 468
     instance-of v4, v3, Ljava/util/Map;
 
     if-eqz v4, :cond_2b
@@ -2664,17 +2616,17 @@
 
     invoke-direct {v3}, Ljava/util/HashMap;-><init>()V
 
-    .line 462
+    .line 470
     :goto_30
     :try_start_30
     invoke-static {p1}, Lcom/zjx/jyandroid/ForegroundService/KeymapManager;->q(Ljava/util/Map;)Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapContentInfo;
 
     move-result-object v4
 
-    .line 463
+    .line 471
     if-eqz v4, :cond_4e
 
-    .line 464
+    .line 472
     iget-object v5, v4, Lcom/zjx/jyandroid/ForegroundService/KeymapManager$KeymapContentInfo;->name:Ljava/lang/String;
 
     if-eqz v5, :cond_41
@@ -2685,7 +2637,7 @@
 
     invoke-interface {v3, v5, v6}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 465
+    .line 473
     :cond_41
     const-string v5, "componentCount"
 
@@ -2701,7 +2653,7 @@
 
     goto :goto_4e
 
-    .line 467
+    .line 475
     :catchall_4d
     move-exception v4
 
@@ -2709,12 +2661,12 @@
     :goto_4e
     nop
 
-    .line 468
+    .line 476
     const-string v4, "bundleId"
 
     invoke-interface {v3, v4, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 469
+    .line 477
     const-string v4, "updateTime"
 
     invoke-static {}, Lmdm/LocalKeymapStore;->now()Ljava/lang/String;
@@ -2723,17 +2675,17 @@
 
     invoke-interface {v3, v4, v5}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 470
+    .line 478
     invoke-static {v2}, Lmdm/LocalKeymapStore;->items(Ljava/util/Map;)Ljava/util/Map;
 
     move-result-object v4
 
     invoke-interface {v4, p2, v3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 471
+    .line 479
     invoke-static {v0}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
 
-    .line 472
+    .line 480
     invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
     move-result-object v0
@@ -2750,21 +2702,36 @@
 
     invoke-static {p0, v1, v0, v2}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 474
+    .line 482
     :cond_78
+    const-string v0, "com.zjx.pubg.rcConfig"
+
+    invoke-virtual {v0, v1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-eqz v0, :cond_84
+
+    invoke-static {v1, p2, p1}, Lmdm/LocalKeymapStore;->writeRcFile(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+
+    goto :goto_87
+
+    .line 483
+    :cond_84
     invoke-static {v1, p2, p1}, Lmdm/LocalKeymapStore;->mirrorRc(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 475
+    .line 484
+    :goto_87
     invoke-static {p0, p2, p1}, Lmdm/LocalKeymapStore;->putContentCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 476
+    .line 485
     new-instance p0, Lmdm/LocalKeymapStore$4;
 
     invoke-direct {p0, p3}, Lmdm/LocalKeymapStore$4;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$UpdateKeymapCompletionHandler;)V
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 477
+    .line 486
     return-void
 .end method
 
@@ -2829,5 +2796,73 @@
     .line 79
     :cond_1f
     :goto_1f
+    return-void
+.end method
+
+.method static writeRcFile(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
+    .registers 4
+
+    .line 252
+    invoke-static {p0, p1}, Lmdm/LocalKeymapStore;->rcFilePath(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object p0
+
+    .line 253
+    if-eqz p0, :cond_2a
+
+    if-nez p2, :cond_9
+
+    goto :goto_2a
+
+    .line 255
+    :cond_9
+    :try_start_9
+    new-instance p1, Ljava/io/File;
+
+    invoke-direct {p1, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 256
+    invoke-virtual {p1}, Ljava/io/File;->getParentFile()Ljava/io/File;
+
+    move-result-object p0
+
+    .line 257
+    if-eqz p0, :cond_1d
+
+    invoke-virtual {p0}, Ljava/io/File;->exists()Z
+
+    move-result v0
+
+    if-nez v0, :cond_1d
+
+    invoke-virtual {p0}, Ljava/io/File;->mkdirs()Z
+
+    .line 258
+    :cond_1d
+    sget-object p0, Lmdm/LocalKeymapStore;->GSON:Lcom/google/gson/Gson;
+
+    invoke-virtual {p0, p2}, Lcom/google/gson/Gson;->toJson(Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object p0
+
+    invoke-static {p1, p0}, Lmdm/LocalKeymapStore;->writeFile(Ljava/io/File;Ljava/lang/String;)V
+    :try_end_26
+    .catchall {:try_start_9 .. :try_end_26} :catchall_27
+
+    goto :goto_28
+
+    .line 259
+    :catchall_27
+    move-exception p0
+
+    :goto_28
+    nop
+
+    .line 260
+    return-void
+
+    .line 253
+    :cond_2a
+    :goto_2a
     return-void
 .end method

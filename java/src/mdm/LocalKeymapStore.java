@@ -212,51 +212,10 @@ public final class LocalKeymapStore {
         return (rd instanceof java.util.List) && !((java.util.List) rd).isEmpty();
     }
 
-    /**
-     * Default recoil value per scope, indexed by the record's scope ordinal:
-     *   0 = no scope, 1 = x1, 2 = x2, 3 = x3, 4 = x4, 5 = x6, 6 = x6.3, 7 = x8.4
-     * Scopes above 7 (tactic tiers) keep whatever the generator produced.
-     */
-    static final double[] DEFAULT_RECOIL = {12d, 20d, 22d, 66d, 100d, 66d, 66d, 100d};
-
-    /**
-     * Stamp the shop's default recoil table over every weapon record. Used for a config the app
-     * generates itself (offline default / heal), so every new config starts from the same numbers
-     * instead of the generator's flat 0/45 placeholder.
-     */
-    @SuppressWarnings("unchecked")
-    static void applyDefaultRecoil(Map content) {
-        if (content == null) return;
-        Object rd = content.get("recoil_data");
-        if (!(rd instanceof java.util.List)) return;
-        for (Object w : (java.util.List) rd) {
-            if (!(w instanceof Map)) continue;
-            Object vs = ((Map) w).get("v");
-            if (!(vs instanceof java.util.List)) continue;
-            for (Object o : (java.util.List) vs) {
-                if (!(o instanceof Map)) continue;
-                Map rec = (Map) o;
-                Object sc = rec.get("scope");
-                if (!(sc instanceof Number)) continue;
-                int scope = ((Number) sc).intValue();
-                if (scope < 0 || scope >= DEFAULT_RECOIL.length) continue;
-                Object rv = rec.get("recoilValue");
-                if (!(rv instanceof java.util.List)) continue;
-                java.util.List pairs = (java.util.List) rv;
-                if (pairs.isEmpty()) continue;
-                Object p0 = pairs.get(0);
-                if (!(p0 instanceof java.util.List)) continue;
-                java.util.List pair = (java.util.List) p0;
-                while (pair.size() < 2) pair.add(Double.valueOf(0d));
-                pair.set(1, Double.valueOf(DEFAULT_RECOIL[scope]));
-            }
-        }
-    }
-
     static Map defaultRcContent() {
         try {
             Map m = com.zjx.jyandroid.Extensions.pubg.g.f();
-            applyDefaultRecoil(m);
+            RcStore.makeDefault(m);
             return m;
         } catch (Throwable t) {
             return null;
@@ -286,6 +245,52 @@ public final class LocalKeymapStore {
             if (parent != null && !parent.exists()) parent.mkdirs();
             writeFile(f, GSON.toJson(content));
         } catch (Throwable ignored) {}
+    }
+
+    /** Overwrite the engine's config file (PUBG): used when our side changed the numbers. */
+    static void writeRcFile(String bundleId, String id, Map content) {
+        String path = rcFilePath(bundleId, id);
+        if (path == null || content == null) return;
+        try {
+            File f = new File(path);
+            File parent = f.getParentFile();
+            if (parent != null && !parent.exists()) parent.mkdirs();
+            writeFile(f, GSON.toJson(content));
+        } catch (Throwable ignored) {}
+    }
+
+    /**
+     * PUBG recoil configs: the engine's RCConfig/<id> file is the live copy (the in-game panel and
+     * the settings screen write it directly), so read it first. Anything not yet in the mdm_v2
+     * format (old configs, restored .mdmcfg backups) is reset to the default table once; the
+     * original is kept as content/<id>.v1.bak.json (never overwritten). Both copies end up equal.
+     * Returns the content to hand to the app (unchanged for other bundles).
+     */
+    static Map ensureV2(KeymapManager km, String bundleId, String id, Map content) {
+        if (!PUBG_RC_BUNDLE.equals(bundleId) || id == null) return content;
+        Map live = readRcFile(bundleId, id);
+        boolean fromLive = hasRecoilData(live);
+        if (fromLive) content = live;
+        if (!hasRecoilData(content)) {
+            Map def = defaultRcContent();
+            if (def == null) return content;
+            content = def;
+        } else if (!RcStore.isV2(content)) {
+            File bak = new File(contentFile(id).getParentFile(), id + ".v1.bak.json");
+            if (!bak.exists()) writeFile(bak, GSON.toJson(content));
+            RcStore.makeDefault(content);
+        } else if (fromLive) {
+            writeFile(contentFile(id), GSON.toJson(content));
+            putContentCache(km, id, content);
+            return content;
+        } else {
+            return content;
+        }
+        String json = GSON.toJson(content);
+        writeFile(contentFile(id), json);
+        writeRcFile(bundleId, id, content);
+        putContentCache(km, id, content);
+        return content;
     }
 
     static boolean rcFileExists(String bundleId, String id) {
@@ -323,6 +328,7 @@ public final class LocalKeymapStore {
     static void healAndMirrorSelectedRc(KeymapManager km, Map<String, Object> root, String bundleId, String selected) {
         if (!PUBG_RC_BUNDLE.equals(bundleId) || selected == null) return;
         if (rcFileExists(bundleId, selected)) {
+            ensureV2(km, bundleId, selected, readContent(selected));
             if (readContent(selected) == null) {
                 Map live = readRcFile(bundleId, selected);
                 if (hasRecoilData(live)) {
@@ -333,6 +339,7 @@ public final class LocalKeymapStore {
             return;
         }
         Map content = readContent(selected);
+        if (hasRecoilData(content) && !RcStore.isV2(content)) content = ensureV2(km, bundleId, selected, content);
         if (!hasRecoilData(content)) {
             Map def = defaultRcContent();
             if (def != null) {
@@ -380,6 +387,7 @@ public final class LocalKeymapStore {
         if (cs != null) {
             try { content = (Map) GSON.fromJson(cs, HashMap.class); } catch (Throwable ignored) {}
         }
+        content = ensureV2(km, bundleId, id, content);
         if (content == null) content = new HashMap();
 
         KeymapInfo info;
@@ -471,7 +479,8 @@ public final class LocalKeymapStore {
             saveIndex(root);
             syncBundleCache(km, bundleId, buildList(root, bundleId), str(bm.get("selected")));
         }
-        mirrorRc(bundleId, id, content);
+        if (PUBG_RC_BUNDLE.equals(bundleId)) writeRcFile(bundleId, id, content);
+        else mirrorRc(bundleId, id, content);
         putContentCache(km, id, content);
         post(new Runnable() { public void run() { if (h != null) h.requestCompleted(null); } });
     }
@@ -523,8 +532,7 @@ public final class LocalKeymapStore {
             // The game reads the selected config straight from its own folder: if that file went
             // missing, put one back instead of leaving the recognition path with nothing to load.
             if (!rcFileExists(bundleId, id)) {
-                Map content = readContent(id);
-                if (!hasRecoilData(content)) content = defaultRcContent();
+                Map content = ensureV2(km, bundleId, id, readContent(id));
                 if (content != null) mirrorRc(bundleId, id, content);
             }
             syncBundleCache(km, bundleId, buildList(root, bundleId), id);

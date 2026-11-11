@@ -36,7 +36,8 @@ public final class RcStore {
     static final int MIN_WEAPONS = 67;
 
     static final double[] DEFAULT_STAND = {10, 20, 22, 66, 100, 66, 100};
-    static final double[] STANCE_FACTOR = {1.0, 0.8, 0.6};
+    /** Đứng / Ngồi / Nằm default = Đứng x factor (user, 2026-11-11: 1 / 0.7 / 0.4). */
+    static final double[] STANCE_FACTOR = {1.0, 0.7, 0.4};
 
     static final String[] COEFFICIENT_KEYS = {
             "laserGrip", "halfGrip", "compensatorMuzzle", "suppressorMuzzle", "flashHidderMuzzle", "crouch",

@@ -104,7 +104,7 @@ public class RcStoreTest {
     static void defaultsValues() {
         Map<String, Object> c = oldContent(77);
         RcStore.makeDefault(c);
-        double[][] want = {{10, 20, 22, 66, 100, 66, 100}, {8, 16, 18, 53, 80, 53, 80}, {6, 12, 13, 40, 60, 40, 60}};
+        double[][] want = {{10, 20, 22, 66, 100, 66, 100}, {7, 14, 15, 46, 70, 46, 70}, {4, 8, 9, 26, 40, 26, 40}};
         for (int st = 0; st < 3; st++)
             for (int s = 0; s < 7; s++)
                 check(RcStore.get(c, 23, st, s) == want[st][s],
@@ -114,10 +114,10 @@ public class RcStoreTest {
     static void aliasesAtDefault() {
         Map<String, Object> c = oldContent(77);
         RcStore.makeDefault(c);
-        check(val(rec(c, 23, 7, 2)) == 40, "aliasesAtDefault: scope 7 prone = x6 prone (40)");
+        check(val(rec(c, 23, 7, 2)) == 26, "aliasesAtDefault: scope 7 prone = x6 prone (26)");
         check(val(rec(c, 23, 8, 0)) == 100, "aliasesAtDefault: scope 8 stand = x8 stand (100)");
         check(val(rec(c, 23, 9, 0)) == 20, "aliasesAtDefault: scope 9 stand = x1 stand (20)");
-        check(val(rec(c, 23, 10, 1)) == 16, "aliasesAtDefault: scope 10 crouch = x1 crouch (16)");
+        check(val(rec(c, 23, 10, 1)) == 14, "aliasesAtDefault: scope 10 crouch = x1 crouch (14)");
     }
 
     @SuppressWarnings("unchecked")
@@ -135,7 +135,7 @@ public class RcStoreTest {
         check(val(rec(c, 23, 5, 1)) == 77, "setWritesAliases: x6 crouch = 77");
         check(val(rec(c, 23, 7, 1)) == 77, "setWritesAliases: x6.3 crouch follows = 77");
         check(val(rec(c, 23, 5, 0)) == 66, "setWritesAliases: x6 stand untouched");
-        check(RcStore.get(c, 24, 1, 5) == 53, "setWritesAliases: other weapon untouched");
+        check(RcStore.get(c, 24, 1, 5) == 46, "setWritesAliases: other weapon untouched");
     }
 
     static void setClamps() {
@@ -158,7 +158,7 @@ public class RcStoreTest {
         RcStore.syncAliases(v(c, 23), alias);
         check(val(rec(c, 23, 6, 0)) == 91, "syncFromAlias: x8 follows x8.4 edit");
         check(rec(c, 23, 6, 0).get("recoilValue") == realListBefore, "syncFromAlias: list mutated in place");
-        check(val(rec(c, 23, 6, 1)) == 80, "syncFromAlias: other stance untouched");
+        check(val(rec(c, 23, 6, 1)) == 70, "syncFromAlias: other stance untouched");
         check(val(rec(c, 23, 1, 0)) == 20, "syncFromAlias: unrelated scope untouched");
     }
 

@@ -85,7 +85,7 @@
 
     sput-object v1, Lmdm/RcStore;->DEFAULT_STAND:[D
 
-    .line 39
+    .line 40
     const/4 v1, 0x3
 
     new-array v2, v1, [D
@@ -94,7 +94,7 @@
 
     sput-object v2, Lmdm/RcStore;->STANCE_FACTOR:[D
 
-    .line 41
+    .line 42
     const-string v14, "prone"
 
     const-string v15, "stand"
@@ -127,7 +127,7 @@
 
     sput-object v2, Lmdm/RcStore;->COEFFICIENT_KEYS:[Ljava/lang/String;
 
-    .line 47
+    .line 48
     const-string v68, "AS50"
 
     const-string v69, "MG97"
@@ -268,7 +268,7 @@
 
     sput-object v2, Lmdm/RcStore;->WEAPONS:[Ljava/lang/String;
 
-    .line 58
+    .line 59
     const-string v19, "HB"
 
     const-string v20, "ASM"
@@ -532,8 +532,8 @@
     :array_200
     .array-data 8
         0x3ff0000000000000L    # 1.0
-        0x3fe999999999999aL    # 0.8
-        0x3fe3333333333333L    # 0.6
+        0x3fe6666666666666L    # 0.7
+        0x3fd999999999999aL    # 0.4
     .end array-data
 
     :array_210
@@ -591,12 +591,12 @@
 .method public static availableSlots(I)[I
     .registers 2
 
-    .line 98
+    .line 99
     invoke-static {p0}, Lmdm/RcStore;->groupOf(I)[Ljava/lang/Object;
 
     move-result-object p0
 
-    .line 99
+    .line 100
     if-nez p0, :cond_a
 
     const/4 p0, 0x0
@@ -625,7 +625,7 @@
 .method public static clamp(D)D
     .registers 5
 
-    .line 237
+    .line 238
     const-wide/16 v0, 0x0
 
     cmpg-double v2, p0, v0
@@ -654,7 +654,7 @@
 .method static defaultValue(II)D
     .registers 5
 
-    .line 144
+    .line 145
     sget-object v0, Lmdm/RcStore;->DEFAULT_STAND:[D
 
     aget-wide v1, v0, p1
@@ -689,14 +689,14 @@
         }
     .end annotation
 
-    .line 217
+    .line 218
     const/4 v0, 0x0
 
     if-nez p0, :cond_4
 
     return-object v0
 
-    .line 218
+    .line 219
     :cond_4
     invoke-interface {p0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
 
@@ -713,18 +713,18 @@
 
     move-result-object v1
 
-    .line 219
+    .line 220
     instance-of v2, v1, Ljava/util/Map;
 
     if-nez v2, :cond_17
 
     goto :goto_8
 
-    .line 220
+    .line 221
     :cond_17
     check-cast v1, Ljava/util/Map;
 
-    .line 221
+    .line 222
     const-string v2, "scope"
 
     invoke-interface {v1, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
@@ -751,11 +751,11 @@
 
     return-object v1
 
-    .line 222
+    .line 223
     :cond_32
     goto :goto_8
 
-    .line 223
+    .line 224
     :cond_33
     return-object v0
 .end method
@@ -763,7 +763,7 @@
 .method public static format(D)Ljava/lang/String;
     .registers 4
 
-    .line 242
+    .line 243
     const-wide/high16 v0, 0x4024000000000000L    # 10.0
 
     mul-double/2addr p0, v0
@@ -776,7 +776,7 @@
 
     div-double/2addr p0, v0
 
-    .line 243
+    .line 244
     invoke-static {p0, p1}, Ljava/lang/Math;->rint(D)D
 
     move-result-wide v0
@@ -809,7 +809,7 @@
 .method public static get(Ljava/util/Map;III)D
     .registers 4
 
-    .line 228
+    .line 229
     invoke-static {p0, p1}, Lmdm/RcStore;->weaponRecords(Ljava/util/Map;I)Ljava/util/List;
 
     move-result-object p0
@@ -818,7 +818,7 @@
 
     move-result-object p0
 
-    .line 229
+    .line 230
     if-nez p0, :cond_c
 
     const/4 p0, 0x0
@@ -830,7 +830,7 @@
 
     move-result-object p0
 
-    .line 230
+    .line 231
     :goto_10
     if-nez p0, :cond_15
 
@@ -858,12 +858,12 @@
 .method static groupOf(I)[Ljava/lang/Object;
     .registers 6
 
-    .line 79
+    .line 80
     invoke-static {p0}, Lmdm/RcStore;->weaponName(I)Ljava/lang/String;
 
     move-result-object p0
 
-    .line 80
+    .line 81
     sget-object v0, Lmdm/RcStore;->GROUPS:[[Ljava/lang/Object;
 
     array-length v1, v0
@@ -875,7 +875,7 @@
 
     aget-object v3, v0, v2
 
-    .line 81
+    .line 82
     const/4 v4, 0x1
 
     aget-object v4, v3, v4
@@ -894,13 +894,13 @@
 
     return-object v3
 
-    .line 80
+    .line 81
     :cond_1c
     add-int/lit8 v2, v2, 0x1
 
     goto :goto_8
 
-    .line 83
+    .line 84
     :cond_1f
     const/4 p0, 0x0
 
@@ -910,14 +910,14 @@
 .method public static isV2(Ljava/util/Map;)Z
     .registers 3
 
-    .line 138
+    .line 139
     const/4 v0, 0x0
 
     if-nez p0, :cond_4
 
     return v0
 
-    .line 139
+    .line 140
     :cond_4
     const-string v1, "mdm_format"
 
@@ -925,7 +925,7 @@
 
     move-result-object p0
 
-    .line 140
+    .line 141
     instance-of v1, p0, Ljava/lang/Number;
 
     if-eqz v1, :cond_18
@@ -949,7 +949,7 @@
 .method public static makeDefault(Ljava/util/Map;)V
     .registers 18
 
-    .line 166
+    .line 167
     move-object/from16 v0, p0
 
     const-string v1, "recoil_data"
@@ -958,7 +958,7 @@
 
     move-result-object v2
 
-    .line 167
+    .line 168
     instance-of v3, v2, Ljava/util/List;
 
     const/4 v4, 0x0
@@ -983,25 +983,25 @@
 
     move-result v2
 
-    .line 168
+    .line 169
     new-instance v3, Ljava/util/ArrayList;
 
     invoke-direct {v3, v2}, Ljava/util/ArrayList;-><init>(I)V
 
-    .line 169
+    .line 170
     move v5, v4
 
     :goto_21
     if-ge v5, v2, :cond_86
 
-    .line 170
+    .line 171
     new-instance v6, Ljava/util/ArrayList;
 
     const/16 v7, 0x21
 
     invoke-direct {v6, v7}, Ljava/util/ArrayList;-><init>(I)V
 
-    .line 171
+    .line 172
     move v7, v4
 
     :goto_2b
@@ -1009,7 +1009,7 @@
 
     if-ge v7, v8, :cond_48
 
-    .line 172
+    .line 173
     move v8, v4
 
     :goto_30
@@ -1017,7 +1017,7 @@
 
     if-ge v8, v9, :cond_45
 
-    .line 173
+    .line 174
     invoke-static {v7}, Lmdm/RcStore;->realSlot(I)I
 
     move-result v9
@@ -1032,18 +1032,18 @@
 
     invoke-interface {v6, v9}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 172
+    .line 173
     add-int/lit8 v8, v8, 0x1
 
     goto :goto_30
 
-    .line 171
+    .line 172
     :cond_45
     add-int/lit8 v7, v7, 0x1
 
     goto :goto_2b
 
-    .line 176
+    .line 177
     :cond_48
     new-instance v7, Ljava/util/ArrayList;
 
@@ -1051,18 +1051,18 @@
 
     invoke-direct {v7, v8}, Ljava/util/ArrayList;-><init>(I)V
 
-    .line 177
+    .line 178
     move v9, v4
 
     :goto_50
     if-ge v9, v8, :cond_71
 
-    .line 178
+    .line 179
     new-instance v10, Ljava/util/LinkedHashMap;
 
     invoke-direct {v10}, Ljava/util/LinkedHashMap;-><init>()V
 
-    .line 179
+    .line 180
     sget-object v11, Lmdm/RcStore;->COEFFICIENT_KEYS:[Ljava/lang/String;
 
     array-length v12, v11
@@ -1086,44 +1086,44 @@
 
     goto :goto_5b
 
-    .line 180
+    .line 181
     :cond_6b
     invoke-interface {v7, v10}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 177
+    .line 178
     add-int/lit8 v9, v9, 0x1
 
     goto :goto_50
 
-    .line 182
+    .line 183
     :cond_71
     new-instance v8, Ljava/util/LinkedHashMap;
 
     invoke-direct {v8}, Ljava/util/LinkedHashMap;-><init>()V
 
-    .line 183
+    .line 184
     const-string v9, "v"
 
     invoke-interface {v8, v9, v6}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 184
+    .line 185
     const-string v6, "coefficients"
 
     invoke-interface {v8, v6, v7}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 185
+    .line 186
     invoke-interface {v3, v8}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 169
+    .line 170
     add-int/lit8 v5, v5, 0x1
 
     goto :goto_21
 
-    .line 187
+    .line 188
     :cond_86
     invoke-interface {v0, v1, v3}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 188
+    .line 189
     const-wide/high16 v1, 0x4000000000000000L    # 2.0
 
     invoke-static {v1, v2}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
@@ -1134,14 +1134,14 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 189
+    .line 190
     return-void
 .end method
 
 .method static num(Ljava/lang/Object;)I
     .registers 2
 
-    .line 204
+    .line 205
     instance-of v0, p0, Ljava/lang/Number;
 
     if-eqz v0, :cond_b
@@ -1176,14 +1176,14 @@
         }
     .end annotation
 
-    .line 209
+    .line 210
     const-string v0, "recoilValue"
 
     invoke-interface {p0, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object p0
 
-    .line 210
+    .line 211
     instance-of v0, p0, Ljava/util/List;
 
     const/4 v1, 0x0
@@ -1200,7 +1200,7 @@
 
     goto :goto_28
 
-    .line 211
+    .line 212
     :cond_14
     const/4 v0, 0x0
 
@@ -1208,7 +1208,7 @@
 
     move-result-object p0
 
-    .line 212
+    .line 213
     instance-of v0, p0, Ljava/util/List;
 
     if-eqz v0, :cond_27
@@ -1228,7 +1228,7 @@
     :cond_27
     return-object v1
 
-    .line 210
+    .line 211
     :cond_28
     :goto_28
     return-object v1
@@ -1237,25 +1237,25 @@
 .method public static realSlot(I)I
     .registers 1
 
-    .line 104
+    .line 105
     packed-switch p0, :pswitch_data_a
 
-    .line 109
+    .line 110
     return p0
 
-    .line 108
+    .line 109
     :pswitch_4
     const/4 p0, 0x1
 
     return p0
 
-    .line 106
+    .line 107
     :pswitch_6
     const/4 p0, 0x6
 
     return p0
 
-    .line 105
+    .line 106
     :pswitch_8
     const/4 p0, 0x5
 
@@ -1282,12 +1282,12 @@
         }
     .end annotation
 
-    .line 148
+    .line 149
     new-instance v0, Ljava/util/LinkedHashMap;
 
     invoke-direct {v0}, Ljava/util/LinkedHashMap;-><init>()V
 
-    .line 149
+    .line 150
     const-wide/16 v1, 0x0
 
     invoke-static {v1, v2}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
@@ -1298,17 +1298,17 @@
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 150
+    .line 151
     const-string v2, "muzzle"
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 151
+    .line 152
     const-string v2, "stock"
 
     invoke-interface {v0, v2, v1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 152
+    .line 153
     int-to-double v2, p1
 
     invoke-static {v2, v3}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
@@ -1319,7 +1319,7 @@
 
     invoke-interface {v0, v2, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 153
+    .line 154
     int-to-double p0, p0
 
     invoke-static {p0, p1}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
@@ -1330,59 +1330,59 @@
 
     invoke-interface {v0, p1, p0}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 154
+    .line 155
     new-instance p0, Ljava/util/ArrayList;
 
     const/4 p1, 0x2
 
     invoke-direct {p0, p1}, Ljava/util/ArrayList;-><init>(I)V
 
-    .line 155
+    .line 156
     invoke-interface {p0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 156
+    .line 157
     invoke-static {p2, p3}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
 
     move-result-object p1
 
     invoke-interface {p0, p1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 157
+    .line 158
     new-instance p1, Ljava/util/ArrayList;
 
     const/4 p2, 0x1
 
     invoke-direct {p1, p2}, Ljava/util/ArrayList;-><init>(I)V
 
-    .line 158
+    .line 159
     invoke-interface {p1, p0}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 159
+    .line 160
     const-string p0, "recoilValue"
 
     invoke-interface {v0, p0, p1}, Ljava/util/Map;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 
-    .line 160
+    .line 161
     return-object v0
 .end method
 
 .method public static set(Ljava/util/Map;IIID)Z
     .registers 9
 
-    .line 248
+    .line 249
     invoke-static {p0, p1}, Lmdm/RcStore;->weaponRecords(Ljava/util/Map;I)Ljava/util/List;
 
     move-result-object p0
 
-    .line 249
+    .line 250
     invoke-static {p4, p5}, Lmdm/RcStore;->clamp(D)D
 
     move-result-wide p4
 
-    .line 250
+    .line 251
     nop
 
-    .line 251
+    .line 252
     const/4 p1, 0x0
 
     move v0, p1
@@ -1392,7 +1392,7 @@
 
     if-ge p1, v1, :cond_31
 
-    .line 252
+    .line 253
     invoke-static {p1}, Lmdm/RcStore;->realSlot(I)I
 
     move-result v1
@@ -1401,13 +1401,13 @@
 
     goto :goto_2e
 
-    .line 253
+    .line 254
     :cond_16
     invoke-static {p0, p1, p2}, Lmdm/RcStore;->find(Ljava/util/List;II)Ljava/util/Map;
 
     move-result-object v1
 
-    .line 254
+    .line 255
     if-nez v1, :cond_1e
 
     const/4 v1, 0x0
@@ -1419,13 +1419,13 @@
 
     move-result-object v1
 
-    .line 255
+    .line 256
     :goto_22
     if-nez v1, :cond_25
 
     goto :goto_2e
 
-    .line 256
+    .line 257
     :cond_25
     invoke-static {p4, p5}, Ljava/lang/Double;->valueOf(D)Ljava/lang/Double;
 
@@ -1435,16 +1435,16 @@
 
     invoke-interface {v1, v2, v0}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
-    .line 257
+    .line 258
     move v0, v2
 
-    .line 251
+    .line 252
     :goto_2e
     add-int/lit8 p1, p1, 0x1
 
     goto :goto_b
 
-    .line 259
+    .line 260
     :cond_31
     return v0
 .end method
@@ -1463,12 +1463,12 @@
         }
     .end annotation
 
-    .line 122
+    .line 123
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
-    .line 123
+    .line 124
     invoke-interface {p0}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
 
     move-result-object v1
@@ -1490,7 +1490,7 @@
 
     check-cast v2, Ljava/lang/String;
 
-    .line 124
+    .line 125
     invoke-virtual {v2, v4, v3}, Ljava/lang/String;->replace(CC)Ljava/lang/String;
 
     move-result-object v2
@@ -1509,11 +1509,11 @@
 
     return-object p0
 
-    .line 125
+    .line 126
     :cond_2b
     goto :goto_9
 
-    .line 126
+    .line 127
     :cond_2c
     invoke-interface {p0}, Ljava/util/Collection;->iterator()Ljava/util/Iterator;
 
@@ -1533,12 +1533,12 @@
 
     check-cast v1, Ljava/lang/String;
 
-    .line 127
+    .line 128
     invoke-virtual {v1, v4, v3}, Ljava/lang/String;->replace(CC)Ljava/lang/String;
 
     move-result-object v1
 
-    .line 128
+    .line 129
     const-string v2, "keymaps/content/"
 
     invoke-virtual {v1, v2}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
@@ -1565,7 +1565,7 @@
 
     goto :goto_30
 
-    .line 129
+    .line 130
     :cond_59
     invoke-virtual {v2}, Ljava/lang/String;->length()I
 
@@ -1585,7 +1585,7 @@
 
     move-result-object v1
 
-    .line 130
+    .line 131
     invoke-virtual {v1}, Ljava/lang/String;->isEmpty()Z
 
     move-result v2
@@ -1608,11 +1608,11 @@
 
     invoke-interface {v0, v1}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 131
+    .line 132
     :cond_81
     goto :goto_30
 
-    .line 132
+    .line 133
     :cond_82
     return-object v0
 .end method
@@ -1620,25 +1620,25 @@
 .method public static syncAliases(Ljava/util/List;Ljava/util/Map;)V
     .registers 8
 
-    .line 268
+    .line 269
     if-eqz p0, :cond_4b
 
     if-nez p1, :cond_5
 
     goto :goto_4b
 
-    .line 270
+    .line 271
     :cond_5
     invoke-static {p1}, Lmdm/RcStore;->pairOf(Ljava/util/Map;)Ljava/util/List;
 
     move-result-object v0
 
-    .line 271
+    .line 272
     if-nez v0, :cond_c
 
     return-void
 
-    .line 272
+    .line 273
     :cond_c
     const-string v1, "gesture"
 
@@ -1650,7 +1650,7 @@
 
     move-result v1
 
-    .line 273
+    .line 274
     const-string v2, "scope"
 
     invoke-interface {p1, v2}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
@@ -1665,14 +1665,14 @@
 
     move-result v2
 
-    .line 274
+    .line 275
     const/4 v3, 0x1
 
     invoke-interface {v0, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object v0
 
-    .line 275
+    .line 276
     const/4 v4, 0x0
 
     :goto_2a
@@ -1680,7 +1680,7 @@
 
     if-ge v4, v5, :cond_4a
 
-    .line 276
+    .line 277
     invoke-static {v4}, Lmdm/RcStore;->realSlot(I)I
 
     move-result v5
@@ -1689,42 +1689,42 @@
 
     goto :goto_47
 
-    .line 278
+    .line 279
     :cond_35
     invoke-static {p0, v4, v1}, Lmdm/RcStore;->find(Ljava/util/List;II)Ljava/util/Map;
 
     move-result-object v5
 
-    .line 279
+    .line 280
     if-eqz v5, :cond_47
 
     if-ne v5, p1, :cond_3e
 
     goto :goto_47
 
-    .line 280
+    .line 281
     :cond_3e
     invoke-static {v5}, Lmdm/RcStore;->pairOf(Ljava/util/Map;)Ljava/util/List;
 
     move-result-object v5
 
-    .line 281
+    .line 282
     if-eqz v5, :cond_47
 
     invoke-interface {v5, v3, v0}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
-    .line 275
+    .line 276
     :cond_47
     :goto_47
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_2a
 
-    .line 283
+    .line 284
     :cond_4a
     return-void
 
-    .line 268
+    .line 269
     :cond_4b
     :goto_4b
     return-void
@@ -1733,7 +1733,7 @@
 .method public static visible(I)Z
     .registers 1
 
-    .line 93
+    .line 94
     invoke-static {p0}, Lmdm/RcStore;->groupOf(I)[Ljava/lang/Object;
 
     move-result-object p0
@@ -1754,12 +1754,12 @@
 .method public static weaponGroup(I)Ljava/lang/String;
     .registers 2
 
-    .line 88
+    .line 89
     invoke-static {p0}, Lmdm/RcStore;->groupOf(I)[Ljava/lang/Object;
 
     move-result-object p0
 
-    .line 89
+    .line 90
     if-nez p0, :cond_8
 
     const/4 p0, 0x0
@@ -1780,7 +1780,7 @@
 .method public static weaponName(I)Ljava/lang/String;
     .registers 3
 
-    .line 75
+    .line 76
     if-ltz p0, :cond_c
 
     sget-object v0, Lmdm/RcStore;->WEAPONS:[Ljava/lang/String;
@@ -1831,14 +1831,14 @@
         }
     .end annotation
 
-    .line 195
+    .line 196
     const-string v0, "recoil_data"
 
     invoke-interface {p0, v0}, Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
 
     move-result-object p0
 
-    .line 196
+    .line 197
     instance-of v0, p0, Ljava/util/List;
 
     const/4 v1, 0x0
@@ -1857,20 +1857,20 @@
 
     goto :goto_2f
 
-    .line 197
+    .line 198
     :cond_16
     invoke-interface {p0, p1}, Ljava/util/List;->get(I)Ljava/lang/Object;
 
     move-result-object p0
 
-    .line 198
+    .line 199
     instance-of p1, p0, Ljava/util/Map;
 
     if-nez p1, :cond_1f
 
     return-object v1
 
-    .line 199
+    .line 200
     :cond_1f
     check-cast p0, Ljava/util/Map;
 
@@ -1880,7 +1880,7 @@
 
     move-result-object p0
 
-    .line 200
+    .line 201
     instance-of p1, p0, Ljava/util/List;
 
     if-eqz p1, :cond_2e
@@ -1892,7 +1892,7 @@
     :cond_2e
     return-object v1
 
-    .line 196
+    .line 197
     :cond_2f
     :goto_2f
     return-object v1

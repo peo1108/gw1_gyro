@@ -67,7 +67,7 @@ một con số phẳng. Spec: `docs/superpowers/specs/2026-11-11-rc-params-simpl
   (scope 0..10 × 3 tư thế, phụ kiện = 0), hệ số = 1.0, dấu `content["mdm_format"] = 2`.
 - Ô scope = ordinal `pubg/c$g`: 0 x0, 1 x1, 2 x2, 3 x3, 4 x4, 5 x6, 6 x8; bí danh luôn = bản sao:
   7 (x6.3) ← 5, 8 (x8.4) ← 6, 9/10 (tactic) ← 1.
-- Mặc định: Đứng 10/20/22/66/100/66/100, Ngồi ×0.8, Nằm ×0.6.
+- Mặc định: Đứng 10/20/22/66/100/66/100, Ngồi ×0.7, Nằm ×0.4 (`RcStore.STANCE_FACTOR`).
 - **File `Documents/pubg_extension/RCConfig/<id>` là bản sống** (engine, bảng nhỏ trong trận và Cài đặt AI ghi
   thẳng vào nó). `LocalKeymapStore.ensureV2` đọc nó trước; cấu hình cũ (kể cả `.mdmcfg` cũ khôi phục) bị reset
   về mặc định một lần, bản gốc giữ ở `mdm_keymaps/content/<id>.v1.bak.json`. `updateKeymap` ghi cả hai bản.

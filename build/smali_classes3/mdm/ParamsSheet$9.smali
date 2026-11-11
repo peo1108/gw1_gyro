@@ -47,7 +47,7 @@
         }
     .end annotation
 
-    .line 375
+    .line 389
     iput-object p1, p0, Lmdm/ParamsSheet$9;->this$0:Lmdm/ParamsSheet;
 
     iput-object p2, p0, Lmdm/ParamsSheet$9;->val$num:Landroid/widget/EditText;
@@ -64,7 +64,7 @@
 .method public onFocusChange(Landroid/view/View;Z)V
     .registers 6
 
-    .line 377
+    .line 391
     if-nez p2, :cond_1d
 
     iget-object p1, p0, Lmdm/ParamsSheet$9;->val$num:Landroid/widget/EditText;
@@ -93,7 +93,7 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/EditText;->setText(Ljava/lang/CharSequence;)V
 
-    .line 378
+    .line 392
     :cond_1d
     return-void
 .end method

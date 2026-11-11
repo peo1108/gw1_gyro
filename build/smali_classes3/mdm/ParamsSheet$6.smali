@@ -43,7 +43,7 @@
         }
     .end annotation
 
-    .line 267
+    .line 274
     iput-object p1, p0, Lmdm/ParamsSheet$6;->this$0:Lmdm/ParamsSheet;
 
     iput p2, p0, Lmdm/ParamsSheet$6;->val$ww:I
@@ -58,7 +58,7 @@
 .method public onClick(Landroid/view/View;)V
     .registers 3
 
-    .line 268
+    .line 275
     iget-object p1, p0, Lmdm/ParamsSheet$6;->this$0:Lmdm/ParamsSheet;
 
     iget v0, p0, Lmdm/ParamsSheet$6;->val$ww:I

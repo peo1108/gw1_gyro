@@ -20,21 +20,33 @@
 # instance fields
 .field final synthetic this$1:Lmdm/ParamsSheet$11;
 
+.field final synthetic val$e:Lcom/zjx/jyandroid/base/MError;
+
 
 # direct methods
-.method constructor <init>(Lmdm/ParamsSheet$11;)V
-    .registers 2
+.method constructor <init>(Lmdm/ParamsSheet$11;Lcom/zjx/jyandroid/base/MError;)V
+    .registers 3
     .annotation system Ldalvik/annotation/MethodParameters;
         accessFlags = {
-            0x8010
+            0x8010,
+            0x1010
         }
         names = {
+            null,
             null
         }
     .end annotation
 
-    .line 439
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
+
+    .line 455
     iput-object p1, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
+
+    iput-object p2, p0, Lmdm/ParamsSheet$11$1;->val$e:Lcom/zjx/jyandroid/base/MError;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -44,9 +56,9 @@
 
 # virtual methods
 .method public run()V
-    .registers 3
+    .registers 4
 
-    .line 441
+    .line 457
     iget-object v0, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
 
     iget-object v0, v0, Lmdm/ParamsSheet$11;->this$0:Lmdm/ParamsSheet;
@@ -57,7 +69,43 @@
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setEnabled(Z)V
 
-    .line 442
+    .line 458
+    iget-object v0, p0, Lmdm/ParamsSheet$11$1;->val$e:Lcom/zjx/jyandroid/base/MError;
+
+    if-eqz v0, :cond_2b
+
+    .line 459
+    iget-object v0, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
+
+    iget-object v0, v0, Lmdm/ParamsSheet$11;->this$0:Lmdm/ParamsSheet;
+
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "L\u01b0u l\u1ed7i: "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    iget-object v2, p0, Lmdm/ParamsSheet$11$1;->val$e:Lcom/zjx/jyandroid/base/MError;
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Lmdm/ParamsSheet;->toast(Ljava/lang/String;)V
+
+    .line 460
+    return-void
+
+    .line 462
+    :cond_2b
     iget-object v0, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
 
     iget-object v0, v0, Lmdm/ParamsSheet$11;->this$0:Lmdm/ParamsSheet;
@@ -66,14 +114,14 @@
 
     iput-boolean v1, v0, Lmdm/ParamsSheet;->dirty:Z
 
-    .line 443
+    .line 463
     iget-object v0, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
 
     iget-object v0, v0, Lmdm/ParamsSheet$11;->this$0:Lmdm/ParamsSheet;
 
     iput-boolean v1, v0, Lmdm/ParamsSheet;->closeArmed:Z
 
-    .line 444
+    .line 464
     iget-object v0, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
 
     iget-object v0, v0, Lmdm/ParamsSheet$11;->this$0:Lmdm/ParamsSheet;
@@ -82,7 +130,7 @@
 
     invoke-virtual {v0, v1}, Lmdm/ParamsSheet;->toast(Ljava/lang/String;)V
 
-    .line 445
+    .line 465
     iget-object v0, p0, Lmdm/ParamsSheet$11$1;->this$1:Lmdm/ParamsSheet$11;
 
     iget-object v0, v0, Lmdm/ParamsSheet$11;->this$0:Lmdm/ParamsSheet;
@@ -91,6 +139,6 @@
 
     invoke-static {v0}, Lmdm/ParamsMenu;->reloadIfSelected(Ljava/lang/String;)V
 
-    .line 446
+    .line 466
     return-void
 .end method

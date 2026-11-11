@@ -52,7 +52,7 @@ Build thử cho máy test đang cài bản ký debug: `scripts/sign_debug.sh out
 | `k/h`, `k/i`, `k/l` | Nhận diện tay cầm / nòng / báng theo gg2 (Ergonomic, Hãm, Kéo dài, Duckbill, Báng nặng) |
 | `mdm/ForceRedDot`, `RecogCompat`, `PostureColor` | Ép Red Dot, nhận súng không giữ súng cũ, nhận ngồi bản quốc tế |
 | `mdm/RcPad` | Sửa lỗi cấu hình thiếu súng dùng chung một bản ghi ghìm tâm |
-| `mdm/RcParams`, `mdm/RcParamsView` | Bảng thông số ghìm tâm: mỗi súng mở ra các tầm ngắm x1…x8, sửa bằng kéo / ± / gõ tay. Thay cho nút Chia sẻ ở cả 3 màn (PUBG, GeneralRC, gnyx) |
+| `mdm/RcStore`, `mdm/ParamsSheet`, `mdm/ParamsMenu`, `mdm/RcPanel`, `mdm/RcEngine` | Thông số ghìm tâm PUBG mdm_v2 (m38, xem mục bên dưới). `mdm/RcParams` + `RcParamsView` là bảng cũ (m28), không còn nút nào trỏ tới: nút "Thông số" của PUBG mở `ParamsSheet`, GeneralRC/gnyx vẫn là luồng Chia sẻ gốc |
 | `y/d.a()` | Chỉ kích hoạt bằng Root: luôn trả `ADBConnectionMode.ROOT` (ô chọn chế độ đã ẩn; trước m26 máy cài mới mặc định USB) |
 | `mdm/RootGate` ← `MainActivity.onResume` | Không có root thì không vào được app: phủ màn hình tới khi `su` trả uid 0, lỗi thì hiện "Cần quyền Root" (Thử lại / Thoát), quay lại app thì tự kiểm tra lại |
 | enum `pubg/c$l,d,c,h` | Thêm ABAKAN, M338, MP7, AS50, MG97 và phụ kiện mới |
@@ -74,7 +74,12 @@ một con số phẳng. Spec: `docs/superpowers/specs/2026-11-11-rc-params-simpl
 - Vá engine: `scripts/recog/patch_rc_simplify.py build --panel --menu` (giữ CRLF, chạy lại không sao):
   `f.u()` (nhận dạng phụ kiện) luôn false; Cài đặt AI không còn nhân lại số khi đổi độ nhạy; `g$b.e` gọi
   `RcStore.syncAliases`; bảng nhỏ gọi `mdm.RcPanel.bind` (tiêu đề "Súng · Tư thế · Scope", ẩn Động/Hệ số/Xoá,
-  cửa sổ 200×70dp); menu nổi có mục **"Thông số"** (`mdm.ParamsMenu`).
+  cửa sổ 200×70dp); menu nổi có mục **"Thông số"** (`mdm.ParamsMenu`). Sửa ô bí danh trong trận còn đánh dấu
+  các nút engine của ô cùng nhóm (`mdm.RcEngine.markAliasesDirty`) để engine đang chạy dùng số mới ngay.
+  Layout của bảng nhỏ (`pubg_adjust_rc_value_*`) sửa thẳng trong `build/res/layout/`.
+- Giá trị mỗi ô 0..300 (`RcStore.MAX_VALUE`, bằng giới hạn thanh trượt trong trận).
+- Sao lưu `.mdmcfg` có thêm `pubgrc/` (= `pubg_extension/RCConfig`); khôi phục bản cũ không có `pubgrc/` thì xoá
+  file RCConfig của các id được khôi phục để bản khôi phục được dùng; `.v1.bak.json` đã có thì không bị ghi đè.
 - Bảng "Thông số" (`mdm.ParamsSheet`, cửa sổ overlay riêng): danh sách súng theo nhóm + tìm, tab tư thế,
   dòng scope theo súng (`RcStore.availableSlots`). Lưu → `KeymapManager.L` → nếu là cấu hình đang dùng thì
   `pubg/d.b0(L + id)` nạp lại ngay. Mở từ menu nổi hoặc nút "Thông số" trên dòng cấu hình
@@ -92,7 +97,8 @@ scripts/abuild.sh MDM_m28                                           # build/ -> 
 scripts/asign.sh out/MDM_m28.apk                                    # -> out/MDM_m28-release.apk
 ```
 
-Vá lại nút Chia sẻ (chạy lại sau khi reset `build/`): `python scripts/recog/patch_rcparams.py build`.
+Vá lại nút "Thông số" của PUBG (chạy lại sau khi reset `build/`): `python scripts/recog/patch_rcparams.py build --only pubg`
+(không có `--only` thì GeneralRC/gnyx cũng bị trỏ sang `RcParamsView` cũ).
 
 ## Giao diện điện thoại (m32)
 

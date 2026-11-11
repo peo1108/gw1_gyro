@@ -7,6 +7,7 @@ docs/superpowers/specs/2026-11-11-rc-params-simplify-design.md).
   g$b.e(ArrayList)               after the in-game panel edits a record, mirror it to the alias
                                  scopes (x6.3 <-> x6 ...) via mdm.RcStore.syncAliases, then flag
                                  those scopes' engine nodes for rebuild (mdm.RcEngine.markAliasesDirty)
+  pubg/d + AdjustRCValueFloatingPanelView$a   (--panel) adjust panel window 200x100 -> 200x70dp
   AdjustRCValueFloatingPanelView$c.run()
                                  after it fetches the current lookup node, call mdm.RcPanel.bind
                                  (title "weapon · stance · scope", extra buttons hidden)
@@ -47,6 +48,8 @@ DONE_IF = {
     "alias_dirty": "Lmdm/RcEngine;->markAliasesDirty",
     "panel_bind": "Lmdm/RcPanel;->bind",
     "menu_install": "Lmdm/ParamsMenu;->install",
+    "panel_height_create": "mdm-rc: one row less",
+    "panel_height_back": "mdm-rc: base page is 70dp tall now",
 }
 
 
@@ -106,6 +109,23 @@ def alias_dirty(t):
                 "    invoke-static {p1, v0}, Lmdm/RcEngine;->markAliasesDirty(Ljava/lang/Object;Ljava/lang/Object;)I\n")
 
 
+def panel_height_create(t):
+    # pubg/d creates the adjust panel window 200x100dp; the button row is gone -> 200x70dp
+    i = t.index("R$layout;->pubg_adjust_rc_value_panel_view:I")
+    j = t.index("Ll/b;->e(", i)
+    seg = once(r"    const/16 v1, 0x64\n", t[i:j],
+               "    # mdm-rc: one row less (no curve/coefficient buttons) -> 70dp tall\n    const/16 v1, 0x46\n")
+    return t[:i] + seg + t[j:]
+
+
+def panel_height_back(t):
+    # AdjustRCValueFloatingPanelView$a resizes back to the base page (200x100dp) -> 200x70dp
+    k = t.index("const-class v0, Lcom/zjx/jyandroid/Extensions/pubg/AdjustRCValueBaseView;")
+    tail = once(r"    const/16 v0, 0x64\n", t[k:],
+                "    # mdm-rc: base page is 70dp tall now\n    const/16 v0, 0x46\n")
+    return t[:k] + tail
+
+
 def panel_bind(t):
     call = "    invoke-virtual {v0}, Lcom/zjx/jyandroid/Extensions/pubg/i;->c()Lcom/zjx/jyandroid/Extensions/pubg/g$f;\n"
     pat = re.escape(call) + r"(\s*\n)?(\s*)move-result-object (v\d+)\n"
@@ -152,6 +172,8 @@ def main():
     patch("g$b.smali", alias_dirty)
     if "--panel" in sys.argv:
         patch("AdjustRCValueFloatingPanelView$c.smali", panel_bind)
+        patch("d.smali", panel_height_create)
+        patch("AdjustRCValueFloatingPanelView$a.smali", panel_height_back)
     if "--menu" in sys.argv:
         patch("d.smali", menu_install)
     lay = os.path.join(B, "res", "layout", "pubg_extension_settings_view.xml")

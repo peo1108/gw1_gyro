@@ -230,11 +230,20 @@ public final class RcStore {
         return p == null ? 0d : ((Number) p.get(1)).doubleValue();
     }
 
-    static double clamp(double v) {
-        return v < 0 ? 0 : (v > 999 ? 999 : v);
+    /** Highest cell value: the in-game adjust panel's slider tops out at 300 (pubg AdjustRCValueFloatingPanelView). */
+    public static final double MAX_VALUE = 300;
+
+    public static double clamp(double v) {
+        return v < 0 ? 0 : (v > MAX_VALUE ? MAX_VALUE : v);
     }
 
-    /** Write a cell (0..999) into the real slot and every alias of it, in place. */
+    /** Display form: whole numbers without decimals, otherwise one decimal (slider floats like 45.5999). */
+    public static String format(double v) {
+        double r = Math.round(v * 10) / 10.0;
+        return r == Math.rint(r) ? String.valueOf((long) Math.rint(r)) : String.valueOf(r);
+    }
+
+    /** Write a cell (0..MAX_VALUE) into the real slot and every alias of it, in place. */
     public static boolean set(Map content, int weapon, int stance, int slot, double value) {
         List<Object> v = weaponRecords(content, weapon);
         double x = clamp(value);

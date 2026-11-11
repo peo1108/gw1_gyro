@@ -1,9 +1,6 @@
 .class Lmdm/ParamsSheet$1;
-.super Ljava/lang/Object;
+.super Landroid/widget/FrameLayout;
 .source "ParamsSheet.java"
-
-# interfaces
-.implements Landroid/view/View$OnClickListener;
 
 
 # annotations
@@ -22,34 +19,63 @@
 
 
 # direct methods
-.method constructor <init>(Lmdm/ParamsSheet;)V
-    .registers 2
+.method constructor <init>(Lmdm/ParamsSheet;Landroid/content/Context;)V
+    .registers 3
     .annotation system Ldalvik/annotation/MethodParameters;
         accessFlags = {
-            0x8010
+            0x8010,
+            0x0
         }
         names = {
+            null,
             null
         }
     .end annotation
 
-    .line 129
+    .line 130
     iput-object p1, p0, Lmdm/ParamsSheet$1;->this$0:Lmdm/ParamsSheet;
 
-    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+    invoke-direct {p0, p2}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
 
     return-void
 .end method
 
 
 # virtual methods
-.method public onClick(Landroid/view/View;)V
-    .registers 2
+.method public dispatchKeyEvent(Landroid/view/KeyEvent;)Z
+    .registers 4
 
-    .line 130
+    .line 134
+    invoke-virtual {p1}, Landroid/view/KeyEvent;->getKeyCode()I
+
+    move-result v0
+
+    const/4 v1, 0x4
+
+    if-ne v0, v1, :cond_14
+
+    .line 135
+    invoke-virtual {p1}, Landroid/view/KeyEvent;->getAction()I
+
+    move-result p1
+
+    const/4 v0, 0x1
+
+    if-ne p1, v0, :cond_13
+
     iget-object p1, p0, Lmdm/ParamsSheet$1;->this$0:Lmdm/ParamsSheet;
 
     invoke-virtual {p1}, Lmdm/ParamsSheet;->requestClose()V
 
-    return-void
+    .line 136
+    :cond_13
+    return v0
+
+    .line 138
+    :cond_14
+    invoke-super {p0, p1}, Landroid/widget/FrameLayout;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z
+
+    move-result p1
+
+    return p1
 .end method

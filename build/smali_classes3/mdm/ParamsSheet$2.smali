@@ -3,7 +3,7 @@
 .source "ParamsSheet.java"
 
 # interfaces
-.implements Landroid/view/View$OnKeyListener;
+.implements Landroid/view/View$OnClickListener;
 
 
 # annotations
@@ -33,7 +33,7 @@
         }
     .end annotation
 
-    .line 132
+    .line 143
     iput-object p1, p0, Lmdm/ParamsSheet$2;->this$0:Lmdm/ParamsSheet;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,33 +43,13 @@
 
 
 # virtual methods
-.method public onKey(Landroid/view/View;ILandroid/view/KeyEvent;)Z
-    .registers 4
+.method public onClick(Landroid/view/View;)V
+    .registers 2
 
-    .line 134
-    const/4 p1, 0x4
-
-    if-ne p2, p1, :cond_10
-
-    invoke-virtual {p3}, Landroid/view/KeyEvent;->getAction()I
-
-    move-result p1
-
-    const/4 p2, 0x1
-
-    if-ne p1, p2, :cond_10
-
-    .line 135
+    .line 144
     iget-object p1, p0, Lmdm/ParamsSheet$2;->this$0:Lmdm/ParamsSheet;
 
     invoke-virtual {p1}, Lmdm/ParamsSheet;->requestClose()V
 
-    .line 136
-    return p2
-
-    .line 138
-    :cond_10
-    const/4 p1, 0x0
-
-    return p1
+    return-void
 .end method

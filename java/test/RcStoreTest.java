@@ -142,7 +142,8 @@ public class RcStoreTest {
         Map<String, Object> c = oldContent(77);
         RcStore.makeDefault(c);
         RcStore.set(c, 23, 0, 0, 5000);
-        check(RcStore.get(c, 23, 0, 0) == 999, "setClamps: 5000 -> 999");
+        check(RcStore.get(c, 23, 0, 0) == 300, "setClamps: 5000 -> 300 (in-game slider max)");
+        check(RcStore.clamp(301) == 300 && RcStore.clamp(300) == 300 && RcStore.MAX_VALUE == 300, "setClamps: MAX_VALUE 300");
         RcStore.set(c, 23, 0, 0, -3);
         check(RcStore.get(c, 23, 0, 0) == 0, "setClamps: -3 -> 0");
     }
@@ -175,6 +176,13 @@ public class RcStoreTest {
         check(val(rec(c, 22, 9, 0)) == 21 && val(rec(c, 22, 10, 0)) == 21, "syncFromRealSlot: tactic scopes follow x1");
     }
 
+    static void formatNumbers() {
+        check("100".equals(RcStore.format(100.0)), "format: integer, got " + RcStore.format(100.0));
+        check("45.6".equals(RcStore.format(45.599998474121094)), "format: slider float rounded, got " + RcStore.format(45.599998474121094));
+        check("12.5".equals(RcStore.format(12.5)), "format: one decimal kept");
+        check("8".equals(RcStore.format(7.99999)), "format: near-integer shown as integer, got " + RcStore.format(7.99999));
+    }
+
     static void oldFormatNotV2() {
         check(!RcStore.isV2(oldContent(77)), "oldFormatNotV2: old content is not v2");
         Map<String, Object> c = oldContent(77);
@@ -204,6 +212,7 @@ public class RcStoreTest {
         setClamps();
         syncFromAlias();
         syncFromRealSlot();
+        formatNumbers();
         oldFormatNotV2();
         scopesPerWeapon();
         if (failures > 0) {

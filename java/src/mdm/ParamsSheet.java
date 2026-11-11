@@ -66,6 +66,9 @@ public class ParamsSheet {
     TextView[] stanceTabs = new TextView[3];
     final Map<Integer, TextView> weaponRows = new HashMap<Integer, TextView>();
 
+    /** The sheet on screen, so a second tap on the menu item does not stack another one. */
+    static ParamsSheet current;
+
     Map work;
     int weapon = 22; // M416
     int stance = 0;
@@ -106,6 +109,7 @@ public class ParamsSheet {
 
     @SuppressWarnings("unchecked")
     public void open() {
+        if (current != null && current.root != null) return;
         try {
             Map live = LocalKeymapStore.loadRcLive(km, id);
             if (live == null) {
@@ -123,20 +127,21 @@ public class ParamsSheet {
 
     void show() {
         wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
-        root = new FrameLayout(ctx);
+        root = new FrameLayout(ctx) {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                // the fields keep focus while typing, so catch Back here, not in an OnKeyListener
+                if (e.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                    if (e.getAction() == KeyEvent.ACTION_UP) requestClose();
+                    return true;
+                }
+                return super.dispatchKeyEvent(e);
+            }
+        };
         root.setBackgroundColor(0x99000000);
         root.setFocusableInTouchMode(true);
         root.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) { requestClose(); }
-        });
-        root.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int code, KeyEvent e) {
-                if (code == KeyEvent.KEYCODE_BACK && e.getAction() == KeyEvent.ACTION_UP) {
-                    requestClose();
-                    return true;
-                }
-                return false;
-            }
         });
 
         DisplayMetrics m = ctx.getResources().getDisplayMetrics();
@@ -168,6 +173,7 @@ public class ParamsSheet {
                 PixelFormat.TRANSLUCENT);
         lp.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
         wm.addView(root, lp);
+        current = this;
         root.requestFocus();
         selectWeapon(RcStore.visible(weapon) ? weapon : firstVisible());
     }
@@ -184,6 +190,7 @@ public class ParamsSheet {
     void close() {
         try { if (wm != null && root != null) wm.removeView(root); } catch (Throwable ignored) {}
         root = null;
+        if (current == this) current = null;
     }
 
     // ============================================================== layout
@@ -370,6 +377,13 @@ public class ParamsSheet {
                 Double v = parse(s.toString());
                 if (v == null) return; // empty / junk: keep the stored number
                 if (v != RcStore.get(work, weapon, stance, slot)) write(slot, v);
+                double stored = RcStore.get(work, weapon, stance, slot);
+                if (stored != v) {
+                    // out of range: show the number that was actually kept (0..RcStore.MAX_VALUE)
+                    String shown = RcStore.format(stored);
+                    num.setText(shown);
+                    num.setSelection(shown.length());
+                }
             }
         });
         num.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -422,7 +436,7 @@ public class ParamsSheet {
     }
 
     static String fmt(double v) {
-        return v == Math.rint(v) ? String.valueOf((long) v) : String.valueOf(v);
+        return RcStore.format(v);
     }
 
     // ============================================================== save
@@ -434,11 +448,17 @@ public class ParamsSheet {
         }
         saveBtn.setEnabled(false);
         try {
-            km.L(work, id, new KeymapManager.UpdateKeymapCompletionHandler() {
-                public void requestCompleted(com.zjx.jyandroid.base.MError e) {
+            // KeymapManager keeps the map it is given as its cache: hand it a copy, keep editing ours
+            Map copy = LocalKeymapStore.GSON.fromJson(LocalKeymapStore.GSON.toJson(work), HashMap.class);
+            km.L(copy, id, new KeymapManager.UpdateKeymapCompletionHandler() {
+                public void requestCompleted(final com.zjx.jyandroid.base.MError e) {
                     main.post(new Runnable() {
                         public void run() {
                             saveBtn.setEnabled(true);
+                            if (e != null) {
+                                toast("Lưu lỗi: " + e);
+                                return;
+                            }
                             dirty = false;
                             closeArmed = false;
                             toast("Đã lưu thông số");

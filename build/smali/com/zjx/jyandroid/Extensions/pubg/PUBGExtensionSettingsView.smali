@@ -1494,6 +1494,11 @@
 
     invoke-interface {v9, v12, v14}, Ljava/util/List;->set(ILjava/lang/Object;)Ljava/lang/Object;
 
+    # mdm-rc: sensitivity saved above; do not rescale recoil values (numbers stay as set)
+    move-object/from16 v20, v9
+
+    goto/16 :goto_5
+
     new-instance v14, Ljava/util/ArrayList;
 
     invoke-direct {v14}, Ljava/util/ArrayList;-><init>()V

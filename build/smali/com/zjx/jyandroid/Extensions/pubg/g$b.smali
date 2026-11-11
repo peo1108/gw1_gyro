@@ -329,6 +329,13 @@
     goto :goto_2
 
     :cond_5
+    # mdm-rc: keep alias scopes (x6.3/x8.4/tactic) equal to the edited cell before the flush
+    iget-object p1, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->c:Ljava/util/ArrayList;
+
+    iget-object v0, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->d:Ljava/util/Map;
+
+    invoke-static {p1, v0}, Lmdm/RcStore;->syncAliases(Ljava/util/List;Ljava/util/Map;)V
+
     iget-object p1, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->b:Lcom/zjx/jyandroid/Extensions/pubg/g$f;
 
     invoke-virtual {p1}, Lcom/zjx/jyandroid/Extensions/pubg/g$f;->e()V

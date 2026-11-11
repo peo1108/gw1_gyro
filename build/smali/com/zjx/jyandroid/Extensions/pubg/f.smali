@@ -1414,21 +1414,10 @@
 .end method
 
 .method public u()Z
-    .locals 3
+    .locals 1
 
-    iget-object v0, p0, Lcom/zjx/jyandroid/Extensions/pubg/f;->c:Landroid/content/SharedPreferences;
-
-    const-wide v1, -0x3a27dacc755L
-
-    invoke-static {v1, v2}, Lorg/lsposed/lsparanoid/Deobfuscator$jyandroid$app;->getString(J)Ljava/lang/String;
-
-    move-result-object v1
-
-    const/4 v2, 0x1
-
-    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
-
-    move-result v0
+    # mdm-rc: accessory recognition removed (mdm_v2 has no accessory records)
+    const/4 v0, 0x0
 
     return v0
 .end method

@@ -12,7 +12,8 @@ docs/superpowers/specs/2026-11-11-rc-params-simplify-design.md).
                                  after it fetches the current lookup node, call mdm.RcPanel.bind
                                  (title "weapon · stance · scope", extra buttons hidden)
   pubg/d.onFloatingPanelDisplay  (--menu) add the "Thông số" item via mdm.ParamsMenu.install
-  pubg_extension_settings_view   hide the accessory recognition switch + its settings block
+  PUBGExtensionSettingsView      onDetachedFromWindow: the "recoil %" slider no longer rescales the table
+  pubg_extension_settings_view   hide the accessory recognition switch + its settings block + the recoil % slider
 
 apktool's smali is CRLF: files are edited as text with their own newline kept. Every patch is
 idempotent (marker "mdm-rc") and must match exactly once.
@@ -44,6 +45,7 @@ def save(path, text, nl):
 DONE_IF = {
     "accessory_getter": "mdm-rc: accessory recognition removed",
     "sensitivity_no_rescale": "mdm-rc: sensitivity saved above",
+    "coefficient_no_rescale": "mdm-rc: recoil % slider retired",
     "alias_sync": "Lmdm/RcStore;->syncAliases",
     "alias_dirty": "Lmdm/RcEngine;->markAliasesDirty",
     "panel_bind": "Lmdm/RcPanel;->bind",
@@ -86,6 +88,15 @@ def sensitivity_no_rescale(t):
                 line.replace("\\", "\\\\") +
                 "\n    # mdm-rc: sensitivity saved above; do not rescale recoil values (numbers stay as set)\n"
                 "    move-object/from16 v20, v9\n\n    goto/16 :goto_5\n")
+
+
+def coefficient_no_rescale(t):
+    # onDetachedFromWindow: when the "recoil %" slider changed (flag F) the app multiplied every
+    # recoilValue of every weapon by new/old and stored the new %. mdm_v2 numbers are absolute:
+    # treat F as false so that block never runs (the slider itself is hidden in the layout)
+    line = "    iget-boolean v0, v1, Lcom/zjx/jyandroid/Extensions/pubg/PUBGExtensionSettingsView;->F:Z\n"
+    return once(re.escape(line), t,
+                line + "\n    # mdm-rc: recoil % slider retired, never rescale the table\n    const/4 v0, 0x0\n")
 
 
 def alias_sync(t):
@@ -152,7 +163,7 @@ def menu_install(t):
 
 
 def settings_layout(t):
-    for vid in ("enableAccessoryRecognitionCell", "accessoryRecognitionSettingsLinearLayout"):
+    for vid in ("enableAccessoryRecognitionCell", "accessoryRecognitionSettingsLinearLayout", "dataPercentageCell"):
         tag = re.search(r'<[^<>]*android:id="@id/%s"[^<>]*>' % vid, t)
         if not tag:
             sys.exit("layout id not found: " + vid)
@@ -168,6 +179,7 @@ def settings_layout(t):
 def main():
     patch("f.smali", accessory_getter)
     patch("PUBGExtensionSettingsView.smali", sensitivity_no_rescale)
+    patch("PUBGExtensionSettingsView.smali", coefficient_no_rescale)
     patch("g$b.smali", alias_sync)
     patch("g$b.smali", alias_dirty)
     if "--panel" in sys.argv:

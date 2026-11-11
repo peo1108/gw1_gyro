@@ -78,6 +78,8 @@ một con số phẳng. Spec: `docs/superpowers/specs/2026-11-11-rc-params-simpl
   các nút engine của ô cùng nhóm (`mdm.RcEngine.markAliasesDirty`) để engine đang chạy dùng số mới ngay.
   Layout của bảng nhỏ (`pubg_adjust_rc_value_*`) sửa thẳng trong `build/res/layout/`.
 - Giá trị mỗi ô 0..300 (`RcStore.MAX_VALUE`, bằng giới hạn thanh trượt trong trận).
+- Thanh "hệ số ghìm %" (`dataPercentageCell`) đã ẩn và không còn nhân lại cả bảng khi đóng Cài đặt AI (trước đó
+  kéo lên 300% làm mọi số ×3). Số trong bảng chỉ đổi khi người dùng sửa.
 - Sao lưu `.mdmcfg` có thêm `pubgrc/` (= `pubg_extension/RCConfig`); khôi phục bản cũ không có `pubgrc/` thì xoá
   file RCConfig của các id được khôi phục để bản khôi phục được dùng; `.v1.bak.json` đã có thì không bị ghi đè.
 - Bảng "Thông số" (`mdm.ParamsSheet`, cửa sổ overlay riêng): danh sách súng theo nhóm + tìm, tab tư thế,

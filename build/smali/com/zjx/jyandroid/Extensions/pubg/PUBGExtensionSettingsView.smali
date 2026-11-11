@@ -1770,6 +1770,9 @@
     :cond_7
     iget-boolean v0, v1, Lcom/zjx/jyandroid/Extensions/pubg/PUBGExtensionSettingsView;->F:Z
 
+    # mdm-rc: recoil % slider retired, never rescale the table
+    const/4 v0, 0x0
+
     if-eqz v0, :cond_b
 
     invoke-static {}, Lcom/zjx/jyandroid/Extensions/ExtensionManager;->sharedInstance()Lcom/zjx/jyandroid/Extensions/ExtensionManager;

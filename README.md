@@ -2,7 +2,7 @@
 
 Bản mod của gg1 (`com.zx.yxt` v1.8.41) cho khách: thêm gyro ghìm tâm qua module Zygisk `sensor_cal`,
 giao diện MDM (đen + vàng champagne), nhận diện súng/phụ kiện cập nhật từ gg2.
-Bản mới nhất: **m38**, file `out/MDM_m38-release.apk` (thông số ghìm tâm gọn: 3 tư thế × 7 scope).
+Bản mới nhất: **m38**, file `release/MDM_release_m38.apk` (thông số ghìm tâm gọn: 3 tư thế × 7 scope, quy đổi theo độ nhạy).
 
 ## Cấu trúc
 

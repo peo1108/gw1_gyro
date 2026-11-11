@@ -2,7 +2,7 @@
 
 Bản mod của gg1 (`com.zx.yxt` v1.8.41) cho khách: thêm gyro ghìm tâm qua module Zygisk `sensor_cal`,
 giao diện MDM (đen + vàng champagne), nhận diện súng/phụ kiện cập nhật từ gg2.
-Bản mới nhất: **m37**, file `out/MDM_m37-release.apk` (trang chính 2 cột khi màn ngang, làm lại 2 bảng nổi).
+Bản mới nhất: **m38**, file `out/MDM_m38-release.apk` (thông số ghìm tâm gọn: 3 tư thế × 7 scope).
 
 ## Cấu trúc
 
@@ -57,28 +57,29 @@ Build thử cho máy test đang cài bản ký debug: `scripts/sign_debug.sh out
 | `mdm/RootGate` ← `MainActivity.onResume` | Không có root thì không vào được app: phủ màn hình tới khi `su` trả uid 0, lỗi thì hiện "Cần quyền Root" (Thử lại / Thoát), quay lại app thì tự kiểm tra lại |
 | enum `pubg/c$l,d,c,h` | Thêm ABAKAN, M338, MP7, AS50, MG97 và phụ kiện mới |
 
-## Bảng thông số ghìm tâm (m28)
+## Thông số ghìm tâm gọn (m38, định dạng mdm_v2)
 
-Nút **Chia sẻ** trên mỗi dòng cấu hình đã thay bằng **Thông số**: mở bảng sửa trực tiếp thay vì
-đẩy cấu hình lên server. Dữ liệu đọc/ghi đúng chỗ bộ nhận diện dùng:
+Mỗi súng PUBG chỉ còn **3 tư thế (Đứng/Ngồi/Nằm) × 7 scope (x0 Tâm trắng, x1, x2, x3, x4, x6, x8)**, mỗi ô
+một con số phẳng. Spec: `docs/superpowers/specs/2026-11-11-rc-params-simplify-design.md`.
 
-```
-content["recoil_data"][súng]["v"][i] = {
-    gesture, grip, muzzle, scope, stock,        # chỉ số enum, dùng để dò đúng bản ghi
-    recoilValue: [ [0, <giá trị>], ... ]        # chỉ sửa phần tử [1]; [0] là mốc trục, luôn 0
-}
-```
-
-- Dò bản ghi **theo 5 trường enum**, không theo vị trí, vì `pubg.g` cũng dò như vậy và cấu hình
-  cũ có thể đã bị đệm (xem `RcPad`).
-- Lưu đi qua `KeymapManager.L` → `mdm/LocalKeymapStore.updateKeymap`: ghi file local **và**
-  mirror ra `pubg_extension/RCConfig/<id>` cho nhận diện đọc.
-- Thanh chọn trong mỗi súng chỉ còn thế **đứng / ngồi / nằm**. Phụ kiện (nòng, báng) đã bỏ khỏi
-  giao diện: mỗi dòng x1…x8 ghi cùng một giá trị cho **mọi biến thể grip/muzzle** của đúng
-  súng + tầm + thế đó (`RcParams.setValueFor`), nên không phải chọn phụ kiện nữa.
-- Màn Cài đặt chạy trong **cửa sổ overlay của service**, không phải Activity → không có window token,
-  nên bảng được gắn thẳng vào `getRootView()` của dòng vừa bấm (`RcParamsView` gắn/gỡ `shell`),
-  không dùng `Dialog`. Dùng `Dialog` ở đây sẽ `BadTokenException` hoặc im lặng không hiện.
+- Engine `pubg/g.j()` dùng bản ghi khớp đủ (súng, scope, tư thế, grip, muzzle, stock) nếu có, nên chỉ
+  cần đổi dữ liệu: `mdm.RcStore` (Java thuần, test `bash java/test/run_rcstore_test.sh`) ghi 33 bản ghi/súng
+  (scope 0..10 × 3 tư thế, phụ kiện = 0), hệ số = 1.0, dấu `content["mdm_format"] = 2`.
+- Ô scope = ordinal `pubg/c$g`: 0 x0, 1 x1, 2 x2, 3 x3, 4 x4, 5 x6, 6 x8; bí danh luôn = bản sao:
+  7 (x6.3) ← 5, 8 (x8.4) ← 6, 9/10 (tactic) ← 1.
+- Mặc định: Đứng 10/20/22/66/100/66/100, Ngồi ×0.8, Nằm ×0.6.
+- **File `Documents/pubg_extension/RCConfig/<id>` là bản sống** (engine, bảng nhỏ trong trận và Cài đặt AI ghi
+  thẳng vào nó). `LocalKeymapStore.ensureV2` đọc nó trước; cấu hình cũ (kể cả `.mdmcfg` cũ khôi phục) bị reset
+  về mặc định một lần, bản gốc giữ ở `mdm_keymaps/content/<id>.v1.bak.json`. `updateKeymap` ghi cả hai bản.
+- Vá engine: `scripts/recog/patch_rc_simplify.py build --panel --menu` (giữ CRLF, chạy lại không sao):
+  `f.u()` (nhận dạng phụ kiện) luôn false; Cài đặt AI không còn nhân lại số khi đổi độ nhạy; `g$b.e` gọi
+  `RcStore.syncAliases`; bảng nhỏ gọi `mdm.RcPanel.bind` (tiêu đề "Súng · Tư thế · Scope", ẩn Động/Hệ số/Xoá,
+  cửa sổ 200×70dp); menu nổi có mục **"Thông số"** (`mdm.ParamsMenu`).
+- Bảng "Thông số" (`mdm.ParamsSheet`, cửa sổ overlay riêng): danh sách súng theo nhóm + tìm, tab tư thế,
+  dòng scope theo súng (`RcStore.availableSlots`). Lưu → `KeymapManager.L` → nếu là cấu hình đang dùng thì
+  `pubg/d.b0(L + id)` nạp lại ngay. Mở từ menu nổi hoặc nút "Thông số" trên dòng cấu hình
+  (`python scripts/recog/patch_rcparams.py build --only pubg`).
+- `java/src/mdm/RcParamsView.java` cũ hơn smali và không còn dùng cho PUBG.
 
 ## Script build phụ (chạy được cả trong WSL)
 

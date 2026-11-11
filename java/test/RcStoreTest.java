@@ -183,6 +183,28 @@ public class RcStoreTest {
         check("8".equals(RcStore.format(7.99999)), "format: near-integer shown as integer, got " + RcStore.format(7.99999));
     }
 
+    @SuppressWarnings("unchecked")
+    static void sensitivityConvert() {
+        Map<String, Object> c = oldContent(77);
+        RcStore.makeDefault(c);
+        // stored sensitivity (what the table was tuned for), by slot: Tâm trắng 100, 1X 50, 2X 30, 3X 22, 4X 14, 6X 12, 8X 10
+        double[] next = {100, 50, 30, 44, 14, 12, 20}; // 3X 22 -> 44, 8X 10 -> 20
+        String summary = RcStore.rescaleForSensitivity(c, next);
+        check(RcStore.get(c, 22, 0, 3) == 33 && RcStore.get(c, 22, 2, 3) == 13, "sensConvert: x3 x 22/44 (66->33, 26->13)");
+        check(RcStore.get(c, 22, 0, 6) == 50 && val(rec(c, 22, 8, 0)) == 50, "sensConvert: x8 and its alias x8.4 halved");
+        check(RcStore.get(c, 22, 0, 4) == 100 && RcStore.get(c, 22, 0, 0) == 10, "sensConvert: unchanged scopes untouched");
+        List<Object> sens = (List<Object>) c.get("sensitivity");
+        check(((Number) sens.get(3)).doubleValue() == 44 && ((Number) sens.get(6)).doubleValue() == 20,
+                "sensConvert: new sensitivities stored as the new baseline");
+        check(summary.contains("3X") && summary.contains("8X") && !summary.contains("4X"), "sensConvert: summary names changed scopes, got " + summary);
+        check("".equals(RcStore.rescaleForSensitivity(c, next)), "sensConvert: second run is a no-op");
+        check(RcStore.get(c, 22, 0, 3) == 33, "sensConvert: no double scaling");
+        double[] lower = {100, 50, 30, 44, 14, 12, 2}; // 8X 20 -> 2 : x10, clamped at MAX_VALUE
+        RcStore.rescaleForSensitivity(c, lower);
+        check(RcStore.get(c, 22, 0, 6) == 300, "sensConvert: clamped at 300");
+        check(RcStore.get(c, 22, 1, 4) == 70, "sensConvert: crouch x4 untouched");
+    }
+
     static void oldFormatNotV2() {
         check(!RcStore.isV2(oldContent(77)), "oldFormatNotV2: old content is not v2");
         Map<String, Object> c = oldContent(77);
@@ -213,6 +235,7 @@ public class RcStoreTest {
         syncFromAlias();
         syncFromRealSlot();
         formatNumbers();
+        sensitivityConvert();
         oldFormatNotV2();
         scopesPerWeapon();
         if (failures > 0) {

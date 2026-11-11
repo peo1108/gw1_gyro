@@ -80,6 +80,10 @@ một con số phẳng. Spec: `docs/superpowers/specs/2026-11-11-rc-params-simpl
 - Giá trị mỗi ô 0..300 (`RcStore.MAX_VALUE`, bằng giới hạn thanh trượt trong trận).
 - Thanh "hệ số ghìm %" (`dataPercentageCell`) đã ẩn và không còn nhân lại cả bảng khi đóng Cài đặt AI (trước đó
   kéo lên 300% làm mọi số ×3). Số trong bảng chỉ đổi khi người dùng sửa.
+- 7 thanh độ nhạy (Tâm trắng…8X) = độ nhạy game mà bảng được chỉnh theo; engine không đọc chúng lúc bắn.
+  Đóng Cài đặt chỉ lưu chúng. Nút **"Quy đổi bảng theo độ nhạy mới"** (`mdm.SensConvert`, đặt ngay dưới thanh 8X
+  trong `pubg_extension_settings_view.xml`) mới tính lại: mỗi ô của scope đổi nhạy × cũ÷mới
+  (`RcStore.rescaleForSensitivity`, có test), lưu bằng `g.e()` rồi nạp lại engine.
 - Sao lưu `.mdmcfg` có thêm `pubgrc/` (= `pubg_extension/RCConfig`); khôi phục bản cũ không có `pubgrc/` thì xoá
   file RCConfig của các id được khôi phục để bản khôi phục được dùng; `.v1.bak.json` đã có thì không bị ghi đè.
 - Bảng "Thông số" (`mdm.ParamsSheet`, cửa sổ overlay riêng): danh sách súng theo nhóm + tìm, tab tư thế,

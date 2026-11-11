@@ -106,6 +106,7 @@
                 <com.zjx.jyandroid.base.Components.TextWithSliderView android:id="@id/X6SensitivityCell" android:layout_width="fill_parent" android:layout_height="40.0dip" app:showSubtitle="false" app:sliderMax="400" app:sliderMin="1" app:subtitleSize="@dimen/font_size_subtext_phone" app:subtitleTextColor="#ffffffff" app:titleSize="@dimen/font_size_text_phone" app:titleText="@string/pubg_settings_text27" app:titleTextColor="#ffffffff" />
                 <View android:id="@id/view19" android:background="#17ffffff" android:layout_width="fill_parent" android:layout_height="1.0px" />
                 <com.zjx.jyandroid.base.Components.TextWithSliderView android:id="@id/X8SensitivityCell" android:layout_width="fill_parent" android:layout_height="40.0dip" app:showSubtitle="false" app:sliderMax="400" app:sliderMin="1" app:subtitleSize="@dimen/font_size_subtext_phone" app:subtitleTextColor="#ffffffff" app:titleSize="@dimen/font_size_text_phone" app:titleText="@string/pubg_settings_text28" app:titleTextColor="#ffffffff" />
+                <mdm.SensConvert android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="6.0dip" />
                 <View android:id="@id/view20" android:background="#17ffffff" android:layout_width="fill_parent" android:layout_height="1.0px" />
             </LinearLayout>
         </LinearLayout>

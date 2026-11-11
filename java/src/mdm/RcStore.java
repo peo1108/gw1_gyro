@@ -111,6 +111,53 @@ public final class RcStore {
         }
     }
 
+    // ---- sensitivity conversion ------------------------------------------------------------------
+
+    static final String[] SENS_LABELS = {"Tâm trắng", "1X", "2X", "3X", "4X", "6X", "8X"};
+
+    /**
+     * "Quy đổi bảng theo độ nhạy mới" (explicit button in Cài đặt AI, never automatic).
+     * content["sensitivity"][i] is the in-game sensitivity the table was tuned for, i = slot
+     * (0 Tâm trắng, 1 1X ... 5 6X, 6 8X). For each slot whose sensitivity changed, every cell of
+     * that slot (all weapons, stances and alias scopes) is multiplied by old/new — higher
+     * sensitivity needs less pull — rounded to 0.1 and clamped to 0..MAX_VALUE; then the new
+     * sensitivities become the stored baseline. Returns a summary ("4X 22→44, …"), "" if nothing
+     * changed.
+     */
+    @SuppressWarnings("unchecked")
+    public static String rescaleForSensitivity(Map content, double[] next) {
+        Object so = content.get("sensitivity");
+        if (!(so instanceof List) || next == null) return "";
+        List<Object> sens = (List<Object>) so;
+        StringBuilder sb = new StringBuilder();
+        Object rdo = content.get("recoil_data");
+        List<Object> rd = rdo instanceof List ? (List<Object>) rdo : new ArrayList<Object>();
+        for (int i = 0; i < SLOTS.length && i < sens.size() && i < next.length; i++) {
+            Object oo = sens.get(i);
+            double old = oo instanceof Number ? ((Number) oo).doubleValue() : 0;
+            double now = next[i];
+            if (old <= 0 || now <= 0 || Math.abs(now / old - 1) < 0.001) continue;
+            double factor = old / now;
+            for (int w = 0; w < rd.size(); w++) {
+                List<Object> v = weaponRecords(content, w);
+                if (v == null) continue;
+                for (Object o : v) {
+                    if (!(o instanceof Map)) continue;
+                    Map<String, Object> r = (Map<String, Object>) o;
+                    if (realSlot(num(r.get("scope"))) != i) continue;
+                    List<Object> p = pairOf(r);
+                    if (p == null || !(p.get(1) instanceof Number)) continue;
+                    double x = ((Number) p.get(1)).doubleValue() * factor;
+                    p.set(1, clamp(Math.round(x * 10) / 10.0));
+                }
+            }
+            sens.set(i, now);
+            if (sb.length() > 0) sb.append(", ");
+            sb.append(SENS_LABELS[i]).append(' ').append(format(old)).append('→').append(format(now));
+        }
+        return sb.toString();
+    }
+
     // ---- backup / restore --------------------------------------------------------------------------
 
     /**

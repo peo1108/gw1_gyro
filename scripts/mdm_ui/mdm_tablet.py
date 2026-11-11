@@ -176,10 +176,14 @@ def classes_in(text):
     return {c for c in found if c.rsplit(".", 1)[-1][:1].isupper()}
 
 
+# mdm views that live in overlay menus (all other mdm.* views belong to the app's own pages)
+OVERLAY_MDM = {"mdm.SensConvert"}
+
+
 def is_activity_layout(name, text):
     if name.startswith(ACTIVITY_PREFIX):
         return True
-    return any(c.startswith(ACTIVITY_PKG) for c in classes_in(text))
+    return any(c.startswith(ACTIVITY_PKG) and c not in OVERLAY_MDM for c in classes_in(text))
 
 
 def allowed(name):

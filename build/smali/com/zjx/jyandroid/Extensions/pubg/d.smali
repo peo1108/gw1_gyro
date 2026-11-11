@@ -906,7 +906,8 @@
 
     move-result v2
 
-    const/16 v1, 0x64
+    # mdm-rc: one row less (no curve/coefficient buttons) -> 70dp tall
+    const/16 v1, 0x46
 
     invoke-static {v1}, Lmdm/TabletScale;->dpx(I)I
 

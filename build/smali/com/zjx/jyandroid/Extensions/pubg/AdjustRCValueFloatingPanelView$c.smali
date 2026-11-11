@@ -84,6 +84,12 @@
 
     move-result-object v0
 
+    # mdm-rc: title = weapon · stance · scope, extra buttons hidden
+    iget-object v4, p0, Lcom/zjx/jyandroid/Extensions/pubg/AdjustRCValueFloatingPanelView$c;->d:Lcom/zjx/jyandroid/Extensions/pubg/AdjustRCValueFloatingPanelView;
+
+    invoke-static {v4, v0}, Lmdm/RcPanel;->bind(Landroid/view/View;Ljava/lang/Object;)V
+
+
     iget-object v3, p0, Lcom/zjx/jyandroid/Extensions/pubg/AdjustRCValueFloatingPanelView$c;->a:Lcom/zjx/jyandroid/Extensions/pubg/g$f;
 
     if-ne v3, v0, :cond_1

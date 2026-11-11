@@ -128,7 +128,8 @@
 
     iput v0, p1, Landroid/view/WindowManager$LayoutParams;->width:I
 
-    const/16 v0, 0x64
+    # mdm-rc: base page is 70dp tall now
+    const/16 v0, 0x46
 
     invoke-static {v0}, Lmdm/TabletScale;->dpx(I)I
 

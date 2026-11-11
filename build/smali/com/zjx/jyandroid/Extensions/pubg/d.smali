@@ -902,13 +902,13 @@
 
     const/16 v1, 0xc8
 
-    invoke-static {v1}, Lcom/zjx/jyandroid/base/util/b$i;->c(I)I
+    invoke-static {v1}, Lmdm/TabletScale;->dpx(I)I
 
     move-result v2
 
     const/16 v1, 0x64
 
-    invoke-static {v1}, Lcom/zjx/jyandroid/base/util/b$i;->c(I)I
+    invoke-static {v1}, Lmdm/TabletScale;->dpx(I)I
 
     move-result v3
 

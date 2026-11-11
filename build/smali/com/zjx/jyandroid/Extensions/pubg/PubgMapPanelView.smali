@@ -615,7 +615,7 @@
 
     iget-object v0, p0, Lcom/zjx/jyandroid/Extensions/pubg/PubgMapPanelView;->A:Landroid/widget/TextView;
 
-    const-string v1, "\u5c55\u5f00"
+    const-string v1, "M\u1edf r\u1ed9ng"
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
@@ -630,7 +630,7 @@
     :cond_0
     iget-object v0, p0, Lcom/zjx/jyandroid/Extensions/pubg/PubgMapPanelView;->A:Landroid/widget/TextView;
 
-    const-string v1, "\u6298\u53e0"
+    const-string v1, "Thu g\u1ecdn"
 
     invoke-virtual {v0, v1}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 

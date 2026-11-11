@@ -77,7 +77,7 @@
 
     const/16 v0, 0x190
 
-    invoke-static {v0}, Lcom/zjx/jyandroid/base/util/b$i;->c(I)I
+    invoke-static {v0}, Lmdm/TabletScale;->dpx(I)I
 
     move-result v0
 
@@ -85,7 +85,7 @@
 
     const/16 v0, 0xb4
 
-    invoke-static {v0}, Lcom/zjx/jyandroid/base/util/b$i;->c(I)I
+    invoke-static {v0}, Lmdm/TabletScale;->dpx(I)I
 
     move-result v0
 
@@ -122,7 +122,7 @@
 
     const/16 v0, 0xc8
 
-    invoke-static {v0}, Lcom/zjx/jyandroid/base/util/b$i;->c(I)I
+    invoke-static {v0}, Lmdm/TabletScale;->dpx(I)I
 
     move-result v0
 
@@ -130,7 +130,7 @@
 
     const/16 v0, 0x64
 
-    invoke-static {v0}, Lcom/zjx/jyandroid/base/util/b$i;->c(I)I
+    invoke-static {v0}, Lmdm/TabletScale;->dpx(I)I
 
     move-result v0
 

@@ -58,6 +58,51 @@
     return p0
 .end method
 
+.method public static dpx(I)I
+    .registers 4
+
+    .line 41
+    invoke-static {}, Landroid/content/res/Resources;->getSystem()Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    .line 42
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration;
+
+    move-result-object v1
+
+    iget v1, v1, Landroid/content/res/Configuration;->smallestScreenWidthDp:I
+
+    const/16 v2, 0x258
+
+    if-lt v1, v2, :cond_12
+
+    const v1, 0x3fa66666    # 1.3f
+
+    goto :goto_14
+
+    :cond_12
+    const/high16 v1, 0x3f800000    # 1.0f
+
+    .line 43
+    :goto_14
+    int-to-float p0, p0
+
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+
+    move-result-object v0
+
+    iget v0, v0, Landroid/util/DisplayMetrics;->density:F
+
+    mul-float/2addr p0, v0
+
+    mul-float/2addr p0, v1
+
+    float-to-int p0, p0
+
+    return p0
+.end method
+
 .method public static factor(Landroid/content/Context;)F
     .registers 2
 

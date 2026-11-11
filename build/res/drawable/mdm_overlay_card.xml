@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MDM in-game panel: thin warm rim + near-black fill, a little translucent over the game. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item><shape android:shape="rectangle"><corners android:radius="14dp" /><gradient android:type="linear" android:angle="315" android:startColor="#66E8D3A4" android:centerColor="#14FFFFFF" android:endColor="#4DE8D3A4" /></shape></item>
+    <item android:left="1dp" android:top="1dp" android:right="1dp" android:bottom="1dp"><shape android:shape="rectangle"><corners android:radius="13dp" /><solid android:color="#F014120F" /></shape></item>
+</layer-list>

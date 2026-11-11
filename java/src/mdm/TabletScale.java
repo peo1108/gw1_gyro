@@ -32,4 +32,14 @@ public final class TabletScale {
     public static float sp(float v) {
         return v * k;
     }
+
+    /**
+     * Drop-in for gg1's {@code b$i.c(int)} (dp -> px with the app density) for overlay windows whose
+     * size is fixed in code: same result on phones, x1.3 on tablets so the scaled layout fits.
+     */
+    public static int dpx(int dp) {
+        Resources r = Resources.getSystem();
+        float f = r.getConfiguration().smallestScreenWidthDp >= 600 ? TABLET : 1f;
+        return (int) (dp * r.getDisplayMetrics().density * f);
+    }
 }

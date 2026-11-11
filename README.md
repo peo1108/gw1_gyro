@@ -2,7 +2,7 @@
 
 Bản mod của gg1 (`com.zx.yxt` v1.8.41) cho khách: thêm gyro ghìm tâm qua module Zygisk `sensor_cal`,
 giao diện MDM (đen + vàng champagne), nhận diện súng/phụ kiện cập nhật từ gg2.
-Bản mới nhất: **m36**, file `out/MDM_m36-release.apk` (menu nổi to hơn trên tablet).
+Bản mới nhất: **m37**, file `out/MDM_m37-release.apk` (trang chính 2 cột khi màn ngang, làm lại 2 bảng nổi).
 
 ## Cấu trúc
 
@@ -139,6 +139,22 @@ python scripts/mdm_ui/mdm_tablet.py build --list   # chỉ in danh sách
 - Bảng ghìm tâm x1…x8 dựng bằng code: smali `RcParamsView` gọi `mdm.TabletScale.density()` / `sp()`
   (cùng ngưỡng 600dp). **`java/src/mdm/RcParamsView.java` cũ hơn smali đang chạy** (thiếu 6 lớp
   ẩn danh, APK m35 dùng bản smali) — đừng biên dịch lại từ file Java đó, vá smali.
+
+## Màn ngang 2 cột + làm lại 2 bảng nổi (m37)
+
+- `python scripts/mdm_ui/mdm_land.py build` sinh `res/layout-w720dp-v13/{main_page_view,settings_page_view}.xml`:
+  màn rộng ≥ 720dp (tablet ngang/dọc, điện thoại xoay ngang) chia 2 cột, cột trái rộng `@dimen/mdm_side_w`
+  (300dip điện thoại, 380dip tablet). Điện thoại dọc vẫn dùng bản 1 cột trong `res/layout/`. Sửa hai trang này ở
+  `res/layout/` rồi chạy lại script.
+- Cỡ tablet (`values-sw600dp-v13/mdm_screen.xml`) thu lại: tiêu đề 24sp, logo 96dip, hàng 52dip.
+- Bảng "Điều chỉnh giá trị" (`pubg_adjust_rc_value_panel_view` + `_base_view`) và bảng vùng nhận dạng AI
+  (`pubg_map_panel_view`) vẽ lại kiểu MDM (thẻ `mdm_overlay_card`, nút pill, D-pad `mdm_dpad_*`, nút đóng
+  `mdm_close_sm`), giữ nguyên mọi id. Chữ "展开/折叠" trong `PubgMapPanelView.smali` → "Mở rộng/Thu gọn".
+- Cửa sổ "Điều chỉnh giá trị" có cỡ cứng trong code (200×100, trang Hệ số 400×180 dp): `pubg/d.smali` và
+  `AdjustRCValueFloatingPanelView$a.smali` gọi `mdm.TabletScale.dpx()` thay `b$i.c()` để cửa sổ to theo
+  layout x1.3 trên tablet (m36 bị tràn/cắt vì thiếu chỗ này).
+- Sau khi sửa layout overlay luôn chạy lại `mdm_tablet.py` để bản tablet cập nhật.
+- Smali gốc dùng CRLF: script vá phải giữ nguyên kiểu xuống dòng, nếu không diff thành cả file.
 
 ## Máy khách cần
 

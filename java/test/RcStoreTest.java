@@ -161,6 +161,20 @@ public class RcStoreTest {
         check(val(rec(c, 23, 1, 0)) == 20, "syncFromAlias: unrelated scope untouched");
     }
 
+    @SuppressWarnings("unchecked")
+    static void syncFromRealSlot() {
+        Map<String, Object> c = oldContent(77);
+        RcStore.makeDefault(c);
+        Map<String, Object> real = rec(c, 22, 5, 2);
+        ((List<Object>) ((List<Object>) real.get("recoilValue")).get(0)).set(1, 33.0);
+        RcStore.syncAliases(v(c, 22), real);
+        check(val(rec(c, 22, 7, 2)) == 33, "syncFromRealSlot: x6.3 follows x6");
+        Map<String, Object> x1 = rec(c, 22, 1, 0);
+        ((List<Object>) ((List<Object>) x1.get("recoilValue")).get(0)).set(1, 21.0);
+        RcStore.syncAliases(v(c, 22), x1);
+        check(val(rec(c, 22, 9, 0)) == 21 && val(rec(c, 22, 10, 0)) == 21, "syncFromRealSlot: tactic scopes follow x1");
+    }
+
     static void oldFormatNotV2() {
         check(!RcStore.isV2(oldContent(77)), "oldFormatNotV2: old content is not v2");
         Map<String, Object> c = oldContent(77);
@@ -189,6 +203,7 @@ public class RcStoreTest {
         setWritesAliases();
         setClamps();
         syncFromAlias();
+        syncFromRealSlot();
         oldFormatNotV2();
         scopesPerWeapon();
         if (failures > 0) {

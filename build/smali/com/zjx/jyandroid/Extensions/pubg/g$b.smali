@@ -336,6 +336,12 @@
 
     invoke-static {p1, v0}, Lmdm/RcStore;->syncAliases(Ljava/util/List;Ljava/util/Map;)V
 
+    iget-object p1, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->e:Lcom/zjx/jyandroid/Extensions/pubg/g;
+
+    iget-object v0, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->b:Lcom/zjx/jyandroid/Extensions/pubg/g$f;
+
+    invoke-static {p1, v0}, Lmdm/RcEngine;->markAliasesDirty(Ljava/lang/Object;Ljava/lang/Object;)I
+
     iget-object p1, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->b:Lcom/zjx/jyandroid/Extensions/pubg/g$f;
 
     invoke-virtual {p1}, Lcom/zjx/jyandroid/Extensions/pubg/g$f;->e()V

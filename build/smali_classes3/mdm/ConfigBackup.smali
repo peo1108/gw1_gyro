@@ -11,7 +11,7 @@
 .method static constructor <clinit>()V
     .registers 2
 
-    .line 36
+    .line 37
     new-instance v0, Landroid/os/Handler;
 
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
@@ -28,7 +28,7 @@
 .method private constructor <init>()V
     .registers 1
 
-    .line 38
+    .line 39
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -42,7 +42,7 @@
         }
     .end annotation
 
-    .line 154
+    .line 158
     if-eqz p2, :cond_54
 
     invoke-virtual {p2}, Ljava/io/File;->exists()Z
@@ -59,18 +59,18 @@
 
     goto :goto_54
 
-    .line 155
+    .line 159
     :cond_f
     invoke-virtual {p2}, Ljava/io/File;->listFiles()[Ljava/io/File;
 
     move-result-object p2
 
-    .line 156
+    .line 160
     if-nez p2, :cond_16
 
     return-void
 
-    .line 157
+    .line 161
     :cond_16
     array-length v0, p2
 
@@ -81,7 +81,7 @@
 
     aget-object v2, p2, v1
 
-    .line 158
+    .line 162
     invoke-virtual {v2}, Ljava/io/File;->isFile()Z
 
     move-result v3
@@ -104,7 +104,7 @@
 
     if-eqz v3, :cond_50
 
-    .line 159
+    .line 163
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -133,17 +133,17 @@
 
     invoke-static {p0, v3, v2}, Lmdm/ConfigBackup;->writeEntry(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
 
-    .line 157
+    .line 161
     :cond_50
     add-int/lit8 v1, v1, 0x1
 
     goto :goto_18
 
-    .line 162
+    .line 166
     :cond_53
     return-void
 
-    .line 154
+    .line 158
     :cond_54
     :goto_54
     return-void
@@ -157,7 +157,7 @@
         }
     .end annotation
 
-    .line 133
+    .line 137
     if-eqz p2, :cond_82
 
     invoke-virtual {p2}, Ljava/io/File;->exists()Z
@@ -174,16 +174,16 @@
 
     goto/16 :goto_82
 
-    .line 134
+    .line 138
     :cond_10
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
-    .line 135
+    .line 139
     invoke-virtual {v0, p2}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
-    .line 136
+    .line 140
     invoke-virtual {p2}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
 
     move-result-object p2
@@ -192,7 +192,7 @@
 
     move-result p2
 
-    .line 137
+    .line 141
     :goto_20
     invoke-virtual {v0}, Ljava/util/ArrayList;->isEmpty()Z
 
@@ -200,7 +200,7 @@
 
     if-nez v1, :cond_81
 
-    .line 138
+    .line 142
     invoke-virtual {v0}, Ljava/util/ArrayList;->size()I
 
     move-result v1
@@ -215,17 +215,17 @@
 
     check-cast v1, Ljava/io/File;
 
-    .line 139
+    .line 143
     invoke-virtual {v1}, Ljava/io/File;->listFiles()[Ljava/io/File;
 
     move-result-object v1
 
-    .line 140
+    .line 144
     if-nez v1, :cond_39
 
     goto :goto_20
 
-    .line 141
+    .line 145
     :cond_39
     array-length v3, v1
 
@@ -236,19 +236,19 @@
 
     aget-object v5, v1, v4
 
-    .line 142
+    .line 146
     invoke-virtual {v5}, Ljava/io/File;->isDirectory()Z
 
     move-result v6
 
     if-eqz v6, :cond_49
 
-    .line 143
+    .line 147
     invoke-virtual {v0, v5}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
 
     goto :goto_7d
 
-    .line 145
+    .line 149
     :cond_49
     invoke-virtual {v5}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
 
@@ -266,7 +266,7 @@
 
     move-result-object v6
 
-    .line 146
+    .line 150
     const-string v7, "/"
 
     invoke-virtual {v6, v7}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
@@ -279,7 +279,7 @@
 
     move-result-object v6
 
-    .line 147
+    .line 151
     :cond_65
     new-instance v8, Ljava/lang/StringBuilder;
 
@@ -303,21 +303,21 @@
 
     invoke-static {p0, v6, v5}, Lmdm/ConfigBackup;->writeEntry(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
 
-    .line 141
+    .line 145
     :goto_7d
     add-int/lit8 v4, v4, 0x1
 
     goto :goto_3b
 
-    .line 150
+    .line 154
     :cond_80
     goto :goto_20
 
-    .line 151
+    .line 155
     :cond_81
     return-void
 
-    .line 133
+    .line 137
     :cond_82
     :goto_82
     return-void
@@ -326,12 +326,12 @@
 .method static backupFolder()Ljava/io/File;
     .registers 3
 
-    .line 59
+    .line 62
     invoke-static {}, Lmdm/ConfigBackup;->docFolder()Ljava/io/File;
 
     move-result-object v0
 
-    .line 60
+    .line 63
     const-string v1, "MDM"
 
     if-nez v0, :cond_16
@@ -357,7 +357,7 @@
 
     move-object v0, v2
 
-    .line 61
+    .line 64
     :goto_1c
     invoke-virtual {v0}, Ljava/io/File;->exists()Z
 
@@ -367,7 +367,7 @@
 
     invoke-virtual {v0}, Ljava/io/File;->mkdirs()Z
 
-    .line 62
+    .line 65
     :cond_25
     return-object v0
 .end method
@@ -380,12 +380,12 @@
         }
     .end annotation
 
-    .line 211
+    .line 227
     const/16 v0, 0x2000
 
     new-array v0, v0, [B
 
-    .line 213
+    .line 229
     :goto_4
     invoke-virtual {p0, v0}, Ljava/io/InputStream;->read([B)I
 
@@ -399,7 +399,7 @@
 
     goto :goto_4
 
-    .line 214
+    .line 230
     :cond_f
     return-void
 .end method
@@ -407,12 +407,12 @@
 .method static docFolder()Ljava/io/File;
     .registers 2
 
-    .line 44
+    .line 45
     invoke-static {}, Lcom/zjx/jyandroid/App;->getAppDocumentFolder()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 45
+    .line 46
     if-nez v0, :cond_8
 
     const/4 v0, 0x0
@@ -433,13 +433,13 @@
 .method public static exportAll()Ljava/lang/String;
     .registers 6
 
-    .line 78
-    nop
-
-    .line 79
-    nop
-
     .line 81
+    nop
+
+    .line 82
+    nop
+
+    .line 84
     const/4 v0, 0x0
 
     :try_start_3
@@ -479,7 +479,7 @@
 
     invoke-direct {v1, v2, v3}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
 
-    .line 82
+    .line 85
     new-instance v2, Ljava/util/zip/ZipOutputStream;
 
     new-instance v3, Ljava/io/FileOutputStream;
@@ -488,9 +488,9 @@
 
     invoke-direct {v2, v3}, Ljava/util/zip/ZipOutputStream;-><init>(Ljava/io/OutputStream;)V
     :try_end_33
-    .catchall {:try_start_3 .. :try_end_33} :catchall_7d
+    .catchall {:try_start_3 .. :try_end_33} :catchall_86
 
-    .line 84
+    .line 87
     :try_start_33
     const-string v3, "keymaps"
 
@@ -500,7 +500,7 @@
 
     invoke-static {v2, v3, v4}, Lmdm/ConfigBackup;->addTree(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
 
-    .line 85
+    .line 88
     const-string v3, "generalrc"
 
     invoke-static {}, Lmdm/ConfigBackup;->generalRcDir()Ljava/io/File;
@@ -509,7 +509,7 @@
 
     invoke-static {v2, v3, v4}, Lmdm/ConfigBackup;->addTree(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
 
-    .line 86
+    .line 89
     const-string v3, "gnyx"
 
     invoke-static {}, Lmdm/ConfigBackup;->gnyxRcDir()Ljava/io/File;
@@ -518,7 +518,16 @@
 
     invoke-static {v2, v3, v4}, Lmdm/ConfigBackup;->addTree(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
 
-    .line 87
+    .line 90
+    const-string v3, "pubgrc"
+
+    invoke-static {}, Lmdm/ConfigBackup;->pubgRcDir()Ljava/io/File;
+
+    move-result-object v4
+
+    invoke-static {v2, v3, v4}, Lmdm/ConfigBackup;->addTree(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
+
+    .line 91
     const-string v3, "prefs"
 
     invoke-static {}, Lmdm/ConfigBackup;->sharedPrefsDir()Ljava/io/File;
@@ -527,16 +536,16 @@
 
     invoke-static {v2, v3, v4}, Lmdm/ConfigBackup;->addPrefs(Ljava/util/zip/ZipOutputStream;Ljava/lang/String;Ljava/io/File;)V
 
-    .line 89
+    .line 93
     invoke-virtual {v2}, Ljava/util/zip/ZipOutputStream;->close()V
-    :try_end_5a
-    .catchall {:try_start_33 .. :try_end_5a} :catchall_7b
+    :try_end_63
+    .catchall {:try_start_33 .. :try_end_63} :catchall_84
 
-    .line 90
+    .line 94
     nop
 
-    .line 91
-    :try_start_5b
+    .line 95
+    :try_start_64
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
@@ -561,33 +570,33 @@
 
     invoke-static {v2}, Lmdm/ConfigBackup;->toast(Ljava/lang/String;)V
 
-    .line 92
+    .line 96
     invoke-virtual {v1}, Ljava/io/File;->getAbsolutePath()Ljava/lang/String;
 
     move-result-object v0
-    :try_end_79
-    .catchall {:try_start_5b .. :try_end_79} :catchall_7d
+    :try_end_82
+    .catchall {:try_start_64 .. :try_end_82} :catchall_86
 
-    .line 97
+    .line 101
     nop
 
-    .line 92
+    .line 96
     return-object v0
 
-    .line 93
-    :catchall_7b
+    .line 97
+    :catchall_84
     move-exception v1
 
-    goto :goto_7f
+    goto :goto_88
 
-    :catchall_7d
+    :catchall_86
     move-exception v1
 
     move-object v2, v0
 
-    .line 94
-    :goto_7f
-    :try_start_7f
+    .line 98
+    :goto_88
+    :try_start_88
     new-instance v3, Ljava/lang/StringBuilder;
 
     invoke-direct {v3}, Ljava/lang/StringBuilder;-><init>()V
@@ -607,34 +616,13 @@
     move-result-object v1
 
     invoke-static {v1}, Lmdm/ConfigBackup;->toast(Ljava/lang/String;)V
-    :try_end_95
-    .catchall {:try_start_7f .. :try_end_95} :catchall_9e
+    :try_end_9e
+    .catchall {:try_start_88 .. :try_end_9e} :catchall_a7
 
-    .line 95
+    .line 99
     nop
 
-    .line 97
-    if-eqz v2, :cond_9d
-
-    :try_start_98
-    invoke-virtual {v2}, Ljava/util/zip/ZipOutputStream;->close()V
-    :try_end_9b
-    .catchall {:try_start_98 .. :try_end_9b} :catchall_9c
-
-    goto :goto_9d
-
-    :catchall_9c
-    move-exception v1
-
-    .line 95
-    :cond_9d
-    :goto_9d
-    return-object v0
-
-    .line 97
-    :catchall_9e
-    move-exception v0
-
+    .line 101
     if-eqz v2, :cond_a6
 
     :try_start_a1
@@ -647,16 +635,37 @@
     :catchall_a5
     move-exception v1
 
-    .line 98
+    .line 99
     :cond_a6
     :goto_a6
+    return-object v0
+
+    .line 101
+    :catchall_a7
+    move-exception v0
+
+    if-eqz v2, :cond_af
+
+    :try_start_aa
+    invoke-virtual {v2}, Ljava/util/zip/ZipOutputStream;->close()V
+    :try_end_ad
+    .catchall {:try_start_aa .. :try_end_ad} :catchall_ae
+
+    goto :goto_af
+
+    :catchall_ae
+    move-exception v1
+
+    .line 102
+    :cond_af
+    :goto_af
     throw v0
 .end method
 
 .method static generalRcDir()Ljava/io/File;
     .registers 3
 
-    .line 48
+    .line 49
     invoke-static {}, Lmdm/ConfigBackup;->docFolder()Ljava/io/File;
 
     move-result-object v0
@@ -683,7 +692,7 @@
 .method static gnyxRcDir()Ljava/io/File;
     .registers 3
 
-    .line 50
+    .line 53
     invoke-static {}, Lmdm/ConfigBackup;->docFolder()Ljava/io/File;
 
     move-result-object v0
@@ -708,52 +717,64 @@
 .end method
 
 .method static importFrom(Ljava/io/File;)V
-    .registers 5
+    .registers 6
     .annotation system Ldalvik/annotation/Throws;
         value = {
             Ljava/lang/Exception;
         }
     .end annotation
 
-    .line 178
+    .line 182
     nop
 
-    .line 180
-    const/4 v0, 0x0
+    .line 183
+    new-instance v0, Ljava/util/ArrayList;
 
-    :try_start_2
-    new-instance v1, Ljava/util/zip/ZipInputStream;
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
-    new-instance v2, Ljava/io/FileInputStream;
+    .line 185
+    const/4 v1, 0x0
 
-    invoke-direct {v2, p0}, Ljava/io/FileInputStream;-><init>(Ljava/io/File;)V
+    :try_start_7
+    new-instance v2, Ljava/util/zip/ZipInputStream;
 
-    invoke-direct {v1, v2}, Ljava/util/zip/ZipInputStream;-><init>(Ljava/io/InputStream;)V
-    :try_end_c
-    .catchall {:try_start_2 .. :try_end_c} :catchall_5d
+    new-instance v3, Ljava/io/FileInputStream;
 
-    .line 182
-    :goto_c
-    :try_start_c
-    invoke-virtual {v1}, Ljava/util/zip/ZipInputStream;->getNextEntry()Ljava/util/zip/ZipEntry;
+    invoke-direct {v3, p0}, Ljava/io/FileInputStream;-><init>(Ljava/io/File;)V
+
+    invoke-direct {v2, v3}, Ljava/util/zip/ZipInputStream;-><init>(Ljava/io/InputStream;)V
+    :try_end_11
+    .catchall {:try_start_7 .. :try_end_11} :catchall_a3
+
+    .line 187
+    :goto_11
+    :try_start_11
+    invoke-virtual {v2}, Ljava/util/zip/ZipInputStream;->getNextEntry()Ljava/util/zip/ZipEntry;
 
     move-result-object p0
 
-    if-eqz p0, :cond_54
+    if-eqz p0, :cond_75
 
-    .line 183
+    .line 188
     invoke-virtual {p0}, Ljava/util/zip/ZipEntry;->isDirectory()Z
 
-    move-result v2
+    move-result v3
 
-    if-eqz v2, :cond_1c
+    if-eqz v3, :cond_21
 
-    invoke-virtual {v1}, Ljava/util/zip/ZipInputStream;->closeEntry()V
+    invoke-virtual {v2}, Ljava/util/zip/ZipInputStream;->closeEntry()V
 
-    goto :goto_c
+    goto :goto_11
 
-    .line 184
-    :cond_1c
+    .line 189
+    :cond_21
+    invoke-virtual {p0}, Ljava/util/zip/ZipEntry;->getName()Ljava/lang/String;
+
+    move-result-object v3
+
+    invoke-virtual {v0, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    .line 190
     invoke-virtual {p0}, Ljava/util/zip/ZipEntry;->getName()Ljava/lang/String;
 
     move-result-object p0
@@ -762,154 +783,228 @@
 
     move-result-object p0
 
-    .line 185
-    if-eqz p0, :cond_50
+    .line 192
+    if-eqz p0, :cond_45
 
-    .line 186
-    invoke-virtual {p0}, Ljava/io/File;->getParentFile()Ljava/io/File;
+    invoke-virtual {p0}, Ljava/io/File;->getName()Ljava/lang/String;
 
-    move-result-object v2
+    move-result-object v3
 
-    .line 187
-    if-eqz v2, :cond_35
+    const-string v4, ".v1.bak.json"
 
-    invoke-virtual {v2}, Ljava/io/File;->exists()Z
+    invoke-virtual {v3, v4}, Ljava/lang/String;->endsWith(Ljava/lang/String;)Z
 
     move-result v3
 
-    if-nez v3, :cond_35
+    if-eqz v3, :cond_45
 
-    invoke-virtual {v2}, Ljava/io/File;->mkdirs()Z
-    :try_end_35
-    .catchall {:try_start_c .. :try_end_35} :catchall_5a
+    invoke-virtual {p0}, Ljava/io/File;->exists()Z
 
-    .line 188
-    :cond_35
-    nop
+    move-result v3
 
-    .line 189
-    :try_start_36
-    new-instance v2, Ljava/io/FileOutputStream;
+    if-eqz v3, :cond_45
 
-    invoke-direct {v2, p0}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;)V
-    :try_end_3b
-    .catchall {:try_start_36 .. :try_end_3b} :catchall_47
-
-    :try_start_3b
-    invoke-static {v1, v2}, Lmdm/ConfigBackup;->copy(Ljava/io/InputStream;Ljava/io/OutputStream;)V
-    :try_end_3e
-    .catchall {:try_start_3b .. :try_end_3e} :catchall_44
-
-    .line 190
-    :try_start_3e
-    invoke-virtual {v2}, Ljava/io/FileOutputStream;->close()V
-    :try_end_41
-    .catchall {:try_start_3e .. :try_end_41} :catchall_42
-
-    goto :goto_50
-
-    :catchall_42
-    move-exception p0
-
-    goto :goto_50
-
-    :catchall_44
-    move-exception p0
-
-    move-object v0, v2
-
-    goto :goto_48
-
-    :catchall_47
-    move-exception p0
-
-    :goto_48
-    if-eqz v0, :cond_4f
-
-    :try_start_4a
-    invoke-virtual {v0}, Ljava/io/FileOutputStream;->close()V
-    :try_end_4d
-    .catchall {:try_start_4a .. :try_end_4d} :catchall_4e
-
-    goto :goto_4f
-
-    :catchall_4e
-    move-exception v0
-
-    :cond_4f
-    :goto_4f
-    :try_start_4f
-    throw p0
-
-    .line 192
-    :cond_50
-    :goto_50
-    invoke-virtual {v1}, Ljava/util/zip/ZipInputStream;->closeEntry()V
-    :try_end_53
-    .catchall {:try_start_4f .. :try_end_53} :catchall_5a
+    move-object p0, v1
 
     .line 193
-    goto :goto_c
+    :cond_45
+    if-eqz p0, :cond_71
+
+    .line 194
+    invoke-virtual {p0}, Ljava/io/File;->getParentFile()Ljava/io/File;
+
+    move-result-object v3
 
     .line 195
-    :cond_54
-    :try_start_54
-    invoke-virtual {v1}, Ljava/util/zip/ZipInputStream;->close()V
-    :try_end_57
-    .catchall {:try_start_54 .. :try_end_57} :catchall_58
+    if-eqz v3, :cond_56
 
-    goto :goto_59
+    invoke-virtual {v3}, Ljava/io/File;->exists()Z
 
-    :catchall_58
-    move-exception p0
+    move-result v4
 
-    .line 197
-    :goto_59
-    return-void
+    if-nez v4, :cond_56
 
-    .line 195
-    :catchall_5a
-    move-exception p0
-
-    move-object v0, v1
-
-    goto :goto_5e
-
-    :catchall_5d
-    move-exception p0
-
-    :goto_5e
-    if-eqz v0, :cond_65
-
-    :try_start_60
-    invoke-virtual {v0}, Ljava/util/zip/ZipInputStream;->close()V
-    :try_end_63
-    .catchall {:try_start_60 .. :try_end_63} :catchall_64
-
-    goto :goto_65
-
-    :catchall_64
-    move-exception v0
+    invoke-virtual {v3}, Ljava/io/File;->mkdirs()Z
+    :try_end_56
+    .catchall {:try_start_11 .. :try_end_56} :catchall_a0
 
     .line 196
-    :cond_65
-    :goto_65
+    :cond_56
+    nop
+
+    .line 197
+    :try_start_57
+    new-instance v3, Ljava/io/FileOutputStream;
+
+    invoke-direct {v3, p0}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;)V
+    :try_end_5c
+    .catchall {:try_start_57 .. :try_end_5c} :catchall_68
+
+    :try_start_5c
+    invoke-static {v2, v3}, Lmdm/ConfigBackup;->copy(Ljava/io/InputStream;Ljava/io/OutputStream;)V
+    :try_end_5f
+    .catchall {:try_start_5c .. :try_end_5f} :catchall_65
+
+    .line 198
+    :try_start_5f
+    invoke-virtual {v3}, Ljava/io/FileOutputStream;->close()V
+    :try_end_62
+    .catchall {:try_start_5f .. :try_end_62} :catchall_63
+
+    goto :goto_71
+
+    :catchall_63
+    move-exception p0
+
+    goto :goto_71
+
+    :catchall_65
+    move-exception p0
+
+    move-object v1, v3
+
+    goto :goto_69
+
+    :catchall_68
+    move-exception p0
+
+    :goto_69
+    if-eqz v1, :cond_70
+
+    :try_start_6b
+    invoke-virtual {v1}, Ljava/io/FileOutputStream;->close()V
+    :try_end_6e
+    .catchall {:try_start_6b .. :try_end_6e} :catchall_6f
+
+    goto :goto_70
+
+    :catchall_6f
+    move-exception v0
+
+    :cond_70
+    :goto_70
+    :try_start_70
+    throw p0
+
+    .line 200
+    :cond_71
+    :goto_71
+    invoke-virtual {v2}, Ljava/util/zip/ZipInputStream;->closeEntry()V
+    :try_end_74
+    .catchall {:try_start_70 .. :try_end_74} :catchall_a0
+
+    .line 201
+    goto :goto_11
+
+    .line 203
+    :cond_75
+    :try_start_75
+    invoke-virtual {v2}, Ljava/util/zip/ZipInputStream;->close()V
+    :try_end_78
+    .catchall {:try_start_75 .. :try_end_78} :catchall_79
+
+    goto :goto_7a
+
+    :catchall_79
+    move-exception p0
+
+    .line 206
+    :goto_7a
+    invoke-static {}, Lmdm/ConfigBackup;->pubgRcDir()Ljava/io/File;
+
+    move-result-object p0
+
+    .line 207
+    if-eqz p0, :cond_9f
+
+    .line 208
+    invoke-static {v0}, Lmdm/RcStore;->staleLiveIds(Ljava/util/Collection;)Ljava/util/List;
+
+    move-result-object v0
+
+    invoke-interface {v0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v0
+
+    :goto_88
+    invoke-interface {v0}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_9f
+
+    invoke-interface {v0}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v1
+
+    check-cast v1, Ljava/lang/String;
+
+    .line 209
+    :try_start_94
+    new-instance v2, Ljava/io/File;
+
+    invoke-direct {v2, p0, v1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    invoke-virtual {v2}, Ljava/io/File;->delete()Z
+    :try_end_9c
+    .catchall {:try_start_94 .. :try_end_9c} :catchall_9d
+
+    goto :goto_9e
+
+    :catchall_9d
+    move-exception v1
+
+    .line 210
+    :goto_9e
+    goto :goto_88
+
+    .line 212
+    :cond_9f
+    return-void
+
+    .line 203
+    :catchall_a0
+    move-exception p0
+
+    move-object v1, v2
+
+    goto :goto_a4
+
+    :catchall_a3
+    move-exception p0
+
+    :goto_a4
+    if-eqz v1, :cond_ab
+
+    :try_start_a6
+    invoke-virtual {v1}, Ljava/util/zip/ZipInputStream;->close()V
+    :try_end_a9
+    .catchall {:try_start_a6 .. :try_end_a9} :catchall_aa
+
+    goto :goto_ab
+
+    :catchall_aa
+    move-exception v0
+
+    .line 204
+    :cond_ab
+    :goto_ab
     throw p0
 .end method
 
 .method public static importLatestAndRestart()V
     .registers 4
 
-    .line 104
+    .line 108
     :try_start_0
     invoke-static {}, Lmdm/ConfigBackup;->newestBackup()Ljava/io/File;
 
     move-result-object v0
 
-    .line 105
+    .line 109
     if-nez v0, :cond_25
 
-    .line 106
+    .line 110
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
@@ -938,14 +1033,14 @@
 
     invoke-static {v0}, Lmdm/ConfigBackup;->toast(Ljava/lang/String;)V
 
-    .line 107
+    .line 111
     return-void
 
-    .line 109
+    .line 113
     :cond_25
     invoke-static {v0}, Lmdm/ConfigBackup;->importFrom(Ljava/io/File;)V
 
-    .line 110
+    .line 114
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -976,7 +1071,7 @@
 
     invoke-static {v0}, Lmdm/ConfigBackup;->toast(Ljava/lang/String;)V
 
-    .line 111
+    .line 115
     sget-object v0, Lmdm/ConfigBackup;->MAIN:Landroid/os/Handler;
 
     new-instance v1, Lmdm/ConfigBackup$2;
@@ -989,14 +1084,14 @@
     :try_end_54
     .catchall {:try_start_0 .. :try_end_54} :catchall_55
 
-    .line 114
+    .line 118
     goto :goto_6c
 
-    .line 112
+    .line 116
     :catchall_55
     move-exception v0
 
-    .line 113
+    .line 117
     new-instance v1, Ljava/lang/StringBuilder;
 
     invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
@@ -1017,7 +1112,7 @@
 
     invoke-static {v0}, Lmdm/ConfigBackup;->toast(Ljava/lang/String;)V
 
-    .line 115
+    .line 119
     :goto_6c
     return-void
 .end method
@@ -1025,7 +1120,7 @@
 .method static keymapsDir()Ljava/io/File;
     .registers 3
 
-    .line 41
+    .line 42
     new-instance v0, Ljava/io/File;
 
     invoke-static {}, Lcom/zjx/jyandroid/App;->getContext()Landroid/content/Context;
@@ -1046,25 +1141,25 @@
 .method static newestBackup()Ljava/io/File;
     .registers 9
 
-    .line 118
+    .line 122
     invoke-static {}, Lmdm/ConfigBackup;->backupFolder()Ljava/io/File;
 
     move-result-object v0
 
-    .line 119
+    .line 123
     invoke-virtual {v0}, Ljava/io/File;->listFiles()[Ljava/io/File;
 
     move-result-object v0
 
-    .line 120
+    .line 124
     nop
 
-    .line 121
+    .line 125
     const/4 v1, 0x0
 
     if-eqz v0, :cond_3a
 
-    .line 122
+    .line 126
     array-length v2, v0
 
     const/4 v3, 0x0
@@ -1074,7 +1169,7 @@
 
     aget-object v4, v0, v3
 
-    .line 123
+    .line 127
     invoke-virtual {v4}, Ljava/io/File;->isFile()Z
 
     move-result v5
@@ -1097,7 +1192,7 @@
 
     if-eqz v5, :cond_37
 
-    .line 124
+    .line 128
     if-eqz v1, :cond_36
 
     invoke-virtual {v4}, Ljava/io/File;->lastModified()J
@@ -1115,27 +1210,54 @@
     :cond_36
     move-object v1, v4
 
-    .line 122
+    .line 126
     :cond_37
     add-int/lit8 v3, v3, 0x1
 
     goto :goto_e
 
-    .line 128
+    .line 132
     :cond_3a
     return-object v1
+.end method
+
+.method static pubgRcDir()Ljava/io/File;
+    .registers 3
+
+    .line 51
+    invoke-static {}, Lmdm/ConfigBackup;->docFolder()Ljava/io/File;
+
+    move-result-object v0
+
+    if-nez v0, :cond_8
+
+    const/4 v0, 0x0
+
+    goto :goto_10
+
+    :cond_8
+    new-instance v1, Ljava/io/File;
+
+    const-string v2, "pubg_extension/RCConfig"
+
+    invoke-direct {v1, v0, v2}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    move-object v0, v1
+
+    :goto_10
+    return-object v0
 .end method
 
 .method static restart()V
     .registers 3
 
-    .line 218
+    .line 234
     :try_start_0
     invoke-static {}, Lcom/zjx/jyandroid/App;->getContext()Landroid/content/Context;
 
     move-result-object v0
 
-    .line 219
+    .line 235
     invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
 
     move-result-object v1
@@ -1148,22 +1270,22 @@
 
     move-result-object v1
 
-    .line 220
+    .line 236
     if-eqz v1, :cond_1d
 
-    .line 221
+    .line 237
     const v2, 0x10008000
 
     invoke-virtual {v1, v2}, Landroid/content/Intent;->addFlags(I)Landroid/content/Intent;
 
-    .line 222
+    .line 238
     invoke-virtual {v0, v1}, Landroid/content/Context;->startActivity(Landroid/content/Intent;)V
     :try_end_1b
     .catchall {:try_start_0 .. :try_end_1b} :catchall_1c
 
     goto :goto_1d
 
-    .line 224
+    .line 240
     :catchall_1c
     move-exception v0
 
@@ -1171,7 +1293,7 @@
     :goto_1d
     nop
 
-    .line 225
+    .line 241
     invoke-static {}, Ljava/lang/Runtime;->getRuntime()Ljava/lang/Runtime;
 
     move-result-object v0
@@ -1180,14 +1302,14 @@
 
     invoke-virtual {v0, v1}, Ljava/lang/Runtime;->exit(I)V
 
-    .line 226
+    .line 242
     return-void
 .end method
 
 .method static sharedPrefsDir()Ljava/io/File;
     .registers 3
 
-    .line 53
+    .line 56
     invoke-static {}, Lcom/zjx/jyandroid/App;->getContext()Landroid/content/Context;
 
     move-result-object v0
@@ -1196,7 +1318,7 @@
 
     move-result-object v0
 
-    .line 54
+    .line 57
     const/4 v1, 0x0
 
     if-nez v0, :cond_d
@@ -1210,7 +1332,7 @@
 
     move-result-object v0
 
-    .line 55
+    .line 58
     :goto_11
     if-nez v0, :cond_14
 
@@ -1230,7 +1352,7 @@
 .method static targetFor(Ljava/lang/String;)Ljava/io/File;
     .registers 4
 
-    .line 201
+    .line 216
     const/16 v0, 0x5c
 
     const/16 v1, 0x2f
@@ -1239,7 +1361,7 @@
 
     move-result-object p0
 
-    .line 202
+    .line 217
     const-string v0, ".."
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
@@ -1252,7 +1374,7 @@
 
     return-object v1
 
-    .line 203
+    .line 218
     :cond_12
     const-string v0, "keymaps/"
 
@@ -1280,7 +1402,7 @@
 
     return-object v1
 
-    .line 204
+    .line 219
     :cond_2c
     const-string v0, "generalrc/"
 
@@ -1314,7 +1436,7 @@
     :goto_48
     return-object v1
 
-    .line 205
+    .line 220
     :cond_49
     const-string v0, "gnyx/"
 
@@ -1348,9 +1470,9 @@
     :goto_65
     return-object v1
 
-    .line 206
+    .line 221
     :cond_66
-    const-string v0, "prefs/"
+    const-string v0, "pubgrc/"
 
     invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
 
@@ -1358,7 +1480,7 @@
 
     if-eqz v2, :cond_83
 
-    invoke-static {}, Lmdm/ConfigBackup;->sharedPrefsDir()Ljava/io/File;
+    invoke-static {}, Lmdm/ConfigBackup;->pubgRcDir()Ljava/io/File;
 
     move-result-object v2
 
@@ -1382,15 +1504,49 @@
     :goto_82
     return-object v1
 
-    .line 207
+    .line 222
     :cond_83
+    const-string v0, "prefs/"
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_a0
+
+    invoke-static {}, Lmdm/ConfigBackup;->sharedPrefsDir()Ljava/io/File;
+
+    move-result-object v2
+
+    if-nez v2, :cond_92
+
+    goto :goto_9f
+
+    :cond_92
+    new-instance v1, Ljava/io/File;
+
+    invoke-virtual {v0}, Ljava/lang/String;->length()I
+
+    move-result v0
+
+    invoke-virtual {p0, v0}, Ljava/lang/String;->substring(I)Ljava/lang/String;
+
+    move-result-object p0
+
+    invoke-direct {v1, v2, p0}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    :goto_9f
+    return-object v1
+
+    .line 223
+    :cond_a0
     return-object v1
 .end method
 
 .method static toast(Ljava/lang/String;)V
     .registers 3
 
-    .line 67
+    .line 70
     sget-object v0, Lmdm/ConfigBackup;->MAIN:Landroid/os/Handler;
 
     new-instance v1, Lmdm/ConfigBackup$1;
@@ -1399,7 +1555,7 @@
 
     invoke-virtual {v0, v1}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    .line 72
+    .line 75
     return-void
 .end method
 
@@ -1411,10 +1567,10 @@
         }
     .end annotation
 
-    .line 165
+    .line 169
     nop
 
-    .line 167
+    .line 171
     const/4 v0, 0x0
 
     :try_start_2
@@ -1424,7 +1580,7 @@
     :try_end_7
     .catchall {:try_start_2 .. :try_end_7} :catchall_1e
 
-    .line 168
+    .line 172
     :try_start_7
     new-instance p2, Ljava/util/zip/ZipEntry;
 
@@ -1432,15 +1588,15 @@
 
     invoke-virtual {p0, p2}, Ljava/util/zip/ZipOutputStream;->putNextEntry(Ljava/util/zip/ZipEntry;)V
 
-    .line 169
+    .line 173
     invoke-static {v1, p0}, Lmdm/ConfigBackup;->copy(Ljava/io/InputStream;Ljava/io/OutputStream;)V
 
-    .line 170
+    .line 174
     invoke-virtual {p0}, Ljava/util/zip/ZipOutputStream;->closeEntry()V
     :try_end_15
     .catchall {:try_start_7 .. :try_end_15} :catchall_1b
 
-    .line 172
+    .line 176
     :try_start_15
     invoke-virtual {v1}, Ljava/io/FileInputStream;->close()V
     :try_end_18
@@ -1451,11 +1607,11 @@
     :catchall_19
     move-exception p0
 
-    .line 174
+    .line 178
     :goto_1a
     return-void
 
-    .line 172
+    .line 176
     :catchall_1b
     move-exception p0
 
@@ -1479,7 +1635,7 @@
     :catchall_25
     move-exception p1
 
-    .line 173
+    .line 177
     :cond_26
     :goto_26
     throw p0

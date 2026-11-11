@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 60
+    .line 59
     iput-object p1, p0, Lmdm/ParamsMenu$1;->val$ctx:Landroid/content/Context;
 
     iput-object p2, p0, Lmdm/ParamsMenu$1;->val$ext:Ljava/lang/Object;
@@ -47,7 +47,7 @@
 .method public onClick(Landroid/view/View;)V
     .registers 3
 
-    .line 62
+    .line 61
     iget-object p1, p0, Lmdm/ParamsMenu$1;->val$ctx:Landroid/content/Context;
 
     iget-object v0, p0, Lmdm/ParamsMenu$1;->val$ext:Ljava/lang/Object;
@@ -58,6 +58,6 @@
 
     invoke-static {p1, v0}, Lmdm/ParamsSheet;->openSelected(Landroid/content/Context;Lcom/zjx/jyandroid/ForegroundService/KeymapManager;)V
 
-    .line 63
+    .line 62
     return-void
 .end method

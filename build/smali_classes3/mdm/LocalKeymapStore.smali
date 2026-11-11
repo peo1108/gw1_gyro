@@ -1016,7 +1016,7 @@
 .method public static getConfigContentById(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetConfigContentByIdCompletionHandler;)V
     .registers 3
 
-    .line 566
+    .line 565
     invoke-static {p1}, Lmdm/LocalKeymapStore;->contentFile(Ljava/lang/String;)Ljava/io/File;
 
     move-result-object p0
@@ -1025,14 +1025,14 @@
 
     move-result-object p0
 
-    .line 567
+    .line 566
     new-instance p1, Lmdm/LocalKeymapStore$8;
 
     invoke-direct {p1, p2, p0}, Lmdm/LocalKeymapStore$8;-><init>(Lcom/zjx/jyandroid/ForegroundService/KeymapManager$GetConfigContentByIdCompletionHandler;Ljava/lang/String;)V
 
     invoke-static {p1}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 568
+    .line 567
     return-void
 .end method
 
@@ -2488,13 +2488,6 @@
     .line 552
     invoke-static {v0}, Lmdm/LocalKeymapStore;->saveIndex(Ljava/util/Map;)V
 
-    .line 555
-    invoke-static {v1, p1}, Lmdm/LocalKeymapStore;->rcFileExists(Ljava/lang/String;Ljava/lang/String;)Z
-
-    move-result v2
-
-    if-nez v2, :cond_2a
-
     .line 556
     invoke-static {p1}, Lmdm/LocalKeymapStore;->readContent(Ljava/lang/String;)Ljava/util/Map;
 
@@ -2507,9 +2500,15 @@
     .line 557
     if-eqz v2, :cond_2a
 
+    invoke-static {v1, p1}, Lmdm/LocalKeymapStore;->rcFileExists(Ljava/lang/String;Ljava/lang/String;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_2a
+
     invoke-static {v1, p1, v2}, Lmdm/LocalKeymapStore;->mirrorRc(Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V
 
-    .line 559
+    .line 558
     :cond_2a
     invoke-static {v0, v1}, Lmdm/LocalKeymapStore;->buildList(Ljava/util/Map;Ljava/lang/String;)Ljava/util/LinkedList;
 
@@ -2517,7 +2516,7 @@
 
     invoke-static {p0, v1, v0, p1}, Lmdm/LocalKeymapStore;->syncBundleCache(Lcom/zjx/jyandroid/ForegroundService/KeymapManager;Ljava/lang/String;Ljava/util/LinkedList;Ljava/lang/String;)V
 
-    .line 561
+    .line 560
     :cond_31
     new-instance p0, Lmdm/LocalKeymapStore$7;
 
@@ -2525,7 +2524,7 @@
 
     invoke-static {p0}, Lmdm/LocalKeymapStore;->post(Ljava/lang/Runnable;)V
 
-    .line 562
+    .line 561
     return-void
 .end method
 

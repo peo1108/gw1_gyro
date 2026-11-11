@@ -110,6 +110,28 @@ public final class RcStore {
         }
     }
 
+    // ---- backup / restore --------------------------------------------------------------------------
+
+    /**
+     * Restoring a .mdmcfg: backups made before m38 carry only our store (keymaps/content/<id>.json),
+     * not the engine's live RCConfig/<id>. Those live files would win over the restored copies
+     * (LocalKeymapStore.ensureV2 reads the engine file first), so they must be dropped for these
+     * ids. Backups that carry "pubgrc/" entries restore the live files themselves -> nothing to drop.
+     */
+    public static java.util.List<String> staleLiveIds(java.util.Collection<String> zipEntries) {
+        java.util.List<String> ids = new ArrayList<String>();
+        for (String e : zipEntries) {
+            if (e.replace('\\', '/').startsWith("pubgrc/")) return new ArrayList<String>();
+        }
+        for (String e : zipEntries) {
+            String n = e.replace('\\', '/');
+            if (!n.startsWith("keymaps/content/") || !n.endsWith(".json") || n.endsWith(".v1.bak.json")) continue;
+            String id = n.substring("keymaps/content/".length(), n.length() - ".json".length());
+            if (!id.isEmpty() && !id.contains("/") && !ids.contains(id)) ids.add(id);
+        }
+        return ids;
+    }
+
     // ---- format ----------------------------------------------------------------------------------
 
     public static boolean isV2(Map content) {

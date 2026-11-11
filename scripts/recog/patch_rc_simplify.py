@@ -5,7 +5,8 @@ docs/superpowers/specs/2026-11-11-rc-params-simplify-design.md).
   PUBGExtensionSettingsView      onDetachedFromWindow: keep saving the scope sensitivities but
                                  skip the loop that rescaled every recoilValue by the change
   g$b.e(ArrayList)               after the in-game panel edits a record, mirror it to the alias
-                                 scopes (x6.3 <-> x6 ...) via mdm.RcStore.syncAliases
+                                 scopes (x6.3 <-> x6 ...) via mdm.RcStore.syncAliases, then flag
+                                 those scopes' engine nodes for rebuild (mdm.RcEngine.markAliasesDirty)
   AdjustRCValueFloatingPanelView$c.run()
                                  after it fetches the current lookup node, call mdm.RcPanel.bind
                                  (title "weapon · stance · scope", extra buttons hidden)
@@ -43,6 +44,7 @@ DONE_IF = {
     "accessory_getter": "mdm-rc: accessory recognition removed",
     "sensitivity_no_rescale": "mdm-rc: sensitivity saved above",
     "alias_sync": "Lmdm/RcStore;->syncAliases",
+    "alias_dirty": "Lmdm/RcEngine;->markAliasesDirty",
     "panel_bind": "Lmdm/RcPanel;->bind",
     "menu_install": "Lmdm/ParamsMenu;->install",
 }
@@ -94,6 +96,16 @@ def alias_sync(t):
     return once(pat, t, lambda m: m.group(1) + ins + m.group(2), re.S)
 
 
+def alias_dirty(t):
+    # the alias records now hold the new number, but their engine nodes cache the old curve:
+    # flag them (g$f.a = true) so the running engine picks the edit up for x6.3 <-> x6 etc.
+    call = "    invoke-static {p1, v0}, Lmdm/RcStore;->syncAliases(Ljava/util/List;Ljava/util/Map;)V\n"
+    return once(re.escape(call), t,
+                call + "\n    iget-object p1, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->e:Lcom/zjx/jyandroid/Extensions/pubg/g;\n\n"
+                "    iget-object v0, p0, Lcom/zjx/jyandroid/Extensions/pubg/g$b;->b:Lcom/zjx/jyandroid/Extensions/pubg/g$f;\n\n"
+                "    invoke-static {p1, v0}, Lmdm/RcEngine;->markAliasesDirty(Ljava/lang/Object;Ljava/lang/Object;)I\n")
+
+
 def panel_bind(t):
     call = "    invoke-virtual {v0}, Lcom/zjx/jyandroid/Extensions/pubg/i;->c()Lcom/zjx/jyandroid/Extensions/pubg/g$f;\n"
     pat = re.escape(call) + r"(\s*\n)?(\s*)move-result-object (v\d+)\n"
@@ -137,6 +149,7 @@ def main():
     patch("f.smali", accessory_getter)
     patch("PUBGExtensionSettingsView.smali", sensitivity_no_rescale)
     patch("g$b.smali", alias_sync)
+    patch("g$b.smali", alias_dirty)
     if "--panel" in sys.argv:
         patch("AdjustRCValueFloatingPanelView$c.smali", panel_bind)
     if "--menu" in sys.argv:

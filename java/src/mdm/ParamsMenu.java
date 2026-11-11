@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.zjx.jyandroid.ForegroundService.KeymapManager;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -87,15 +86,15 @@ public final class ParamsMenu {
         }
     }
 
-    /** After a save: make the engine reload the config when it is the one in use. */
+    /**
+     * After a save: reload the config into the engine when it is the one in use AND the engine is
+     * running (RcEngine.reloadIfRunning checks d.G() so a paused extension is not revived). The
+     * load runs on a background executor like the engine's own AsyncTask loads.
+     */
     public static void reloadIfSelected(String id) {
         try {
             if (id == null || !id.equals(LocalKeymapStore.selectedRcId())) return;
-            Object ext = pubgExtension();
-            if (ext == null) return;
-            Field base = ext.getClass().getField("L");
-            String dir = (String) base.get(null);
-            ext.getClass().getMethod("b0", String.class).invoke(ext, dir + id);
+            RcEngine.reloadIfRunning(pubgExtension(), id, android.os.AsyncTask.THREAD_POOL_EXECUTOR);
         } catch (Throwable ignored) {
             // the new numbers still apply on the next config load
         }

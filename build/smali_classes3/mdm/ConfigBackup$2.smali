@@ -21,7 +21,7 @@
 .method constructor <init>()V
     .registers 1
 
-    .line 111
+    .line 115
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
@@ -32,7 +32,7 @@
 .method public run()V
     .registers 1
 
-    .line 111
+    .line 115
     invoke-static {}, Lmdm/ConfigBackup;->restart()V
 
     return-void

@@ -550,12 +550,11 @@ public final class LocalKeymapStore {
             Map<String, Object> bm = bundle(root, bundleId, true);
             bm.put("selected", id);
             saveIndex(root);
-            // The game reads the selected config straight from its own folder: if that file went
-            // missing, put one back instead of leaving the recognition path with nothing to load.
-            if (!rcFileExists(bundleId, id)) {
-                Map content = ensureV2(km, bundleId, id, readContent(id));
-                if (content != null) mirrorRc(bundleId, id, content);
-            }
+            // The game reads the selected config straight from its own folder and reloads it right
+            // after this call (often from cache, without listing again): convert it to mdm_v2 now,
+            // whether or not the file exists, and put the file back if it went missing.
+            Map content = ensureV2(km, bundleId, id, readContent(id));
+            if (content != null && !rcFileExists(bundleId, id)) mirrorRc(bundleId, id, content);
             syncBundleCache(km, bundleId, buildList(root, bundleId), id);
         }
         post(new Runnable() { public void run() { if (h != null) h.requestCompleted(null); } });

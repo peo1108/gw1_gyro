@@ -25,6 +25,7 @@ import java.util.zip.ZipOutputStream;
  *   keymaps/     <- getFilesDir()/mdm_keymaps/        (keymaps + pubg/gnyx recoil configs, see LocalKeymapStore)
  *   generalrc/   <- getAppDocumentFolder()/GeneralRC/RCConfig/
  *   gnyx/        <- getAppDocumentFolder()/gnyxExtension/RCConfig/
+ *   pubgrc/      <- getAppDocumentFolder()/pubg_extension/RCConfig/  (PUBG engine's live copies, m38+)
  *   prefs/       <- shared_prefs/*.xml               (includes gw2_gyro and every other app pref)
  *
  * Backups are written to getAppDocumentFolder()/MDM/backup_<timestamp>.mdmcfg .
@@ -46,6 +47,8 @@ public final class ConfigBackup {
     }
 
     static File generalRcDir() { File d = docFolder(); return d == null ? null : new File(d, "GeneralRC/RCConfig"); }
+
+    static File pubgRcDir() { File d = docFolder(); return d == null ? null : new File(d, "pubg_extension/RCConfig"); }
 
     static File gnyxRcDir() { File d = docFolder(); return d == null ? null : new File(d, "gnyxExtension/RCConfig"); }
 
@@ -84,6 +87,7 @@ public final class ConfigBackup {
             addTree(zos, "keymaps", keymapsDir());
             addTree(zos, "generalrc", generalRcDir());
             addTree(zos, "gnyx", gnyxRcDir());
+            addTree(zos, "pubgrc", pubgRcDir());
             addPrefs(zos, "prefs", sharedPrefsDir());
 
             zos.close();
@@ -176,12 +180,16 @@ public final class ConfigBackup {
     // ---------------- restore ----------------
     static void importFrom(File zip) throws Exception {
         ZipInputStream zis = null;
+        ArrayList<String> names = new ArrayList<String>();
         try {
             zis = new ZipInputStream(new FileInputStream(zip));
             ZipEntry e;
             while ((e = zis.getNextEntry()) != null) {
                 if (e.isDirectory()) { zis.closeEntry(); continue; }
+                names.add(e.getName());
                 File target = targetFor(e.getName());
+                // the pre-mdm_v2 backup of a config is written once and never replaced
+                if (target != null && target.getName().endsWith(".v1.bak.json") && target.exists()) target = null;
                 if (target != null) {
                     File parent = target.getParentFile();
                     if (parent != null && !parent.exists()) parent.mkdirs();
@@ -194,6 +202,13 @@ public final class ConfigBackup {
         } finally {
             if (zis != null) try { zis.close(); } catch (Throwable ignored) {}
         }
+        // backups without pubgrc/: the engine's live files would win over the restored copies
+        File rc = pubgRcDir();
+        if (rc != null) {
+            for (String id : RcStore.staleLiveIds(names)) {
+                try { new File(rc, id).delete(); } catch (Throwable ignored) {}
+            }
+        }
     }
 
     /** Map a zip entry path back to its real location; null = ignore (safety against path traversal). */
@@ -203,6 +218,7 @@ public final class ConfigBackup {
         if (name.startsWith("keymaps/"))   return new File(keymapsDir(), name.substring("keymaps/".length()));
         if (name.startsWith("generalrc/")) { File d = generalRcDir(); return d == null ? null : new File(d, name.substring("generalrc/".length())); }
         if (name.startsWith("gnyx/"))      { File d = gnyxRcDir();    return d == null ? null : new File(d, name.substring("gnyx/".length())); }
+        if (name.startsWith("pubgrc/"))    { File d = pubgRcDir();    return d == null ? null : new File(d, name.substring("pubgrc/".length())); }
         if (name.startsWith("prefs/"))     { File d = sharedPrefsDir(); return d == null ? null : new File(d, name.substring("prefs/".length())); }
         return null;
     }
